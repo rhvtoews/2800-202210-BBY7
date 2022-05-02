@@ -1,0 +1,42 @@
+html{
+    background: linear-gradient(to bottom, #081C15, #1B4332);
+    height: 100%;
+}
+
+.login-form{
+    width: 25%;
+    margin: 0 auto;
+    margin-top: 200px;
+    height: 400px;
+    border: 2px solid #95D5B2;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.submit{
+    width: 150px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #95D5B2;
+    color: #95D5B2;
+    border-radius: 20px;
+    margin-top: 25px;
+}
+
+.input{
+    background: transparent;
+    border: 0px;
+    border-bottom: 2px solid #95D5B2;
+    width: 80%;
+    height: 30px;
+    color: #95D5B2;
+    margin-bottom: 25px;
+}
+
+.input::placeholder{
+    color: #95D5B2;
+}
+
+.logo{
+    width: 40%;
+}
