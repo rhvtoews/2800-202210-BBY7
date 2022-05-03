@@ -1,5 +1,7 @@
 CREATE DATABASE IF NOT EXISTS members;
 use members;
+
+--User data table
 CREATE TABLE IF NOT EXISTS user (
   ID int NOT NULL AUTO_INCREMENT,
   firstName varchar(25),
@@ -10,6 +12,18 @@ CREATE TABLE IF NOT EXISTS user (
   birthDate DATE,
   PRIMARY KEY (ID)
   );
+
+--Plants and Trees datatable
+CREATE TABLE IF NOT EXISTS plant (
+  plantName varchar(50) NOT NULL,
+  type varchar(25),
+  soilType varchar(25),
+  region varchar(25),
+  tools varchar(25),
+  period int;
+  PRIMARY KEY (plantName)
+);
+
 
 INSERT INTO user 
 VALUES ("1", "Nacho", "Varga", "nachov@bcs.com", "pass0987", "North Delta", "1981-03-25"),
