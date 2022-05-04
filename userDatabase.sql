@@ -35,4 +35,4 @@ VALUES ("1", "Nacho", "Varga", "nachov@bcs.com", "pass0987", "North Delta", "198
   ("7", "Amos", "Burton", "amosb@ba.com", "pass0987", "Toronto", "1988-06-07"),
   ("8", "Camina", "Drummer", "caminad@bl.com", "pass1234", "Ottawa", "1985-11-18"),
   ("9", "Harry", "Bosch", "harryb@lapd.com", "pass0987", "Winnipeg", "1967-03-09"),
-  ("10", "Jerry", "Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", "1985-09-13")
+  ("10", "Jerry", "Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", "1985-09-13");
