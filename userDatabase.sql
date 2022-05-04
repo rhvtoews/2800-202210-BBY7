@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS user (
 
 CREATE TABLE IF NOT EXISTS plant (
   plantName varchar(50) NOT NULL,
-  type varchar(25),
+  plantType varchar(25),
   soilType varchar(25),
   region varchar(25),
   tools varchar(25),
