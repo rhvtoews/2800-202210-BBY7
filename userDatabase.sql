@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS toolList (
   pName varchar(50) NOT NULL,
   tool varchar(25),
   PRIMARY KEY (pName),
-  FOREIGN KEY (pNAME) REFERENCES plant(plantName)
+  FOREIGN KEY (pName) REFERENCES plant(plantName)
 );
 
 
