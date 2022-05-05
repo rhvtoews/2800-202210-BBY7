@@ -2,14 +2,14 @@
     --lightGreen: #95D5B2;
     --darkGreen: #1B4332;
     --black: #081C15;
-  }
+}
 
-html{
+html {
     background: linear-gradient(to bottom, var(--black), var(--darkGreen));
     height: 100%;
 }
 
-.login-form{
+.login-form {
     width: 25%;
     margin: 0 auto;
     margin-top: 200px;
@@ -19,7 +19,7 @@ html{
     text-align: center;
 }
 
-.submit{
+.submit {
     width: 150px;
     height: 40px;
     background: transparent;
@@ -29,7 +29,7 @@ html{
     margin-top: 25px;
 }
 
-.input{
+.input {
     background: transparent;
     border: 0px;
     border-bottom: 2px solid var(--lightGreen);
@@ -39,10 +39,10 @@ html{
     margin-bottom: 25px;
 }
 
-.input::placeholder{
+.input::placeholder {
     color: var(--lightGreen);
 }
 
-.logo{
+.logo {
     width: 40%;
 }
