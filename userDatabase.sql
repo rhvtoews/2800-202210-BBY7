@@ -34,13 +34,13 @@ CREATE TABLE IF NOT EXISTS toolList (
 
 
 INSERT INTO user 
-VALUES ("1", "Nacho", "Varga", "nachov@bcs.com", "pass0987", "North Delta", "1981-03-25"),
-  ("2", "Saul", "Goodman", "saulg@bcs.com", "pass1234", "Saskatoon", "1963-07-14"),
-  ("3", "Dexter", "Morgan", "dexterm@mpd.com", "pass0987", "Burnaby", "1974-04-22"),
-  ("4", "Rita", "Bennett", "ritab@gmail.com", "pass1234", "Vancouver", "1975-03-16"),
-  ("5", "Naomi", "Nagata", "naomin@bl.com", "pass0987", "Calgary", "1990-10-23"),
-  ("6", "Alex", "Kamal", "alexk@mcrn.com", "pass1234", "Edmonton", "1963-07-14"),
-  ("7", "Amos", "Burton", "amosb@ba.com", "pass0987", "Toronto", "1988-06-07"),
-  ("8", "Camina", "Drummer", "caminad@bl.com", "pass1234", "Ottawa", "1985-11-18"),
-  ("9", "Harry", "Bosch", "harryb@lapd.com", "pass0987", "Winnipeg", "1967-03-09"),
-  ("10", "Jerry", "Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", "1985-09-13");
+VALUES ("1", "Nacho", "Varga", "nachov@bcs.com", "pass0987", "North Delta", "1981-03-25", FALSE),
+  ("2", "Saul", "Goodman", "saulg@bcs.com", "pass1234", "Saskatoon", "1963-07-14", TRUE),
+  ("3", "Dexter", "Morgan", "dexterm@mpd.com", "pass0987", "Burnaby", "1974-04-22", FALSE),
+  ("4", "Rita", "Bennett", "ritab@gmail.com", "pass1234", "Vancouver", "1975-03-16", FALSE),
+  ("5", "Naomi", "Nagata", "naomin@bl.com", "pass0987", "Calgary", "1990-10-23", FALSE),
+  ("6", "Alex", "Kamal", "alexk@mcrn.com", "pass1234", "Edmonton", "1963-07-14", FALSE),
+  ("7", "Amos", "Burton", "amosb@ba.com", "pass0987", "Toronto", "1988-06-07", FALSE),
+  ("8", "Camina", "Drummer", "caminad@bl.com", "pass1234", "Ottawa", "1985-11-18", FALSE),
+  ("9", "Harry", "Bosch", "harryb@lapd.com", "pass0987", "Winnipeg", "1967-03-09", TRUE),
+  ("10", "Jerry", "Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", "1985-09-13", FALSE);
