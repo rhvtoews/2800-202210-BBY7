@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS plant (
   soilType varchar(25),
   region varchar(25),
   period int,
-  PRIMARY KEY (plantName)
+  PRIMARY KEY (plantName),
+  FOREIGN KEY (region) REFERENCES user(city)
 );
 
 CREATE TABLE IF NOT EXISTS toolList (
