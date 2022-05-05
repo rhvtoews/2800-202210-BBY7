@@ -1,29 +1,39 @@
-const mysql = require('mysql2');
 const express = require('express');
+const app = express();
+app.use(express.json());
 const session = require('express-session');
+const mysql = require('mysql2');
 const path = require('path');
 
 const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
 	password : '',
-	database : 'members' //Fill in the database
+	database : 'members' //The database
 });
 
-const app = express();
 
 app.use(session({
+	name: "login",
 	secret: 'BBY-7',
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(express.json());
+
+/*
+* const port = 3000;
+* const fs = require("fs");
+* const bodyParser = require("body-parser");
+* const router = express.Router();
+* var mysql = require("mysql");
+* const cookieSession = require("cookie-session");
+*/
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'script')));
 
 
 app.get('/', function(request, response) {
-	// Render login template
 	response.sendFile(path.join(__dirname + '/login.html'));
 });
 
