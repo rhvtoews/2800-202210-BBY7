@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS user (
   password varchar(25),
   city varchar(25),
   birthDate DATE,
+  admin BOOLEAN,
   PRIMARY KEY (ID)
   );
 

@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
 	password : '',
-	database : ' ' //Fill in the database
+	database : 'members' //Fill in the database
 });
 
 const app = express();
