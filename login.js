@@ -4,17 +4,20 @@ app.use(express.json());
 const session = require('express-session');
 const res = require('express/lib/response');
 const path = require('path');
+const bodyParser = require("body-parser");
 const fs = require('fs');
 const { connect } = require('http2');
 const { JSDOM } = require('jsdom');
 
+app.use("/", express.static("./"));
+app.use("/styles", express.static("./styles"));
 
 
 
 app.use(session({
 	name: "login",
 	secret: 'BBY-7',
-	resave: true,
+	resave: false,
 	saveUninitialized: true
 }));
 
