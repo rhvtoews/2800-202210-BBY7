@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
 
 	app.get('/login', function(req, res) {
 
-		res.sendFile(__dirname + '/login.html');
+		res.sendFile(__dirname + '/index.html');
 	});
 
 
