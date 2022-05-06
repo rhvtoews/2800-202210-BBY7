@@ -184,7 +184,7 @@ async function init() {
 
  
 	
-	console.log("Listening on port " + port + "!");
+	console.log("Port ready: " + port);
 }
 
 
