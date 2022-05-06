@@ -21,7 +21,7 @@
 .login-form {
     grid-area: login-form;
     border-radius: 35px;
-    background-color: rgba(8, 28, 21, 1);
+    background: linear-gradient(#103a2b, #000000);
     display: flex;
     justify-content: center;
     padding: 390px;
@@ -34,8 +34,9 @@
     height: 300px;
     border: 2px solid rgba(153, 217, 140, 1);
     box-shadow: rgba(161, 236, 195, 1);
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
+    background: linear-gradient(#a1ecc3, #103a2b);
 }
 
 #username {
@@ -45,7 +46,6 @@
 .submit {
     width: 100px;
     height: 40px;
-    background: transparent;
     border: 2px solid rgba(45, 106, 79, 1);
     color: rgba(8, 28, 21, 1);
     border-radius: 20px;
@@ -54,7 +54,7 @@
 }
 
 .submit:hover {
-    background-color: rgba(161, 236, 195, 1);
+    background-color: #a1ecc3;
 }
 
 .input {
@@ -80,8 +80,13 @@
 
 .tree {
     width: 400px;
-    margin-top: 300px;
+    margin-top: 290px;
 
+}
+
+h1 {
+    background-color: #a1ecc30d;
+    border-radius: 15px;
 }
 
 @media only screen and (max-width: 480px) {
