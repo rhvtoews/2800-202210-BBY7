@@ -19,6 +19,15 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({	extended: true }));
 app.use(bodyParser.json());
 
+
+// const mysql = require('mysql2');
+// const connection = mysql.createConnection({
+// 	host     : 'localhost',
+// 	user     : 'root',
+// 	password : '',
+// 	database : 'members'
+// });
+
 app.use(session({
 	secret: 'secretpasscode',
 	resave: true,
