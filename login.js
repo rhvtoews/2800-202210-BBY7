@@ -9,6 +9,7 @@ const fs = require('fs');
 const { connect } = require('http2');
 const { JSDOM } = require('jsdom');
 
+app.set("Server Environ", "html")
 app.use("/", express.static("./"));
 app.use("/styles", express.static("./styles"));
 
@@ -37,14 +38,14 @@ app.use(session({
 app.get('/', function(request, response) {
 
 	if (request.session.loggedIn) {
-		response.redirect("/profile");
+		response.redirect("/landing.html");
 	} else {
-		let doc = fs.readFileSync("./login.html", "utf8");
+		let doc = fs.readFileSync("/login.html", "utf8");
 		response.send(doc);
 	}
 });
 
-app.get("/profile", function(request, response) {
+app.get("/landing.html", function(request, response) {
 	if(request.session.loggedIn) {
 		const mysql = require('mysql2');
 		const connection = mysql.createConnection({
@@ -115,9 +116,9 @@ app.post('/auth', function(request, response) {
 
 });
 
-app.get('/home', function(request, response) {
+app.get('/landing.html', function(request, response) {
 	
-	if (request.session.loggedin) {
+	if (request.session.loggedIn) {
 		
 		response.send('Welcome to SeedIt again, ' + request.session.email + '!');
 	} else {
