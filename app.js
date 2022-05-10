@@ -43,7 +43,7 @@ var sessionData = new MySQLStore({
       data: 'data'
     }
   }
-}, sessionData)
+})
 
 app.use(session ({
   key: 'keyin',
