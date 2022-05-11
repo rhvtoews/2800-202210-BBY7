@@ -1,16 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
-
-body {
-    font-family: 'Merriweather', serif;
-    margin: 0;
-  }
-  
-  html {
+* {
     box-sizing: border-box;
   }
   
-  *, *:before, *:after {
-    box-sizing: inherit;
+  body {
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   .topnav {
@@ -48,41 +41,25 @@ body {
     background-color: #04AA6D;
     color: white;
 }
+
   
+  /* Float four columns side by side */
   .column {
     float: left;
-    width: 33.3%;
-    margin-bottom: 16px;
-    padding: 0 8px;
+    width: 25%;
+    padding: 0 10px;
   }
   
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 8px;
-  }
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
   
-  .about-section {
-    font-size: large;
-    padding: 50px;
-    text-align: center;
-    background-color: #103a2b;
-    color: white;
-  }
-  
-  .container {
-    padding: 0 16px;
-  }
-  
-  .container::after, .row::after {
+  /* Clear floats after the columns */
+  .row:after {
     content: "";
-    clear: both;
     display: table;
+    clear: both;
   }
-  
-  .title {
-    color: grey;
-  }
-  
+
   .button {
     border: none;
     outline: 0;
@@ -95,13 +72,19 @@ body {
     width: 100%;
   }
   
-  .button:hover {
-    background-color: #555;
-  }
-  
-  @media screen and (max-width: 650px) {
+  /* Responsive columns */
+  @media screen and (max-width: 800px) {
     .column {
       width: 100%;
       display: block;
+      margin-bottom: 20px;
     }
+  }
+  
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
   }
