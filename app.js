@@ -4,26 +4,25 @@ const session = require('express-session');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const MySQLStore = require('express-mysql-session')(session);
-const port = 8000;
-
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/'));
+app.use('/', express.static('public/'));
 
-// const POST = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
 
 
 //dummy account
 const userData = {
   fullname: "Ryan Toews",
   username: "ryant",
-  password: 12345
+  password: '12345'
 }
 
-var options = {
+var database = {
   host: 'localhost',
   port: 3306,
   user: 'root',
@@ -31,7 +30,7 @@ var options = {
   database: 'BBY7_members'
 }
 
-var sessionConnection = mysql.createConnection(options);
+var sessionConnection = mysql.createConnection(database);
 var sessionData = new MySQLStore({
   expiration: 10800000,
   createDatabaseTable: true,
@@ -48,7 +47,7 @@ var sessionData = new MySQLStore({
 app.use(session ({
   key: 'keyin',
   secret: 'secret0982348934',
-  strore: sessionData,
+  store: sessionData,
   resave: false,
   saveUninitialized: true
 }))
@@ -70,6 +69,8 @@ app.use('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
           res.send("Logged Out")
+      } else {
+        res.redirect('/');
       }
   })
 })
@@ -82,6 +83,30 @@ app.use('/', function(req, res) {
   }
 })
 
+app.get('/', function(req, res) {
+  if(req.session.loggedIn) {
+    res.redirect(__dirname + '/landing.html');
+  }
+})
+
+app.post('/login', function(req, res) {
+  sessionConnection.connect();
+  sessionConnection.query(
+    'SELECT * FROM BBY7_user WHERE username = ? AND password = ?', 
+    [username, password],
+    function(err, records) {
+      console.log("Records: ", records, 'Number of records: ', records.length)
+      if(err) {
+        console.log(err);
+      }
+      if(records.length > 0) {
+        return callback(records[0]);
+      } else {
+        return callback(null);
+      }
+    }
+    )
+});
 
 
 // var thisSession;
@@ -133,7 +158,7 @@ app.use('/', function(req, res) {
 
 // app.use('/', router);
 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT || 8000, function() {
   console.log('App started on port ' + port);
 });
 
