@@ -4,16 +4,16 @@ const session = require('express-session');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
 
+app.set("view engine", "seedit");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
 
 const port = process.env.PORT || 8000;
-
 
 //dummy account
 const userData = {
@@ -22,15 +22,15 @@ const userData = {
   password: '12345'
 }
 
-var database = {
+var sessionConnection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: '',
+  password: 'password',
   database: 'BBY7_members'
-}
+});
 
-var sessionConnection = mysql.createConnection(database);
+
 var sessionData = new MySQLStore({
   expiration: 10800000,
   createDatabaseTable: true,
@@ -53,14 +53,16 @@ app.use(session ({
 }))
 
 app.use('/login', function(req, res) {
-  const { username , password } = req.body
+  const username = req.body.username;
+  const password = req.body.password;
+  const adminUser = sessionConnection.BBY7_user.admin;
   if (username != userData.username || password != userData.password) {
     return res.status(401).json({
       error: true,
       message: "Invalid Username or Password"
     })
   } else {
-    req.session.userinfo = userData.fullname
+    req.session.userinfo = userData.username
     res.send("Login successful")
   }
 })
@@ -85,17 +87,16 @@ app.use('/', function(req, res) {
 
 app.get('/', function(req, res) {
   if(req.session.loggedIn) {
-    res.redirect(__dirname + '/landing.html');
+    res.redirect(__dirname + '/index.html');
   }
 })
 
 app.post('/login', function(req, res) {
-  sessionConnection.connect();
+  
   sessionConnection.query(
     'SELECT * FROM BBY7_user WHERE username = ? AND password = ?', 
     [username, password],
     function(err, records) {
-      console.log("Records: ", records, 'Number of records: ', records.length)
       if(err) {
         console.log(err);
       }
