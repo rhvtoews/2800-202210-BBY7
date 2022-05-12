@@ -6,6 +6,11 @@ const path = require('path');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
+const { JSDOM } = require('jsdom');
+const fs = require("fs");
+
+
+
 
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
@@ -114,6 +119,18 @@ app.post('/login', function(req, res, next) {
     }
     )
 });
+
+// Plants Population //
+
+app.get("/plantscards", function(req, res) {
+
+  // check for a session first!
+  if(req.session.loggedIn) {
+
+      let profile = fs.readFileSync("./plantscards.html", "utf8");
+      let profileDOM = new JSDOM(profile);
+
+
 
 
 // var thisSession;
