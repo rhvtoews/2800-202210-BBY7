@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lobster', cursive;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgb(182, 248, 182);
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar {
+    background: url(./curve1.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.sidebar img {
+    width: 55%;
+    max-width: 55%;
+    margin-top: 50px;
+    margin-right: 100px;
+}
+
+h1 {
+    max-width: 450px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.line {
+    width: 66%;
+    height: 4px;
+    background-color: rgb(0, 86, 0);
+    margin: 24px;
+}
+
+.login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 70%;
+    position: relative;
+    margin-bottom: 24px;
+    border: none;
+    outline: none;
+    background: linear-gradient(to bottom right, rgb(182, 248, 182), rgb(8, 72, 2));
+    border-radius: 25px;
+    font-size: 1.2rem;
+    padding: 14px 64px;
+    color: rgb(174, 249, 174);
+}
+
+.submit {
+    width: 30%;
+    background: linear-gradient(to bottom right, rgb(111, 249, 111), rgb(8, 72, 2));
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: linear-gradient(to bottom right, rgb(8, 72, 2), rgb(111, 249, 111));
+}
+
+@media (max-width: 780px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .submit {
+        width: 50%;
+    }
+}
