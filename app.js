@@ -1,19 +1,30 @@
 "use strict";
 const express = require('express');
 const session = require('express-session');
+const mysql = require('mysql2');
+const path = require('path');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-const mysql = require('mysql2');
+
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
 
-app.set("view engine", "seedit");
+app.use(session ({
+  key: 'keyin',
+  secret: 'secret0982348934',
+  store: sessionData,
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
 
 const port = process.env.PORT || 8000;
+
+
 
 //dummy account
 const userData = {
@@ -44,66 +55,61 @@ var sessionData = new MySQLStore({
   }
 })
 
-app.use(session ({
-  key: 'keyin',
-  secret: 'secret0982348934',
-  store: sessionData,
-  resave: false,
-  saveUninitialized: true
-}))
 
-app.use('/login', function(req, res) {
-  const username = req.body.username;
-  const password = req.body.password;
-  const adminUser = sessionConnection.BBY7_user.admin;
-  if (username != userData.username || password != userData.password) {
-    return res.status(401).json({
-      error: true,
-      message: "Invalid Username or Password"
-    })
-  } else {
-    req.session.userinfo = userData.username
-    res.send("Login successful")
-  }
-})
 
-app.use('/logout', function(req,res){
+// app.use('/login', function(req, res) {
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   if (username != userData.username || password != userData.password) {
+//     return res.status(401).json({
+//       error: true,
+//       message: "Invalid Username or Password"
+//     })
+//   } else {
+//     req.session.userinfo = userData.username
+//     res.send("Login successful")
+//   }
+// })
+
+app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
           res.send("Logged Out")
       } else {
-        res.redirect('/');
+        res.sendFile('/');
       }
   })
 })
 
-app.use('/', function(req, res) {
-  if(req.session.userinfo) {
-    res.send("Welcome" + req.session.userinfo)
-  } else {
-    res.send("Please log in")
-  }
-})
+// app.use('/', function(req, res) {
+//   if(req.session.userinfo) {
+//     res.send("Welcome" + req.session.userinfo)
+//   } else {
+//     res.send("Please log in")
+//   }
+// })
 
 app.get('/', function(req, res) {
-  if(req.session.loggedIn) {
-    res.redirect(__dirname + '/index.html');
-  }
+  res.sendFile('./index.html');
 })
 
-app.post('/login', function(req, res) {
+
+
+app.post('/login', function(req, res, next) {
+  const username = req.body.username;
+  const password = req.body.password;
   
   sessionConnection.query(
     'SELECT * FROM BBY7_user WHERE username = ? AND password = ?', 
     [username, password],
-    function(err, records) {
+    function(err, records, fields) {
       if(err) {
         console.log(err);
       }
       if(records.length > 0) {
-        return callback(records[0]);
+        res.redirect('./landing.html');
       } else {
-        return callback(null);
+        res.redirect('/');
       }
     }
     )
