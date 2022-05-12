@@ -55,22 +55,12 @@ var sessionData = new MySQLStore({
   }
 })
 
+// Supply index page
+app.get('/', function(req, res) {
+  res.sendFile('./index.html');
+})
 
-
-// app.use('/login', function(req, res) {
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   if (username != userData.username || password != userData.password) {
-//     return res.status(401).json({
-//       error: true,
-//       message: "Invalid Username or Password"
-//     })
-//   } else {
-//     req.session.userinfo = userData.username
-//     res.send("Login successful")
-//   }
-// })
-
+// Logout, route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
@@ -81,20 +71,7 @@ app.get('/logout', function(req,res){
   })
 })
 
-// app.use('/', function(req, res) {
-//   if(req.session.userinfo) {
-//     res.send("Welcome" + req.session.userinfo)
-//   } else {
-//     res.send("Please log in")
-//   }
-// })
-
-app.get('/', function(req, res) {
-  res.sendFile('./index.html');
-})
-
-
-
+// Login, route to landing page on success
 app.post('/login', function(req, res, next) {
   const username = req.body.username;
   const password = req.body.password;
@@ -116,54 +93,6 @@ app.post('/login', function(req, res, next) {
 });
 
 
-// var thisSession;
-
-// router.get('/', (req, res) => {
-//   thisSession = req.session;
-//   if (thisSession.username) {
-//     return res.redirect('/admin');
-//   }
-//   res.sendFile('index.html')
-// })
-
-// app.use(session({
-//   secret: "secret234234key234324token690848064",
-//   saveUninitialized: true,
-//   resave: false
-// }));
-
-// router.post('/login', (req, res) => {
-//   thisSession = req.session;
-//   thisSession.username = req.body.username;
-//   res.end('done');
-// })
-
-// app.get('/', function(req, res){
-//   thisSession =  req.session;
-//   thisSession.username;
-//   thisSession.password;
-// });
-
-// router.get('/admin', (req, res) => {
-//   thisSession = req.session;
-//   if (thisSession.username) {
-//     res.write('<h1>Hello ${thisSession.username} <h1><br>');
-//     res.end('+', 'Logout');
-//   } else {
-//     res.write('Please login first.');
-//   }
-// });
-
-// router.get('/logout', (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       return console.log(err);
-//     }
-//     res.redirect('/');
-//   });
-// });
-
-// app.use('/', router);
 
 app.listen(process.env.PORT || 8000, function() {
   console.log('App started on port ' + port);
