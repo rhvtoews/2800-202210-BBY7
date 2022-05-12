@@ -53,12 +53,12 @@ var sessionData = new MySQLStore({
       data: 'data'
     }
   }
-})
+});
 
 // Supply index page
 app.get('/', function(req, res) {
   res.sendFile('./index.html');
-})
+});
 
 // Logout, route to index
 app.get('/logout', function(req,res){
@@ -69,7 +69,7 @@ app.get('/logout', function(req,res){
         res.sendFile('/');
       }
   })
-})
+});
 
 // Login, route to landing page on success
 app.post('/login', function(req, res, next) {
@@ -92,6 +92,12 @@ app.post('/login', function(req, res, next) {
     )
 });
 
+app.post('/deleteAccount', function(req, res, next) {
+  const input = req.body.input;
+
+  sessionConnection.query(
+    'DELETE FROM BBY7_user WHERE ID = ?', [input])
+});
 
 
 app.listen(process.env.PORT || 8000, function() {
