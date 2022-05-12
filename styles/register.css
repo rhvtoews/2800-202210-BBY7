@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lobster', cursive;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: url(./tree.jpg);
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    max-width: 450px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.line {
+    width: 66%;
+    height: 4px;
+    background-color: #354c58;
+    margin: 24px;
+}
+
+.login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 70%;
+    position: relative;
+    margin-bottom: 24px;
+    border: none;
+    outline: none;
+    background: linear-gradient(to bottom right, #c2cad7c4, #47595500);
+    border-radius: 25px;
+    font-size: 1.2rem;
+    padding: 14px 64px;
+    color: #0b202a;
+}
+
+::placeholder {
+    color: rgb(91, 90, 90);
+}
+
+.submit {
+    width: 30%;
+    background: linear-gradient(to bottom right, #9398a1af, #2c3f4983);
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: linear-gradient(to bottom right, #a4bbcf, #a9b0bc2f);
+}
+
+@media (max-width: 780px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .submit {
+        width: 50%;
+    }
+}
