@@ -1,8 +1,11 @@
-const e = require("express");
+
 
 function getBotResponse(input) {
         if (input == "hello") {
-            return "Hello there!";
+            return "Welcome to SeedIt. What can I help you?";
+        } 
+        if (input == "hi") {
+            return "Welcome to SeedIt. What can I help you?";
         } 
         if (input == "goodbye") {
             return "Talk to you later!";

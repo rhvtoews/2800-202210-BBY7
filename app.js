@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
-const bcrypt = require('bcrypt');
+
+var sess;
 
 app.use(session ({
   key: 'keyin',
@@ -46,12 +47,10 @@ const dbConfigLocal = {
 }
 
 if (is_heroku) {
-  var sessionConnection = mysql.createConnection(dbConfigHeroku);
+  var sessionConnection = mysql.createPool(dbConfigHeroku);
 } else {
-  var sessionConnection = mysql.createConnection(dbConfigLocal);
+  var sessionConnection = mysql.createPool(dbConfigLocal);
 }
-
-
 
 var sessionData = new MySQLStore({
   expiration: 10800000,
@@ -108,6 +107,8 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
+        sess=req.session;
+        sess.email= 
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -152,6 +153,22 @@ app.post('/signup', function(req, res, next) {
     res.redirect('./index.html');
 });
 
+// Changes name
+app.post('/changeName', function(req, res, next) {
+
+});
+
+app.post('/changeEmail', function(req, res, next) {
+
+});
+
+app.post('/changePassword', function(req, res, next) {
+
+});
+
+app.post('/changeCity', function(req, res, next) {
+
+});
 
 
 app.post('/adminCreate', function(req, res, next) {

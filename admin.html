@@ -4,39 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="./styles/admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <script src="./scripts/header.js"></script>
 </head>
 <body>
     <div class="container">
-        <nav>Navbar</nav>
+        <div class="topnav">
+            <a href="landing.html" class="active">Logo</a>
+            <div id="myLinks">
+                <a href="profile.html">Profile</a>                
+                <a href="admin.html">Admin</a>
+                <a href="about.html">About</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <div class="Userlist">
-            <form action="">
+            <form action="/changeName" method="POST">
                 <div class="name">
                     <h2>Name</h2>
                     <input type="text" name="Name" placeholder="Nanakpreet Singh">
                     <button>Change</button>
                 </div>
+            </form>
+            <form action="/changeEmail" method="POST">
                 <div class="email">
                     <h2>E-mail</h2>
-                    <input type="text" name="email" placeholder="nanak@gmail.com">
+                    <input type="email" name="email" placeholder="nanak@gmail.com">
                     <button>Change</button>
                 </div>
+            </form>
+            <form action="/changePassword" method="POST">
                 <div class="password">
                     <h2>Password</h2>
-                    <input type="text" name="email" placeholder="5486">
+                    <input type="text" name="password" placeholder="5486">
                     <button>Change</button>
                 </div>
+            </form>
+            <form action="/changeCity" method="POST">
                 <div class="city">
                     <h2>City</h2>
-                    <input type="text" name="email" placeholder="Surrey">
+                    <input type="text" name="city" placeholder="Surrey">
                     <button>Change</button>
                 </div>
             </form>
         </div>
         <div class="profile">
-            <img src="profile.jpg" alt="">
+            <img src="./Image/profile2.jpg" alt="">
             <button class="delete">Delete User</button>
             <button class="admin">Make Admin</button>
         </div>
