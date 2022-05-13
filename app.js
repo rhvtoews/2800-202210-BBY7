@@ -10,6 +10,11 @@ const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
 
+<<<<<<< HEAD
+=======
+var sess;
+
+>>>>>>> dev
 app.use(session ({
   key: 'keyin',
   secret: 'secret0982348934',
@@ -50,8 +55,11 @@ if (is_heroku) {
   var sessionConnection = mysql.createPool(dbConfigLocal);
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> dev
 var sessionData = new MySQLStore({
   expiration: 10800000,
   createDatabaseTable: true,
@@ -107,6 +115,11 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
+<<<<<<< HEAD
+=======
+        sess=req.session;
+        sess.email= 
+>>>>>>> dev
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -151,6 +164,25 @@ app.post('/signup', function(req, res, next) {
     res.redirect('./index.html');
 });
 
+<<<<<<< HEAD
+=======
+// Changes name
+app.post('/changeName', function(req, res, next) {
+
+});
+
+app.post('/changeEmail', function(req, res, next) {
+
+});
+
+app.post('/changePassword', function(req, res, next) {
+
+});
+
+app.post('/changeCity', function(req, res, next) {
+
+});
+>>>>>>> dev
 
 
 app.post('/adminCreate', function(req, res, next) {

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./styles/landing.css">
-    <script src="./scripts/landing.js"></script>
+    <script src="./scripts/header.js"></script>
 </head>
 
 <body>
@@ -16,9 +16,9 @@
         <div class="topnav">
             <a href="landing.html" class="active">Logo</a>
             <div id="myLinks">
-                <a href="profile.html">Profile</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">Help</a>
+                <a href="profile.html">Profile</a>                
+                <a href="./Dashboard/dashboard.html">Admin</a>
+                <a href="about.html">About</a>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
@@ -28,33 +28,95 @@
 
         <div class="middle">
 
-            <p>Choose your current location type!</p>
-
-            <div class="dropdown">
-                <button class="dropbtn">Mountain</button>
-                <div class="dropdown-content">
-                    <a href="#">Mountain</a>
-                    <a href="#">Beach</a>
-                    <a href="#">Forest</a>
-                </div>
+            <div class="search-container">
+                <form class="searchBar">
+                    <input type="text" placeholder="Search.." name="search" size="80" style="padding: 10px">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
-            <br><br>
+            <br><br><br>
 
+            <h2>Choose your location!</h2>
 
-            <p>Which type of plant are you looking for?</p>
-
-            <div class="dropdown">
-                <button class="dropbtn">Shrub</button>
-                <div class="dropdown-content">
-                    <a href="#">Trees</a>
-                    <a href="#">Herbs</a>
-                    <a href="#">Shrub</a>
-                </div>
+            <div class="custom-select">
+                <select>
+                    <option value="0">Select location:</option>
+                    <option value="1">Mountain</option>
+                    <option value="2">Urban</option>
+                    <option value="3">Forest</option>
+                </select>
             </div>
+
+
+            <br><br><br>
+
+            <h2>Select the plant type!</h2>
+
+            <div class="custom-select">
+                <select>
+                    <option value="0">Select type:</option>
+                    <option value="1">Herbs</option>
+                    <option value="2">Shrub</option>
+                    <option value="3">Tree</option>
+                </select>
+            </div>
+            <br><br><br>
+
+            <button class="button"><a href="plantscards.html">Submit</a></button>
         </div>
 
         <!-- End smartphone / tablet look -->
+        <div class="chat-bar-collapsible">
+            <button id="chat-button" type="button" class="collapsible">Chat with us!
+                <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+            </button>
+
+            <div class="content">
+                <div class="full-chat-block">
+                    <!-- Message Container -->
+                    <div class="outer-container">
+                        <div class="chat-container">
+                            <!-- Messages -->
+                            <div id="chatbox">
+                                <h5 id="chat-timestamp"></h5>
+                                <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                            </div>
+
+                            <!-- User input box -->
+                            <div class="chat-bar-input-block">
+                                <div id="userInput">
+                                    <input id="textInput" class="input-box" type="text" name="msg"
+                                        placeholder="Tap 'Enter' to send a message">
+                                    <p></p>
+                                </div>
+
+                                <div class="chat-bar-icons">
+                                    <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
+                                        onclick="heartButton()"></i>
+                                    <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                        onclick="sendButton()"></i>
+                                </div>
+                            </div>
+
+                            <div id="chat-bar-bottom">
+                                <p></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
+
+
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="./scripts/chatbot.js"></script>
+<script src="./scripts/chatResponse.js"></script>
+<script src="./scripts/landing.js"></script>
 
 </html>

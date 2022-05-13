@@ -1,0 +1,204 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-30deg, #5E8B7E, rgba(8, 28, 21, 1), #5E8B7E);
+}
+
+.container {
+    width: 93%;
+    height: 92vh;
+    background-color: #8cfddf54;
+    border-radius: 30px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 0.4fr 1fr 0.15fr;
+    grid-template-areas:
+        "nav nav"
+        "profile Userlist"
+        "footer footer";
+}
+
+.topnav {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+}
+
+.topnav #myLinks {
+    display: none;
+}
+
+.topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
+.topnav a.icon {
+    background: black;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+nav {
+    background-color: #8ebab6;
+    grid-area: nav;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.Userlist {
+    background-color: #a1c7c769;
+    margin-left: 20px;
+    margin-right: 20px;
+    grid-area: Userlist;
+    border-radius: 20px;
+}
+
+.profile {
+    background-color: #a1c7c7;
+    margin-left: 20px;
+    grid-area: profile;
+    border-radius: 20px;
+}
+
+::placeholder {
+    text-align: center;
+}
+
+img {
+    display: block;
+    max-height: 60%;
+    max-width: 60%;
+    border-radius: 30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+.delete {
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(#a1ecc3, #42b089);
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin-top: 70px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 25px;
+}
+
+.delete:hover {
+    background: linear-gradient(#42b089, #a1ecc3);
+}
+
+.admin {
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(#a1ecc3, #42b089);
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 25px;
+}
+
+.admin:hover {
+    background: linear-gradient(#42b089, #a1ecc3);
+}
+
+form {
+    margin-left: auto;
+    padding: 20px;
+}
+
+input {
+    border-radius: 20px;
+    font-size: 25px;
+    border: none;
+    background-color: #a1c7c7;
+}
+
+button {
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #B9D3CD;
+    grid-area: footer;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 780px) {
+    .container {
+        height: 80%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.45fr 1fr 1fr 0.2fr;
+        grid-template-areas:
+            "nav"
+            "profile"
+            "Userlist"
+            "footer";
+    }
+
+    .admin {
+        font-size: 20px;
+    }
+
+    .delete {
+        font-size: 20px;
+    }
+
+    img {
+        max-height: 30%;
+        max-width: 30%;
+    }
+
+    .profile {
+        margin-right: 20px;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+
+}

@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>SeedIt</title>
-        <link href="login.css" rel="stylesheet" type="text/css">
+        <link href="./styles/login.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital,wght@0,800;1,700&family=Source+Sans+Pro&display=swap" rel="stylesheet">
 	</head>
-	<body>
-		<div class="content">
-			<div class="seedit"><img class="main-logo" src="newlogo.png" alt=""></div>
-			<div class="img"><img class="tree" src="tree-removebg.png" alt=""></div>
-				<div class="login-form">
-					<form class="login">
-						<h1>Login</h1>
-						<input type="text" name="username" placeholder="Enter email id" id="username" required>
-						<br><br><br>
-						<input type="password" name="password" placeholder="Enter password" id="password" required>
-						<br><br>
-						<input type="submit" class="submit" value="Login">
-					</form>	
-				</div>
-		</div>
+	<body onload="tableLoad()">
+		<section class="sidebar">
+		</section>
+		<section class="login-form">
+			
+			<form action="/login" method="POST" class="login">				
+				<h1>Login</h1>
+				<div class="line"></div>
+				<input type="email" name="email" placeholder="Enter email id" id="email" required>
+				<input type="password" name="password" placeholder="Enter password" id="password" required>
+				<input type="submit" class="submit" value="Login">
+			</form>	
+		</section>
 	</body>
 </html>
