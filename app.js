@@ -45,9 +45,9 @@ const dbConfigLocal = {
 }
 
 if (is_heroku) {
-  var sessionConnection = mysql.createConnection(dbConfigHeroku);
+  var sessionConnection = mysql.createPool(dbConfigHeroku);
 } else {
-  var sessionConnection = mysql.createConnection(dbConfigLocal);
+  var sessionConnection = mysql.createPool(dbConfigLocal);
 }
 
 
