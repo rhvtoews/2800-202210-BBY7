@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 app.use(session ({
   key: 'keyin',
