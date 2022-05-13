@@ -138,6 +138,8 @@ app.post('/signup', function(req, res, next) {
     res.redirect('./index.html');
 });
 
+
+
 app.post('/adminCreate', function(req, res, next) {
   
   const fullname = req.body.fullname;
@@ -152,20 +154,20 @@ app.post('/adminCreate', function(req, res, next) {
 });
 
 
-
+function tableLoad() {
 app.get("/dashboard", function(req, res) {
 
-  if(req.session) {
-    var connection = mysql.createConnection({
-      host: 'localhost',
-      port: 3306,
-      user: 'root',
-      password: '',
-      database: 'BBY7_members'
-    });
+  // if(req.session) {
+  //   var connection = mysql.createConnection({
+  //     host: 'localhost',
+  //     port: 3306,
+  //     user: 'root',
+  //     password: '',
+  //     database: 'BBY7_members'
+  //   });
     
-    connection.connect();
-    connection.query(
+  //   connection.connect();
+    sessionConnection.query(
           "SELECT * FROM BBY7_user",
           function(err, tableResults, fields) {
               
@@ -190,13 +192,13 @@ app.get("/dashboard", function(req, res) {
           }
       );
 
-      connection.end();
-  } else {
-      res.redirect("/");
-  }
+      // connection.end();
+  // } else {
+  //     res.redirect("/");
+  // }
 
 });
-
+}
 
 
 
