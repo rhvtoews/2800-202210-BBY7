@@ -22,17 +22,35 @@ app.use(session ({
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
+// app.use('/landing', express.static('./landing.html'));
+// app.use('/dashboard', express.static('./dashboard.html'));
+// app.use('/admin', express.static('./UserProfile/admin.html'));
 
+const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
 
+// Database declarations
+const dbConfigHeroku = {
+  host: 'us-cdbr-east-05.cleardb.net',
+  user: 'b7bc82056b389e',
+  password: '8f0a455b',
+  database: 'heroku_6bb5156c76d47cb'
+};
 
-var sessionConnection = mysql.createConnection({
+const dbConfigLocal = {
   host: 'localhost',
   port: 3306,
   user: 'root',
   password: '',
   database: 'BBY7_members'
-});
+}
+
+if (is_heroku) {
+  var sessionConnection = mysql.createConnection(dbConfigHeroku);
+} else {
+  var sessionConnection = mysql.createConnection(dbConfigLocal);
+}
+
 
 
 var sessionData = new MySQLStore({
@@ -50,7 +68,19 @@ var sessionData = new MySQLStore({
 
 // Supply index page
 app.get('/', function(req, res) {
-  res.sendFile('./index.html');
+  res.sendFile(__dirname + '/index.html');
+});
+
+
+// Supply landing page
+app.get('/landing', function(req, res) {
+  res.sendFile(__dirname + '/landing.html');
+});
+
+
+// Supply landing page
+app.get('/dashboard', function(req, res) {
+  res.sendFile(__dirname + '/Dashboard/dashboard.html');
 });
 
 // Logout, route to index
@@ -59,7 +89,7 @@ app.get('/logout', function(req,res){
       if(!err){
           res.send("Logged Out")
       } else {
-        res.sendFile('/');
+        res.redirect('/');
       }
   })
 });
@@ -78,7 +108,7 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
-        res.redirect('./landing.html');
+        res.redirect('/landing');
       } else {
         res.redirect('/');
       }
@@ -102,10 +132,10 @@ app.get("/plantscards", function(req, res) {
 // Delete Account, routes back to the dashboard upon completion.
 app.post('/deleteAccount', function(req, res, next) {
   
-  const input = req.body.delInput;
+  const delInput = req.body.delInput;
 
-  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [input])
-  res.redirect('./admindashboard.html');
+  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
+  res.redirect('./Dashboard/dashboard.html');
 });
 
 // Account signup code
@@ -122,6 +152,8 @@ app.post('/signup', function(req, res, next) {
     res.redirect('./index.html');
 });
 
+
+
 app.post('/adminCreate', function(req, res, next) {
   
   const fullname = req.body.fullname;
@@ -132,8 +164,58 @@ app.post('/adminCreate', function(req, res, next) {
   sessionConnection.query(
     'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
     [fullname, email, password, city];
-    res.redirect('./admindashboard.html');
+    res.redirect('dashboard');
 });
+
+
+function tableLoad() {
+app.get("/dashboard", function(req, res) {
+
+  // if(req.session) {
+  //   var connection = mysql.createConnection({
+  //     host: 'localhost',
+  //     port: 3306,
+  //     user: 'root',
+  //     password: '',
+  //     database: 'BBY7_members'
+  //   });
+    
+  //   connection.connect();
+    sessionConnection.query(
+          "SELECT * FROM BBY7_user",
+          function(err, tableResults, fields) {
+              
+              if (err) {
+                  console.log(err);
+              }
+              let adminDash = fs.readFileSync("./Dashboard/dashboard.html", "utf8");
+              let adminDOM = new JSDOM(adminDash);
+
+              let tableDisplay = "<table class=\"table\"><thead><tr><th>NAME</th><th>EMAIL</th><th>PASSWORD</th><th>CITY</th><th>ADMIN</th></tr></thead><tbody>"
+              for (let index = 0; index < tableResults.length; index++) {
+                  tableDisplay += "<tr><td>" + tableResults[index].fullname + "</td>"
+                  + "<td>" + tableResults[index].email + "</td>"
+                  + "<td>" + tableResults[index].password + "</td>"
+                  + "<td>" + tableResults[index].city + "</td>"
+                  + "<td>" + tableResults[index].admin + "</td></tr>";
+              }
+              tableDisplay += "</tbody></table>";
+              adminDOM.window.document.getElementById("usertable").innerHTML = tableDisplay;
+
+              res.send(adminDOM.serialize());
+          }
+      );
+
+      // connection.end();
+  // } else {
+  //     res.redirect("/");
+  // }
+
+});
+}
+
+
+
 
 
 app.listen(process.env.PORT || 8000, function() {
