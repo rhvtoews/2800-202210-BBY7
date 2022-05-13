@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
-const bcrypt = require('bcrypt');
 
 var sess;
 
@@ -48,9 +47,9 @@ const dbConfigLocal = {
 }
 
 if (is_heroku) {
-  var sessionConnection = mysql.createConnection(dbConfigHeroku);
+  var sessionConnection = mysql.createPool(dbConfigHeroku);
 } else {
-  var sessionConnection = mysql.createConnection(dbConfigLocal);
+  var sessionConnection = mysql.createPool(dbConfigLocal);
 }
 
 var sessionData = new MySQLStore({
