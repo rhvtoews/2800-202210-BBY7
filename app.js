@@ -103,10 +103,10 @@ app.get("/plantscards", function(req, res) {
 // Delete Account, routes back to the dashboard upon completion.
 app.post('/deleteAccount', function(req, res, next) {
   
-  const input = req.body.delInput;
+  const delInput = req.body.delInput;
 
-  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [input])
-  res.redirect('./admindashboard.html');
+  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
+  res.redirect('./Dashboard/dashboard.html');
 });
 
 // Account signup code
@@ -133,7 +133,7 @@ app.post('/adminCreate', function(req, res, next) {
   sessionConnection.query(
     'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
     [fullname, email, password, city];
-    res.redirect('./admindashboard.html');
+    res.redirect('./Dashboard/dashboard.html');
 });
 
 app.get("/adminDashboard", function(req, res) {
