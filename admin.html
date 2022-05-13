@@ -4,13 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Dashboard</title>
+<<<<<<< HEAD:User Profile/admin.html
     <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+=======
+    <link rel="stylesheet" href="./styles/admin.css">
+    <script src="./scripts/header.js"></script>
+    
+>>>>>>> Thant_Reference:admin.html
 </head>
 <body>
     <div class="container">
-        <nav>Navbar</nav>
+        <div class="topnav">
+            <a href="landing.html" class="active">Logo</a>
+            <div id="myLinks">
+                <a href="profile.html">Profile</a>                
+                <a href="admin.html">Admin</a>
+                <a href="about.html">About</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <div class="Userlist">
             <form action="">
                 <div class="name">
@@ -36,7 +53,7 @@
             </form>
         </div>
         <div class="profile">
-            <img src="profile.jpg" alt="">
+            <img src="./Image/profile2.jpg" alt="">
             <button class="delete">Delete User</button>
             <button class="admin">Make Admin</button>
         </div>
