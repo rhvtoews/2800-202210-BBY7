@@ -22,6 +22,9 @@ app.use(session ({
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
+// app.use('/landing', express.static('./landing.html'));
+// app.use('/dashboard', express.static('./dashboard.html'));
+// app.use('/admin', express.static('./UserProfile/admin.html'));
 
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
@@ -51,7 +54,19 @@ var sessionData = new MySQLStore({
 
 // Supply index page
 app.get('/', function(req, res) {
-  res.sendFile('./index.html');
+  res.sendFile(__dirname + '/index.html');
+});
+
+
+// Supply landing page
+app.get('/landing', function(req, res) {
+  res.sendFile(__dirname + '/landing.html');
+});
+
+
+// Supply landing page
+app.get('/dashboard', function(req, res) {
+  res.sendFile(__dirname + '/Dashboard/dashboard.html');
 });
 
 // Logout, route to index
@@ -60,7 +75,7 @@ app.get('/logout', function(req,res){
       if(!err){
           res.send("Logged Out")
       } else {
-        res.sendFile('/');
+        res.redirect('/');
       }
   })
 });
@@ -79,7 +94,7 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
-        res.redirect('./landing.html');
+        res.redirect('/landing');
       } else {
         res.redirect('/');
       }
@@ -133,14 +148,24 @@ app.post('/adminCreate', function(req, res, next) {
   sessionConnection.query(
     'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
     [fullname, email, password, city];
-    res.redirect('./Dashboard/dashboard.html');
+    res.redirect('dashboard');
 });
 
-app.get("/adminDashboard", function(req, res) {
 
-  if(req.session.loggedIn) {
 
-      connection.query(
+app.get("/dashboard", function(req, res) {
+
+  if(req.session) {
+    var connection = mysql.createConnection({
+      host: 'localhost',
+      port: 3306,
+      user: 'root',
+      password: '',
+      database: 'BBY7_members'
+    });
+    
+    connection.connect();
+    connection.query(
           "SELECT * FROM BBY7_user",
           function(err, tableResults, fields) {
               
