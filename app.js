@@ -29,14 +29,28 @@ app.use('/', express.static('./'));
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
 
+// Database declarations
+const dbConfigHeroku = {
+  host: 'us-cdbr-east-05.cleardb.net',
+  user: 'b7bc82056b389e',
+  password: '8f0a455b',
+  database: 'heroku_6bb5156c76d47cb'
+};
 
-var sessionConnection = mysql.createConnection({
+const dbConfigLocal = {
   host: 'localhost',
   port: 3306,
   user: 'root',
   password: '',
   database: 'BBY7_members'
-});
+}
+
+if (is_heroku) {
+  var sessionConnection = mysql.createConnection(dbConfigHeroku);
+} else {
+  var sessionConnection = mysql.createConnection(dbConfigLocal);
+}
+
 
 
 var sessionData = new MySQLStore({
