@@ -1,9 +1,13 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(-30deg, #1D323F, #DFEEEA, #5E8B7E);
+    background: linear-gradient(-30deg, #5E8B7E, rgba(8, 28, 21, 1), #5E8B7E);
 }
 
 .container {
@@ -45,6 +49,10 @@ nav {
     border-radius: 20px;
 }
 
+::placeholder {
+    text-align: center;
+}
+
 img {
     display: block;
     max-height: 60%;
@@ -58,7 +66,7 @@ img {
 .delete {
     border-radius: 20px;
     border: none;
-    background: linear-gradient(#a1ecc3, #23795b);
+    background: linear-gradient(#a1ecc3, #42b089);
     cursor: pointer;
     font-weight: bold;
     display: block;
@@ -69,13 +77,13 @@ img {
 }
 
 .delete:hover {
-    background: linear-gradient(#23795b, #a1ecc3);
+    background: linear-gradient(#42b089, #a1ecc3);
 }
 
 .admin {
     border-radius: 20px;
     border: none;
-    background: linear-gradient(#a1ecc3, #23795b);
+    background: linear-gradient(#a1ecc3, #42b089);
     cursor: pointer;
     font-weight: bold;
     display: block;
@@ -86,7 +94,7 @@ img {
 }
 
 .admin:hover {
-    background: linear-gradient(#23795b, #a1ecc3);
+    background: linear-gradient(#42b089, #a1ecc3);
 }
 
 form {
@@ -97,6 +105,15 @@ form {
 input {
     border-radius: 20px;
     font-size: 25px;
+    border: none;
+    background-color: #a1c7c7;
+}
+
+button {
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    margin-left: 20px;
 }
 
 footer {
@@ -106,4 +123,44 @@ footer {
     margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 780px) {
+    .container {
+        height: 80%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.3fr 1fr 1fr 0.2fr;
+        grid-template-areas:
+            "nav"
+            "profile"
+            "Userlist"
+            "footer";
+    }
+
+    .admin {
+        font-size: 20px;
+    }
+
+    .delete {
+        font-size: 20px;
+    }
+
+    img {
+        max-height: 30%;
+        max-width: 30%;
+    }
+
+    .profile {
+        margin-right: 20px;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+
 }
