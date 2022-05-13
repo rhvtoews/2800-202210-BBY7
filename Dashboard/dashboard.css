@@ -1,0 +1,107 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-30deg, #2F5D62, #DFEEEA, #5E8B7E);
+}
+
+.container {
+    width: 90%;
+    height: 87vh;
+    background-color: rgba(240, 248, 255, 0.413);
+    border-radius: 30px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 0.4fr;
+    grid-template-rows: 0.2fr 1fr 0.15fr;
+    grid-template-areas:
+        "nav nav"
+        "Userlist  adminProfile"
+        "footer footer ";
+}
+
+nav {
+    background-color: rgb(255, 0, 0);
+    grid-area: nav;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.Userlist {
+    background-color: rgb(252, 237, 23);
+    margin-left: 20px;
+    grid-area: Userlist;
+    border-radius: 20px;
+}
+
+.users {
+    margin-top: 20px;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+.listOfUsers {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 20px 20px rgb(62, 62, 62);
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid white;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background: #f3f3f3;
+}
+
+.table tbody tr.active {
+    font-weight: bold;
+    color: #4AD489;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #4AD489;
+}
+
+table thead tr {
+    color: white;
+    background: rgb(94, 214, 166);
+    text-align: left;
+    font-weight: bold;
+}
+
+footer {
+    background-color: rgb(0, 255, 255);
+    grid-area: footer;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.adminProfile {
+    background-color: rgb(245, 245, 220);
+    grid-area: adminProfile;
+    border-radius: 20px;
+    margin-right: 20px;
+}
