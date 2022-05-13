@@ -107,8 +107,8 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
-        sess=req.session;
-        sess.email= 
+        // sess=req.session;
+        // sess.email= 
         res.redirect('/landing');
       } else {
         res.redirect('/');
