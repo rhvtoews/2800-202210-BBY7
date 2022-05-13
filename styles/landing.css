@@ -143,9 +143,17 @@ body {
     font-family: Arial;
     background-color: rgb(82, 151, 255);
     color: white;
+    cursor: pointer;
+}
 
-    
-  }
+.button a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
 
 .chat-bar-collapsible {
     position: fixed;
