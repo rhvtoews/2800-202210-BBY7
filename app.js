@@ -6,7 +6,6 @@ const path = require('path');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
 
@@ -25,19 +24,11 @@ app.use('/', express.static('./'));
 const port = process.env.PORT || 8000;
 
 
-
-//dummy account
-const userData = {
-  fullname: "Ryan Toews",
-  username: "ryant",
-  password: '12345'
-}
-
 var sessionConnection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: 'password',
+  password: '',
   database: 'BBY7_members'
 });
 
@@ -73,17 +64,18 @@ app.get('/logout', function(req,res){
 
 // Login, route to landing page on success
 app.post('/login', function(req, res, next) {
-  const username = req.body.username;
+  
+  const email = req.body.email;
   const password = req.body.password;
   
   sessionConnection.query(
-    'SELECT * FROM BBY7_user WHERE username = ? AND password = ?', 
-    [username, password],
-    function(err, records, fields) {
+    'SELECT * FROM BBY7_user WHERE email = ? AND password = ?', 
+    [email, password],
+    function(err, results, fields) {
       if(err) {
         console.log(err);
       }
-      if(records.length > 0) {
+      if(results.length > 0) {
         res.redirect('./landing.html');
       } else {
         res.redirect('/');
@@ -92,12 +84,44 @@ app.post('/login', function(req, res, next) {
     )
 });
 
+// Delete Account, routes back to the dashboard upon completion.
 app.post('/deleteAccount', function(req, res, next) {
-  const input = req.body.input;
+  
+  const input = req.body.delInput;
+
+  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [input])
+  res.redirect('./admindashboard.html');
+});
+
+// Account signup code
+app.post('/signup', function(req, res, next) {
+  
+  const fullname = req.body.fullname;
+  const email = req.body.email;
+  const password = req.body.password;
+  const city = req.body.city;
 
   sessionConnection.query(
-    'DELETE FROM BBY7_user WHERE ID = ?', [input])
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
+    [fullname, email, password, city];
+    res.redirect('./index.html');
 });
+
+app.post('/adminCreate', function(req, res, next) {
+  
+  const fullname = req.body.fullname;
+  const email = req.body.email;
+  const password = req.body.password;
+  const city = req.body.city;
+
+  sessionConnection.query(
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
+    [fullname, email, password, city];
+    res.redirect('./admindashboard.html');
+});
+
+app.post
+
 
 
 app.listen(process.env.PORT || 8000, function() {
