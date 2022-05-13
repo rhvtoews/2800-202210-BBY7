@@ -8,10 +8,6 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
-
-
-
-
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
 
@@ -30,19 +26,11 @@ app.use('/', express.static('./'));
 const port = process.env.PORT || 8000;
 
 
-
-//dummy account
-const userData = {
-  fullname: "Ryan Toews",
-  username: "ryant",
-  password: '12345'
-}
-
 var sessionConnection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: 'password',
+  password: '',
   database: 'BBY7_members'
 });
 
@@ -58,24 +46,14 @@ var sessionData = new MySQLStore({
       data: 'data'
     }
   }
-})
+});
 
+// Supply index page
+app.get('/', function(req, res) {
+  res.sendFile('./index.html');
+});
 
-
-// app.use('/login', function(req, res) {
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   if (username != userData.username || password != userData.password) {
-//     return res.status(401).json({
-//       error: true,
-//       message: "Invalid Username or Password"
-//     })
-//   } else {
-//     req.session.userinfo = userData.username
-//     res.send("Login successful")
-//   }
-// })
-
+// Logout, route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
@@ -84,34 +62,22 @@ app.get('/logout', function(req,res){
         res.sendFile('/');
       }
   })
-})
+});
 
-// app.use('/', function(req, res) {
-//   if(req.session.userinfo) {
-//     res.send("Welcome" + req.session.userinfo)
-//   } else {
-//     res.send("Please log in")
-//   }
-// })
-
-app.get('/', function(req, res) {
-  res.sendFile('./index.html');
-})
-
-
-
+// Login, route to landing page on success
 app.post('/login', function(req, res, next) {
-  const username = req.body.username;
+  
+  const email = req.body.email;
   const password = req.body.password;
   
   sessionConnection.query(
-    'SELECT * FROM BBY7_user WHERE username = ? AND password = ?', 
-    [username, password],
-    function(err, records, fields) {
+    'SELECT * FROM BBY7_user WHERE email = ? AND password = ?', 
+    [email, password],
+    function(err, results, fields) {
       if(err) {
         console.log(err);
       }
-      if(records.length > 0) {
+      if(results.length > 0) {
         res.redirect('./landing.html');
       } else {
         res.redirect('/');
@@ -129,60 +95,47 @@ app.get("/plantscards", function(req, res) {
 
       let profile = fs.readFileSync("./plantscards.html", "utf8");
       let profileDOM = new JSDOM(profile);
+  }
+});
 
 
+// Delete Account, routes back to the dashboard upon completion.
+app.post('/deleteAccount', function(req, res, next) {
+  
+  const input = req.body.delInput;
 
+  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [input])
+  res.redirect('./admindashboard.html');
+});
 
-// var thisSession;
+// Account signup code
+app.post('/signup', function(req, res, next) {
+  
+  const fullname = req.body.fullname;
+  const email = req.body.email;
+  const password = req.body.password;
+  const city = req.body.city;
 
-// router.get('/', (req, res) => {
-//   thisSession = req.session;
-//   if (thisSession.username) {
-//     return res.redirect('/admin');
-//   }
-//   res.sendFile('index.html')
-// })
+  sessionConnection.query(
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
+    [fullname, email, password, city];
+    res.redirect('./index.html');
+});
 
-// app.use(session({
-//   secret: "secret234234key234324token690848064",
-//   saveUninitialized: true,
-//   resave: false
-// }));
+app.post('/adminCreate', function(req, res, next) {
+  
+  const fullname = req.body.fullname;
+  const email = req.body.email;
+  const password = req.body.password;
+  const city = req.body.city;
 
-// router.post('/login', (req, res) => {
-//   thisSession = req.session;
-//   thisSession.username = req.body.username;
-//   res.end('done');
-// })
+  sessionConnection.query(
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
+    [fullname, email, password, city];
+    res.redirect('./admindashboard.html');
+});
 
-// app.get('/', function(req, res){
-//   thisSession =  req.session;
-//   thisSession.username;
-//   thisSession.password;
-// });
-
-// router.get('/admin', (req, res) => {
-//   thisSession = req.session;
-//   if (thisSession.username) {
-//     res.write('<h1>Hello ${thisSession.username} <h1><br>');
-//     res.end('+', 'Logout');
-//   } else {
-//     res.write('Please login first.');
-//   }
-// });
-
-// router.get('/logout', (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       return console.log(err);
-//     }
-//     res.redirect('/');
-//   });
-// });
-
-// app.use('/', router);
 
 app.listen(process.env.PORT || 8000, function() {
   console.log('App started on port ' + port);
 });
-
