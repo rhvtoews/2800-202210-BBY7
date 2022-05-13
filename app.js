@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
 
+const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
 
 
@@ -134,6 +135,46 @@ app.post('/adminCreate', function(req, res, next) {
     [fullname, email, password, city];
     res.redirect('./admindashboard.html');
 });
+
+app.get("/adminDashboard", function(req, res) {
+
+  if(req.session.loggedIn) {
+
+      connection.query(
+          "SELECT * FROM BBY7_user",
+          function(err, tableResults, fields) {
+              
+              if (err) {
+                  console.log(err);
+              }
+              let adminDash = fs.readFileSync("./Dashboard/dashboard.html", "utf8");
+              let adminDOM = new JSDOM(adminDash);
+
+              let tableDisplay = "<table class=\"table\"><thead><tr><th>NAME</th><th>EMAIL</th><th>PASSWORD</th><th>CITY</th><th>ADMIN</th></tr></thead><tbody>"
+              for (let index = 0; index < tableResults.length; index++) {
+                  tableDisplay += "<tr><td>" + tableResults[index].fullname + "</td>"
+                  + "<td>" + tableResults[index].email + "</td>"
+                  + "<td>" + tableResults[index].password + "</td>"
+                  + "<td>" + tableResults[index].city + "</td>"
+                  + "<td>" + tableResults[index].admin + "</td></tr>";
+              }
+              tableDisplay += "</tbody></table>";
+              adminDOM.window.document.getElementById("usertable").innerHTML = tableDisplay;
+
+              res.send(adminDOM.serialize());
+          }
+      );
+
+      connection.end();
+  } else {
+      res.redirect("/");
+  }
+
+});
+
+
+
+
 
 
 app.listen(process.env.PORT || 8000, function() {
