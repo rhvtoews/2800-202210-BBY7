@@ -23,9 +23,7 @@ app.use(session ({
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
-// app.use('/landing', express.static('./landing.html'));
-// app.use('/dashboard', express.static('./dashboard.html'));
-// app.use('/admin', express.static('./UserProfile/admin.html'));
+
 
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
@@ -82,6 +80,11 @@ app.get('/dashboard', function(req, res) {
   res.sendFile(__dirname + '/Dashboard/dashboard.html');
 });
 
+// Supply register page
+app.get('/register', function(req, res) {
+  res.sendFile(__dirname + '/register.html');
+});
+
 // Logout, route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
@@ -107,8 +110,6 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
-        // sess=req.session;
-        // sess.email= 
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -146,16 +147,21 @@ app.post('/signup', function(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
   const city = req.body.city;
+  
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
-    [fullname, email, password, city];
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)',
+    [fullname, email, password, city, admin]);
     res.redirect('./index.html');
+
 });
 
 // Changes name
 app.post('/changeName', function(req, res, next) {
-
+  const fullname = req.body.fullname;
+  const id = session.id;
+  sessionConnection.query('UPDATE BBY7_user SET fullname = ? WHERE ID = ?',
+  [fullname, id], function(err, results, fields){})
 });
 
 app.post('/changeEmail', function(req, res, next) {
@@ -188,16 +194,6 @@ app.post('/adminCreate', function(req, res, next) {
 function tableLoad() {
 app.get("/dashboard", function(req, res) {
 
-  // if(req.session) {
-  //   var connection = mysql.createConnection({
-  //     host: 'localhost',
-  //     port: 3306,
-  //     user: 'root',
-  //     password: '',
-  //     database: 'BBY7_members'
-  //   });
-    
-  //   connection.connect();
     sessionConnection.query(
           "SELECT * FROM BBY7_user",
           function(err, tableResults, fields) {
