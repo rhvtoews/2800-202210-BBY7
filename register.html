@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<title>Register</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
-		<title>Register</title>
-        <link href="./styles/login.css" rel="stylesheet" type="text/css">
+		<link href="/styles/login.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital,wght@0,800;1,700&family=Source+Sans+Pro&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<section class="sidebar">
-		</section>
-		<section class="login-form">
+		<div class="sidebar">
+		</div>
+		<div class="login-form">
 			
-			<form action="/login" method="POST" class="login">				
+			<form action="/signup" method="POST" class="login">				
 				<h1>Register</h1>
 				<div class="line"></div>
-				<input type="text" name="username" placeholder="Enter Your Name" id="username" required>
-                <input type="text" name="username" placeholder="Enter Your City" id="city" required>
-				<input type="password" name="password" placeholder="Enter e-mail" id="email" required>
-                <input type="password" name="password" placeholder="Enter Password" id="password" required>
+				<input type="text" name="fullname" placeholder="Enter Your Name" id="username" required>
+        <input type="text" name="city" placeholder="Enter Your City" id="city" required>
+				<input type="email" name="email" placeholder="Enter e-mail" id="email" required>
+        <input type="password" name="password" placeholder="Enter Password" id="password" required>
 				<input type="submit" class="submit" value="Submit">
 			</form>	
-		</section>
+		</div>
 	</body>
 </html>
