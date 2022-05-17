@@ -10,7 +10,7 @@ const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
 
-var sess;
+
 
 app.use(session ({
   key: 'keyin',
@@ -20,13 +20,17 @@ app.use(session ({
   saveUninitialized: true
 }))
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
 
 
+
+
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
+
+var sess;
 
 // Database declarations
 const dbConfigHeroku = {
@@ -65,7 +69,11 @@ var sessionData = new MySQLStore({
 
 // Supply index page
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  if (!sessionData) {
+    res.sendFile(__dirname + '/index.html');
+  } else {
+    res.sendFile(__dirname + '/landing.html');
+  }
 });
 
 
@@ -75,7 +83,7 @@ app.get('/landing', function(req, res) {
 });
 
 
-// Supply landing page
+// Supply dashboard page
 app.get('/dashboard', function(req, res) {
   res.sendFile(__dirname + '/Dashboard/dashboard.html');
 });
@@ -110,6 +118,8 @@ app.post('/login', function(req, res, next) {
         console.log(err);
       }
       if(results.length > 0) {
+        sess = req.session;
+        sess.userID = 
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -143,15 +153,15 @@ app.post('/deleteAccount', function(req, res, next) {
 // Account signup code
 app.post('/signup', function(req, res, next) {
   
-  const fullname = req.body.fullname;
-  const email = req.body.email;
-  const password = req.body.password;
-  const city = req.body.city;
+  var fullname = req.body.fullname;
+  var email = req.body.email;
+  var password = req.body.password;
+  var city = req.body.city;
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)',
-    [fullname, email, password, city, admin]);
+    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, ?)',
+    [fullname, email, password, city, '0']);
     res.redirect('./index.html');
 
 });
@@ -160,20 +170,32 @@ app.post('/signup', function(req, res, next) {
 app.post('/changeName', function(req, res, next) {
   const fullname = req.body.fullname;
   const id = session.id;
-  sessionConnection.query('UPDATE BBY7_user SET fullname = ? WHERE ID = ?',
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.ID = ?',
   [fullname, id], function(err, results, fields){})
 });
 
+// Changes email
 app.post('/changeEmail', function(req, res, next) {
-
+  const email = req.body.email;
+  const id = session.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.ID = ?',
+  [email, id], function(err, results, fields){})
 });
 
+// Changes password
 app.post('/changePassword', function(req, res, next) {
-
+  const password = req.body.password;
+  const id = session.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.ID = ?',
+  [password, id], function(err, results, fields){})
 });
 
+// Changes city
 app.post('/changeCity', function(req, res, next) {
-
+  const city = req.body.city;
+  const id = session.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.city = ? WHERE BBY7_user.ID = ?',
+  [city, id], function(err, results, fields){})
 });
 
 

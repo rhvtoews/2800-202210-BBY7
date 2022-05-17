@@ -12,24 +12,21 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   PRIMARY KEY (ID)
   );
 
+  CREATE TABLE IF NOT EXISTS BBY7_plant (
+  plantName varchar(50) NOT NULL,
+  plantType varchar(25),
+  soilType varchar(25),
+  region varchar(25),
+  period int,
+  PRIMARY KEY (plantName),
+);
 
--- CREATE TABLE IF NOT EXISTS BBY7_plant (
---   plantName varchar(50) NOT NULL,
---   plantType varchar(25),
---   soilType varchar(25),
---   region varchar(25),
---   period int,
---   PRIMARY KEY (plantName),
---   FOREIGN KEY (region) REFERENCES BB7_user(city)
--- );
-
--- CREATE TABLE IF NOT EXISTS BB7_toolList (
---   pName varchar(50) NOT NULL,
---   tool varchar(25),
---   PRIMARY KEY (pName),
---   FOREIGN KEY (pName) REFERENCES BB7_plant(plantName)
--- );
-
+CREATE TABLE IF NOT EXISTS BB7_toolList (
+  pName varchar(50) NOT NULL,
+  tool varchar(25),
+  PRIMARY KEY (pName),
+  FOREIGN KEY (pName) REFERENCES BB7_plant(plantName)
+);
 
 INSERT INTO BBY7_user 
 VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North Delta", TRUE),
