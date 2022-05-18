@@ -14,10 +14,10 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
 
   CREATE TABLE IF NOT EXISTS BBY7_plant (
   plantName varchar(50) NOT NULL,
-  plantType varchar(25),
+  plantDescription varchar(300) NOT NULL,
   soilType varchar(25),
+  bloomingPeriod varchar(25),
   region varchar(25),
-  period int,
   PRIMARY KEY (plantName),
 );
 
