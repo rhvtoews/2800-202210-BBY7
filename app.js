@@ -76,6 +76,10 @@ app.get('/', function(req, res) {
   }
 });
 
+// Supply profile page
+app.get('/profile', function(req,res) {
+  res.sendFile(__dirname + '/profile.html');
+});
 
 // Supply landing page
 app.get('/landing', function(req, res) {
