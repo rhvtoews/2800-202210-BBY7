@@ -211,7 +211,7 @@ app.post('/adminCreate', function(req, res, next) {
   const city = req.body.city;
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, FALSE)'),
+    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin) VALUES (?, ?, ?, ?, 0, FALSE)'),
     [fullname, email, password, city];
     res.redirect('dashboard');
 });
