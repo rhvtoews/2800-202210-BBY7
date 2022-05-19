@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   email varchar(25),
   password varchar(25),
   city varchar(25),
+  plantCounter int,
   admin BOOLEAN,
   PRIMARY KEY (ID)
   );
