@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheet.css">
+  <title>SeedIt</title>
+</head>
+<body>
+  <main>
+    <label>Name:</label>
+    <input type="text" id="nameInput">
+    <button>Add Name</button>
+
+    <br/><br/><br/>
+    
+    <div>
+      <input placeholder="Search by name" id="searchInput">
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <table id="table">
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>City</th>
+        <th>Admin</th>
+        <th>Delete</th>
+        <th>Edit</th>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <section hidden id="updateUser">
+      <label>Name:</label>
+      <input type="text" id="updateNameInput">
+      <button id="update-row-btn">Update</button>
+    </section>
+
+
+  </main>
+  <script src="index.js"></script>
+  
+</body>
+</html>
