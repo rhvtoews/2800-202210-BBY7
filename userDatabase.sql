@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   soilType varchar(25),
   bloomingPeriod varchar(25),
   region varchar(25),
-  PRIMARY KEY (plantName),
+  PRIMARY KEY (plantName)
 );
 
-CREATE TABLE IF NOT EXISTS BB7_toolList (
+CREATE TABLE IF NOT EXISTS BBY7_toolList (
   pName varchar(50) NOT NULL,
   tool varchar(25),
   PRIMARY KEY (pName),
-  FOREIGN KEY (pName) REFERENCES BB7_plant(plantName)
+  FOREIGN KEY (pName) REFERENCES BBY7_plant(plantName)
 );
 
 INSERT INTO BBY7_user 
