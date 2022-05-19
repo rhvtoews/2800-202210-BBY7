@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   fullname varchar(50),
   email varchar(25),
   password varchar(25),
-  city varchar(25),
+  region varchar(25),
   admin BOOLEAN,
   PRIMARY KEY (ID)
   );
@@ -18,24 +18,24 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   soilType varchar(25),
   bloomingPeriod varchar(25),
   region varchar(25),
-  PRIMARY KEY (plantName),
+  PRIMARY KEY (plantName)
 );
 
-CREATE TABLE IF NOT EXISTS BB7_toolList (
+CREATE TABLE IF NOT EXISTS BBY7_toolList (
   pName varchar(50) NOT NULL,
   tool varchar(25),
   PRIMARY KEY (pName),
-  FOREIGN KEY (pName) REFERENCES BB7_plant(plantName)
+  FOREIGN KEY (pName) REFERENCES BBY7_plant(plantName)
 );
 
 INSERT INTO BBY7_user 
-VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North Delta", TRUE),
-  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "Saskatoon", TRUE),
-  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "Burnaby", FALSE),
-  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "Vancouver", FALSE),
-  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987", "Calgary", FALSE),
-  ("6", "Alex Kamal", "alexk@mcrn.com", "pass1234", "Edmonton", FALSE),
-  ("7", "Amos Burton", "amosb@ba.com", "pass0987", "Toronto", FALSE),
-  ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "Ottawa", FALSE),
-  ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "Winnipeg", FALSE),
-  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", FALSE);
+VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", TRUE),
+  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", TRUE),
+  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "North America", FALSE),
+  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "North America", FALSE),
+  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987","North America", FALSE),
+  ("6", "Alex Kamal", "alexk@mcrn.com", "pass1234", "North America", FALSE),
+  ("7", "Amos Burton", "amosb@ba.com", "pass0987", "North America", FALSE),
+  ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "North America", FALSE),
+  ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "North America", FALSE),
+  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "North America", FALSE);
