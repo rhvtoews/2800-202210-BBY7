@@ -139,8 +139,17 @@ app.get('/admin', function(req, res) {
   } 
 });
 
+// Plants page
+app.get('/plantscards', function(req, res) {  
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/plantscards.html');
+  } 
+});
 
-// Logout, route to index
+
+// Logout, then route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
