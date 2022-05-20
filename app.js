@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
 const MySQLStore = require('express-mysql-session')(session);
+const cors = require('cors');
 
 
 
@@ -20,13 +21,13 @@ app.use(session ({
   saveUninitialized: true
 }))
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
 
 
-
-
+// DB Location constants
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
 
@@ -213,46 +214,78 @@ app.post('/adminCreate', function(req, res, next) {
 });
 
 
-function tableLoad() {
-app.get("/dashboard", function(req, res) {
-
-    sessionConnection.query(
-          "SELECT * FROM BBY7_user",
-          function(err, tableResults, fields) {
-              
-              if (err) {
-                  console.log(err);
-              }
-              let adminDash = fs.readFileSync("./Dashboard/dashboard.html", "utf8");
-              let adminDOM = new JSDOM(adminDash);
-
-              let tableDisplay = "<table class=\"table\"><thead><tr><th>NAME</th><th>EMAIL</th><th>PASSWORD</th><th>CITY</th><th>ADMIN</th></tr></thead><tbody>"
-              for (let index = 0; index < tableResults.length; index++) {
-                  tableDisplay += "<tr><td>" + tableResults[index].fullname + "</td>"
-                  + "<td>" + tableResults[index].email + "</td>"
-                  + "<td>" + tableResults[index].password + "</td>"
-                  + "<td>" + tableResults[index].city + "</td>"
-                  + "<td>" + tableResults[index].admin + "</td></tr>";
-              }
-              tableDisplay += "</tbody></table>";
-              adminDOM.window.document.getElementById("usertable").innerHTML = tableDisplay;
-
-              res.send(adminDOM.serialize());
-          }
-      );
-
-      // connection.end();
-  // } else {
-  //     res.redirect("/");
-  // }
-
+// Create
+app.post('/insert', (request, response) => {
+  const { fullname } = request.body;
+  const results = insertName(fullname);
+  results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
+
+
+// Read
+app.get('/getTable', (request, response) => {
+  const results = getTableData();
+  results.then(data => response.json({ data : data })).catch(err => console.log(err));
+});
+
+// Update
+
+
+
+// Delete
+app.delete('/delete/:ID', (request, response) => {
+  const { ID } = request.params;
+  console.log('ID fed to DB: ' + ID);
+  const results = deleteUser(ID);
+  results
+  .then(data => response.json({success : data}))
+  .catch(err => console.log(err));
+});
+
+
+
+//--------------------------//
+//      DB Functions        //
+//--------------------------//
+
+async function getTableData() {
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM BBY7_user;';
+
+      sessionConnection.query(query, (err, results) => {
+        if (err) reject(new Error(err.message));
+        resolve(results);
+      })
+    });
+    return response;
+
+  } catch (err) {
+    console.log(err);
+  }
 }
 
+async function deleteUser(ID) {
+  console.log('ID received by DB: ' + ID);
+  try {
+      ID = parseInt(ID, 10); 
+      const response = await new Promise((resolve, reject) => {
+          
+          const query = "DELETE FROM BBY7_user WHERE ID = ?";
 
+          sessionConnection.query(query, [ID] , (err, results) => {
+              if (err) reject(new Error(err.message));
+              resolve(results);
+          })
+      });
+      return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
 
-
-
+// Start app, listen on port
 app.listen(process.env.PORT || 8000, function() {
   console.log('App started on port ' + port);
 });
