@@ -112,12 +112,7 @@ app.get('/dashboard', function(req, res) {
 
 // Supply register page
 app.get('/register', function(req, res) {
-  if (!loggedIn) {
-    res.sendFile(__dirname + '/html/index.html');
-  } else {
     res.sendFile(__dirname + '/html/register.html');
-  }
-  
 });
 
 // Supply about page
@@ -153,7 +148,7 @@ app.get('/plantscards', function(req, res) {
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
-        loggedIn =  false;
+        loggedIn = false;
         res.redirect('/');
       } else {
         res.redirect('/');
