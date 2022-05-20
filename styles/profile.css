@@ -60,15 +60,22 @@
     cursor: pointer;
     width: 100%;
   }
+
+  .button a{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 1px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
   
   a {
     text-decoration: none;
     font-size: 22px;
-    color: black;
-  }
-
-  button a {
-    color: white;
   }
   
   button:hover, a:hover {
