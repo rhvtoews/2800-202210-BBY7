@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('http://localhost:8000/getPlants')
+  fetch('/getPlants')
   .then(response => response.json())
   .then(data => plantCards(data['data']));
 });
@@ -33,6 +33,6 @@ function plantCards(data) {
     console.log(newcard);
     document.getElementById(list + "plants-go-here").appendChild(newcard);
     i++;
-      
-  }
+  }    
+  
 )}
