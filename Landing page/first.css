@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Koulen', cursive;
+}
+
+section {
+    height: 100vh;
+    color: white;
+    scroll-snap-align: start;
+}
+
+.container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.first {
+    background-color: rgb(62, 25, 163);
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+}
+
+.earth {
+    width: 70%;
+    margin-top: 20%;
+    filter: drop-shadow(10px 10px 10px #000000);
+}
+
+.earthTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: bold;
+    font-size: 50px;
+    padding: 25px;
+    color: #c8c4fa;
+}
+
+.second {
+    background-color: rgb(190, 35, 35);
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-areas:
+        "tree treeTxt";
+}
+
+.tree {
+    width: 70%;
+    margin-top: 20%;
+    margin-left: 10%;
+    filter: drop-shadow(10px 10px 10px #000000);
+}
+
+.treeTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: bold;
+    font-size: 50px;
+    padding: 25px;
+    color: #c8c4fa;
+}
+
+.third {
+    background-color: rgb(206, 114, 28);
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+}
+
+.plant {
+    width: 70%;
+    margin-top: 20%;
+    filter: drop-shadow(10px 10px 10px #000000);
+}
+
+.plantTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: bold;
+    font-size: 50px;
+    padding: 25px;
+    color: #c8c4fa;
+}
+
+.fourth {
+    background-color: rgb(194, 249, 105)
+}
+
+.earth:hover {
+    -webkit-animation: wiggle 5s ease-in-out .5s infinite alternate;
+}
+
+@-webkit-keyframes wiggle {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+        -webkit-transform-origin: center center;
+    }
+}
+
+.tree:hover {
+    -webkit-animation: jiggle 1s ease-in-out .1s infinite alternate;
+}
+
+@-webkit-keyframes jiggle {
+    from {
+        -webkit-transform: rotate(15deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-15deg);
+        -webkit-transform-origin: center center;
+    }
+}
+
+h2 {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    padding: 25px;
+}
+
+h3 {
+    color: rgb(31, 30, 30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.back {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(254, 202, 137);
+    text-align: center;
+}
+
+.back:hover {
+    cursor: pointer;
+}
