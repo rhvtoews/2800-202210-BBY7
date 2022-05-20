@@ -310,6 +310,11 @@ body {
     animation: floatup .5s forwards
 }
 
+#phantom {
+    background: transparent;
+    border: none;
+}
+
 @keyframes floatup {
     from {
         transform: translateY(14px);
