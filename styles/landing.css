@@ -16,7 +16,6 @@ body {
 
 .mobile-container {
     margin: auto;
-    background-image: url("/Image/landing.jpg");
     color: var(--white);
     border-radius: 10px;
     height: 900px;
