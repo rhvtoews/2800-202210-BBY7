@@ -8,30 +8,32 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
-const MySQLStore = require('express-mysql-session')(session);
+// const MySQLStore = require('express-mysql-session')(session);
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
-
-
-app.use(session ({
-  key: 'keyin',
-  secret: 'secret0982348934',
-  store: sessionData,
-  resave: false,
-  saveUninitialized: true
-}))
+const twoHours = 1000 * 60 * 60 * 2;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('./'));
+app.use(cookieParser());
 
+
+app.use(session ({
+  key: 'keyin',
+  secret: 'secret0982348934',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: twoHours }
+}));
+
+var sess;
 
 // DB Location constants
 const is_heroku = process.env.IS_HEROKU || false;
 const port = process.env.PORT || 8000;
-
-var sess;
 
 // Database declarations
 const dbConfigHeroku = {
@@ -55,18 +57,18 @@ if (is_heroku) {
   var sessionConnection = mysql.createPool(dbConfigLocal);
 }
 
-var sessionData = new MySQLStore({
-  expiration: 10800000,
-  createDatabaseTable: true,
-  schema:{
-    tableName: 'sessiontbl',
-    columnNames:{
-      session_id: 'session_id',
-      expires: 'expires',
-      data: 'data'
-    }
-  }
-});
+// var sessionData = new MySQLStore({
+//   expiration: 10800000,
+//   createDatabaseTable: true,
+//   schema:{
+//     tableName: 'sessiontbl',
+//     columnNames:{
+//       session_id: 'session_id',
+//       expires: 'expires',
+//       data: 'data'
+//     }
+//   }
+// });
 
 // Supply index page
 app.get('/', function(req, res) {
@@ -124,7 +126,9 @@ app.post('/login', function(req, res, next) {
       }
       if(results.length > 0) {
         sess = req.session;
-        sess.userID = 
+        sess.email = req.body.email;
+        sess.id = getID(sess.email);
+        console.log(req.sess);
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -155,6 +159,13 @@ app.post('/deleteAccount', function(req, res, next) {
   res.redirect('./Dashboard/dashboard.html');
 });
 
+
+//--------------------------//
+//      CRUD Functions      //
+//--------------------------//
+
+//---- Create ----//
+
 // Account signup code
 app.post('/signup', function(req, res, next) {
   
@@ -165,45 +176,13 @@ app.post('/signup', function(req, res, next) {
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, admin) VALUES (?, ?, ?, ?, ?)',
+    'INSERT into BBY7_user (fullname, email, password, region, planCounter, admin) VALUES (?, ?, ?, ?, 0, FALSE)',
     [fullname, email, password, city, '0']);
-    res.redirect('./index.html');
+    res.redirect('/index.html');
 
 });
 
-// Changes name
-app.post('/changeName', function(req, res, next) {
-  const fullname = req.body.fullname;
-  const id = session.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.ID = ?',
-  [fullname, id], function(err, results, fields){})
-});
-
-// Changes email
-app.post('/changeEmail', function(req, res, next) {
-  const email = req.body.email;
-  const id = session.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.ID = ?',
-  [email, id], function(err, results, fields){})
-});
-
-// Changes password
-app.post('/changePassword', function(req, res, next) {
-  const password = req.body.password;
-  const id = session.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.ID = ?',
-  [password, id], function(err, results, fields){})
-});
-
-// Changes city
-app.post('/changeCity', function(req, res, next) {
-  const city = req.body.city;
-  const id = session.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.city = ? WHERE BBY7_user.ID = ?',
-  [city, id], function(err, results, fields){})
-});
-
-
+// Account creation for admin
 app.post('/adminCreate', function(req, res, next) {
   
   const fullname = req.body.fullname;
@@ -214,29 +193,58 @@ app.post('/adminCreate', function(req, res, next) {
   sessionConnection.query(
     'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin) VALUES (?, ?, ?, ?, 0, FALSE)'),
     [fullname, email, password, city];
-    res.redirect('dashboard');
+    res.redirect('/Dashboard/dashboard');
 });
 
 
-// Create
-app.post('/insert', (request, response) => {
-  const { fullname } = request.body;
-  const results = insertName(fullname);
-  results.then(data => response.json({ data : data })).catch(err => console.log(err));
-});
+//---- Read ----//
 
-
-// Read
+// Gets BBY7_user data
 app.get('/getTable', (request, response) => {
   const results = getTableData();
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
-// Update
+
+
+//---- Update ----//
+
+// Changes name
+app.post('/changeName', function(req, res, next) {
+  const fullname = req.body.fullname;
+  const id = sess.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.ID = ?',
+  [fullname, id], function(err, results, fields){})
+});
+
+// Changes email
+app.post('/changeEmail', function(req, res, next) {
+  const email = req.body.email;
+  const id = sess.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.ID = ?',
+  [email, id], function(err, results, fields){})
+});
+
+// Changes password
+app.post('/changePassword', function(req, res, next) {
+  const password = req.body.password;
+  const id = sess.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.ID = ?',
+  [password, id], function(err, results, fields){})
+});
+
+// Changes city
+app.post('/changeRegion', function(req, res, next) {
+  const city = req.body.city;
+  const id = sess.id;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.city = ? WHERE BBY7_user.ID = ?',
+  [city, id], function(err, results, fields){})
+});
 
 
 
-// Delete
+//---- Delete ----//
+
 app.delete('/delete/:ID', (request, response) => {
   const { ID } = request.params;
   console.log('ID fed to DB: ' + ID);
@@ -269,6 +277,23 @@ async function getTableData() {
   }
 }
 
+async function getPlantTableData() {
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM BBY7_plant;';
+
+      sessionConnection.query(query, (err, results) => {
+        if (err) reject(new Error(err.message));
+        resolve(results);
+      })
+    });
+    return response;
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function deleteUser(ID) {
   console.log('ID received by DB: ' + ID);
   try {
@@ -287,6 +312,24 @@ async function deleteUser(ID) {
       console.log(err);
       return false;
   }
+}
+
+async function getID(email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+        
+        const query = "SELECT ID FROM BBY7_user WHERE email = ?";
+
+        sessionConnection.query(query, [email] , (err, results) => {
+            if (err) reject(new Error(err.message));
+            resolve(results);
+        })
+    });
+    return response[0].ID;
+} catch (err) {
+    console.log(err);
+    return false;
+}
 }
 
 // Start app, listen on port
