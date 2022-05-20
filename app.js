@@ -31,6 +31,7 @@ app.use(session ({
 
 var sess;
 var loggedIn = false;
+var isAdmin = false;
 
 // DB Location constants
 const is_heroku = process.env.IS_HEROKU || false;
@@ -82,28 +83,60 @@ app.get('/', function(req, res) {
 
 // Supply profile page
 app.get('/profile', function(req,res) {
-  res.sendFile(__dirname + '/html/profile.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/profile.html');
+  }
 });
 
 // Supply landing page
 app.get('/landing', function(req, res) {
-  res.sendFile(__dirname + '/html/landing.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/landing.html');
+  }
 });
 
 
 // Supply dashboard page
 app.get('/dashboard', function(req, res) {
-  res.sendFile(__dirname + '/html/dashboard.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/dashboard.html');
+  }
+  
 });
 
 // Supply register page
 app.get('/register', function(req, res) {
-  res.sendFile(__dirname + '/html/register.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/register.html');
+  }
+  
 });
 
 // Supply about page
 app.get('/about', function(req, res) {
-  res.sendFile(__dirname + '/html/about.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/about.html');
+  }
+  
+});
+
+// Supply account admin page
+app.get('/admin', function(req, res) {  
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/html/admin.html');
+  } 
 });
 
 
@@ -174,12 +207,12 @@ app.post('/signup', function(req, res, next) {
   var fullname = req.body.fullname;
   var email = req.body.email;
   var password = req.body.password;
-  var city = req.body.city;
+  var region = req.body.region;
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, region, planCounter, admin) VALUES (?, ?, ?, ?, 0, FALSE)',
-    [fullname, email, password, city, '0']);
+    'INSERT into BBY7_user (fullname, email, password, region, planCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
+    [fullname, email, password, region, 0, false]);
     res.redirect('/index.html');
 
 });
@@ -187,14 +220,14 @@ app.post('/signup', function(req, res, next) {
 // Account creation for admin
 app.post('/adminCreate', function(req, res, next) {
   
-  const fullname = req.body.fullname;
-  const email = req.body.email;
-  const password = req.body.password;
-  const city = req.body.city;
+  var fullname = req.body.fullname;
+  var email = req.body.email;
+  var password = req.body.password;
+  var region = req.body.city;
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin) VALUES (?, ?, ?, ?, 0, FALSE)'),
-    [fullname, email, password, city];
+    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
+    [fullname, email, password, region, 0, false]);
     res.redirect('/Dashboard/dashboard');
 });
 
@@ -213,40 +246,39 @@ app.get('/getPlants', (request, response) => {
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
+
 //---- Update ----//
 
 // Changes name
 app.post('/changeName', function(req, res, next) {
   const fullname = req.body.fullname;
-  const id = sess.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.ID = ?',
-  [fullname, id], function(err, results, fields){})
+  const email = sess.email;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?',
+  [fullname, email], function(err, results, fields){})
 });
 
 // Changes email
 app.post('/changeEmail', function(req, res, next) {
-  const email = req.body.email;
-  const id = sess.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.ID = ?',
-  [email, id], function(err, results, fields){})
+  const email = sess.email;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.email = ?',
+  [email, email], function(err, results, fields){})
 });
 
 // Changes password
 app.post('/changePassword', function(req, res, next) {
   const password = req.body.password;
-  const id = sess.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.ID = ?',
-  [password, id], function(err, results, fields){})
+  const email = sess.email;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.email = ?',
+  [password, email], function(err, results, fields){})
 });
 
-// Changes city
+// Changes region
 app.post('/changeRegion', function(req, res, next) {
-  const city = req.body.city;
-  const id = sess.id;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.city = ? WHERE BBY7_user.ID = ?',
-  [city, id], function(err, results, fields){})
+  const region = req.body.region;
+  const email = sess.email;
+  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.email = ?',
+  [region, email], function(err, results, fields){})
 });
-
 
 
 //---- Delete ----//
