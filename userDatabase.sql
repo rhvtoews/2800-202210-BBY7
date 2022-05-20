@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   CREATE TABLE IF NOT EXISTS BBY7_plant (
   plantName varchar(50) NOT NULL,
   plantDescription varchar(300) NOT NULL,
-  soilType varchar(25),
+  soilType varchar(50),
   bloomingPeriod varchar(25),
   region varchar(25),
   PRIMARY KEY (plantName)
