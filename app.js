@@ -111,9 +111,10 @@ app.get('/about', function(req, res) {
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
-          res.send("Logged Out")
+        loggedIn =  false;
+        res.redirect('/');
       } else {
-        res.redirect('/');af
+        res.redirect('/');
       }
   })
 });
@@ -158,14 +159,7 @@ app.get("/plantscards", function(req, res) {
 });
 
 
-// Delete Account, routes back to the dashboard upon completion.
-app.post('/deleteAccount', function(req, res, next) {
-  
-  const delInput = req.body.delInput;
 
-  sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
-  res.redirect('/Dashboard/dashboard.html');
-});
 
 
 //--------------------------//
@@ -265,6 +259,15 @@ app.delete('/delete/:ID', (request, response) => {
   .then(data => response.json({success : data}))
   .catch(err => console.log(err));
 });
+
+// // Delete Account, routes back to the dashboard upon completion.
+// app.post('/deleteAccount', function(req, res, next) {
+  
+//   const delInput = req.body.delInput;
+
+//   sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
+//   res.redirect('/dashboard');
+// });
 
 
 
