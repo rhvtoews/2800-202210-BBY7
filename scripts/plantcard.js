@@ -31,7 +31,7 @@ function plantCards(data) {
     // newcard.querySelector('.card-image').setAttribute("id", "cimage" + (i+1));
 
     console.log(newcard);
-    document.getElementById("plants-go-here").appendChild(newcard);
+    document.getElementById(list + "plants-go-here").appendChild(newcard);
     i++;
       
   }
