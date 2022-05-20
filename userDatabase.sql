@@ -40,7 +40,9 @@ VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TR
   ("7", "Amos Burton", "amosb@ba.com", "pass0987", "North America", 0, FALSE),
   ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "North America", 0, FALSE),
   ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "North America", 0, FALSE),
-  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "North America", 0, FALSE);
+  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "North America", 0, FALSE),
+  ("11", "Tester", "test@test.com", "1234", "North America", 0, TRUE),
+  ("12", "Charles Tapp", "charles@charles.com", "1234", "North America", 0, TRUE);
 
 INSERT INTO BBY7_plant 
 VALUES ("African daisy", "These flowers are best planted in the spring after the threat of frost has passed, and they have a fairly quick growth rate, blooming about two months after sprouting from seeds.", "moist, well-drained", "Spring, summer, fall", "Africa, South Asia"),
