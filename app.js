@@ -100,13 +100,19 @@ app.get('/register', function(req, res) {
   res.sendFile(__dirname + '/register.html');
 });
 
+// Supply about page
+app.get('/about', function(req, res) {
+  res.sendFile(__dirname + '/about.html');
+});
+
+
 // Logout, route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
           res.send("Logged Out")
       } else {
-        res.redirect('/');
+        res.redirect('/');af
       }
   })
 });
@@ -156,7 +162,7 @@ app.post('/deleteAccount', function(req, res, next) {
   const delInput = req.body.delInput;
 
   sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
-  res.redirect('./Dashboard/dashboard.html');
+  res.redirect('/Dashboard/dashboard.html');
 });
 
 
@@ -205,7 +211,11 @@ app.get('/getTable', (request, response) => {
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
-
+//gets BBY7_plant data
+app.get('/getPlants', (request, response) => {
+  const results = getPlantTableData();
+  results.then(data => response.json({ data : data })).catch(err => console.log(err));
+});
 
 //---- Update ----//
 

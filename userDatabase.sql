@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   soilType varchar(50),
   bloomingPeriod varchar(25),
   region varchar(25),
+  image varchar(50),
   PRIMARY KEY (plantName)
 );
 

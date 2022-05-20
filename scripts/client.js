@@ -59,6 +59,7 @@ function loadTable(data) {
     adminTable += `<td><button class='editUserBtn' data-id=${ID}>Edit</td>`;
     adminTable += "</tr>";
   });
+  
 
   table.innerHTML = adminTable;
 }
