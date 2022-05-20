@@ -9,6 +9,7 @@ function plantCards(data) {
   console.log(CardTemplate);
   console.log(data);  
   var i = 0;
+  let list = "";
 
   data.forEach(function ({plantName, region, soilType, bloomingPeriod}) {
     
@@ -16,10 +17,10 @@ function plantCards(data) {
     let newcard = CardTemplate.content.cloneNode(true);
 
     
-    newcard.querySelector('.card-title').innerHTML = data[i].plantName;
-    newcard.querySelector('.card-region').innerHTML = data[i].region;
-    newcard.querySelector('.card-soil').innerHTML = data[i].soilType;
-    newcard.querySelector('.card-period').innerHTML = data[i].bloomingPeriod;
+    newcard.querySelector('.card-title').innerHTML = plantName;
+    newcard.querySelector('.card-region').innerHTML = region;
+    newcard.querySelector('.card-soil').innerHTML = soilType;
+    newcard.querySelector('.card-period').innerHTML = bloomingPeriod;
     // newcard.querySelector('.card-image').src = image;
 
     
@@ -30,7 +31,7 @@ function plantCards(data) {
     // newcard.querySelector('.card-image').setAttribute("id", "cimage" + (i+1));
 
     console.log(newcard);
-    document.getElementById(data + "-go-here").appendChild(newcard);
+    document.getElementById("plants-go-here").appendChild(newcard);
     i++;
       
   }

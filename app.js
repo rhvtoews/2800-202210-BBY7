@@ -112,12 +112,7 @@ app.get('/dashboard', function(req, res) {
 
 // Supply register page
 app.get('/register', function(req, res) {
-  if (!loggedIn) {
-    res.sendFile(__dirname + '/html/index.html');
-  } else {
     res.sendFile(__dirname + '/html/register.html');
-  }
-  
 });
 
 // Supply about page
@@ -148,18 +143,28 @@ app.get('/plantscards', function(req, res) {
   } 
 });
 
+// Easter Egg
+app.get('/surprise', function(req, res) {  
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
+  } else {
+    res.sendFile(__dirname + '/LandingPage/first.html');
+  } 
+});
 
 // Logout, then route to index
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
-        loggedIn =  false;
+        loggedIn = false;
         res.redirect('/');
       } else {
         res.redirect('/');
       }
   })
 });
+
+
 
 // Login, route to landing page on success
 app.post('/login', function(req, res, next) {
