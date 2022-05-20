@@ -49,7 +49,7 @@ const dbConfigLocal = {
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: '',
+  password: '0gvbxeityr',
   database: 'BBY7_members'
 }
 
