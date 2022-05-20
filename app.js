@@ -127,7 +127,7 @@ app.post('/login', function(req, res, next) {
       if(results.length > 0) {
         sess = req.session;
         sess.email = req.body.email;
-        sess.id = getID(sess.email);
+        // sess.id = getID(sess.email);
         console.log(req.sess);
         res.redirect('/landing');
       } else {
