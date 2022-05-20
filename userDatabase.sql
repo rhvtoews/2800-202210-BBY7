@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   fullname varchar(50),
   email varchar(25),
   password varchar(25),
-  city varchar(25),
+  region varchar(25),
   plantCounter int,
   admin BOOLEAN,
   PRIMARY KEY (ID)
@@ -30,16 +30,16 @@ CREATE TABLE IF NOT EXISTS BBY7_toolList (
 );
 
 INSERT INTO BBY7_user 
-VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North Delta", TRUE),
-  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "Saskatoon", TRUE),
-  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "Burnaby", FALSE),
-  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "Vancouver", FALSE),
-  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987", "Calgary", FALSE),
-  ("6", "Alex Kamal", "alexk@mcrn.com", "pass1234", "Edmonton", FALSE),
-  ("7", "Amos Burton", "amosb@ba.com", "pass0987", "Toronto", FALSE),
-  ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "Ottawa", FALSE),
-  ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "Winnipeg", FALSE),
-  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "Red Deer", FALSE);
+VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TRUE),
+  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 0, TRUE),
+  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "North America", 0, FALSE),
+  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "North America", 0, FALSE),
+  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987","North America", 0, FALSE),
+  ("6", "Alex Kamal", "alexk@mcrn.com", "pass1234", "North America", 0, FALSE),
+  ("7", "Amos Burton", "amosb@ba.com", "pass0987", "North America", 0, FALSE),
+  ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "North America", 0, FALSE),
+  ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "North America", 0, FALSE),
+  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "North America", 0, FALSE);
 
 INSERT INTO BBY7_plant 
 VALUES ("African daisy", "These flowers are best planted in the spring after the threat of frost has passed, and they have a fairly quick growth rate, blooming about two months after sprouting from seeds.", "moist, well-drained", "Spring, summer, fall", "Africa, South Asia"),
@@ -48,7 +48,7 @@ VALUES ("African daisy", "These flowers are best planted in the spring after the
 ("Beetroot", "The beet plant (Beta vulgaris) is a fast-growing vegetable that can be grown just about anywhere.", "moist, well-drained", "Seasonal", "Europe"),
 ("Cassia", "The popcorn plant is a tall shrub, and in its native African habitat it can grow up to 25 feet in height", "well-drained", "Summer", "Africa"),
 ("Cantaloupe", "It has a tan-green rind and sweet orange flesh. Coarse, medium green heart-shape leaves sit upright on fuzzy stems that line prickly, sprawling vines", "Sandy, well-drained", "Summer", "Asia, Africa"),
-("Easter lily", "This perennial bulb bears large, fragrant white or pink flowers. The plant’s thick, rigid stem grows upright and is covered in long, thin, dark green leaves.", "Well-drained", "Summer", "Asia"),
+("Easter lily", "This perennial bulb bears large, fragrant white or pink flowers. The plant's thick, rigid stem grows upright and is covered in long, thin, dark green leaves.", "Well-drained", "Summer", "Asia"),
 ("Eureka Lemon Trees", "Eureka lemons were developed from a seedling planted in Los Angeles, California in 1858. The tree is non-vigorous and has a spreading, open growth habit", "Sandy", "spring", "North America"),
 ("Four o'clock plant", "Four o'clock plants (Mirabilis jalapa) are bushy blooming perennials. These tuberous-rooted plants produce slightly pointed oval leaves on branching stems.", "Moist, well-drained", "Summer, Fall", "South America"),
 ("Gerbera daisy", "Gerbera daisies are so vividly colored that they can sometimes make you wonder if they're real. Native to South Africa, the Gerbera flower is in the Aster family, alongside sunflowers (Asteraceae)", "Moist, well-drained", "Summer, Fall", "Africa"),
@@ -66,4 +66,5 @@ VALUES ("African daisy", "These flowers are best planted in the spring after the
 ("Kentucky coffee tree", "It has enormous leaves (up to 2 feet wide) making a dramatic impact in the landscape once it reaches its full mature height.", "Moist", "Late Spring  ", "North America"),
 ("Lavender", "Lavender (Lavendula spp.) is a well-known and fragrant perennial plant with gray-green foliage, upright flower spikes, and a compact shrub form.", "Well-drained", "Summer", "Europe"),
 ("Magnolia 'Jane'", "The flowers Jane magnolia are fairly large, especially relative to the overall size of the plant. Under ideal conditions, the blooms can reach 8 inches across when fully open.", "Sandy", "Spring", "South America"),
-("Naked ladies", "One of the plant’s common names—naked ladies—comes from the fact that no foliage accompanies its blooms. This plant has a moderate growth rate.", "Well-drained", "Fall", "Europe, Africa, Asia")
+("Naked ladies", "One of the plant's common names—naked ladies—comes from the fact that no foliage accompanies its blooms. This plant has a moderate growth rate.", "Well-drained", "Fall", "Europe, Africa, Asia")
+
