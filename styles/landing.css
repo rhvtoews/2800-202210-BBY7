@@ -319,6 +319,7 @@ body {
 #phantom {
     background: transparent;
     border: none;
+    height: 200px;
 }
 
 @keyframes floatup {
