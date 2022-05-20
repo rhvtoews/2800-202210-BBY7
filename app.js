@@ -30,6 +30,7 @@ app.use(session ({
 }));
 
 var sess;
+var loggedIn = false;
 
 // DB Location constants
 const is_heroku = process.env.IS_HEROKU || false;
@@ -72,37 +73,37 @@ if (is_heroku) {
 
 // Supply index page
 app.get('/', function(req, res) {
-  if (!sessionData) {
-    res.sendFile(__dirname + '/index.html');
+  if (!loggedIn) {
+    res.sendFile(__dirname + '/html/index.html');
   } else {
-    res.sendFile(__dirname + '/landing.html');
+    res.sendFile(__dirname + '/html/landing.html');
   }
 });
 
 // Supply profile page
 app.get('/profile', function(req,res) {
-  res.sendFile(__dirname + '/profile.html');
+  res.sendFile(__dirname + '/html/profile.html');
 });
 
 // Supply landing page
 app.get('/landing', function(req, res) {
-  res.sendFile(__dirname + '/landing.html');
+  res.sendFile(__dirname + '/html/landing.html');
 });
 
 
 // Supply dashboard page
 app.get('/dashboard', function(req, res) {
-  res.sendFile(__dirname + '/Dashboard/dashboard.html');
+  res.sendFile(__dirname + '/html/dashboard.html');
 });
 
 // Supply register page
 app.get('/register', function(req, res) {
-  res.sendFile(__dirname + '/register.html');
+  res.sendFile(__dirname + '/html/register.html');
 });
 
 // Supply about page
 app.get('/about', function(req, res) {
-  res.sendFile(__dirname + '/about.html');
+  res.sendFile(__dirname + '/html/about.html');
 });
 
 
@@ -132,6 +133,7 @@ app.post('/login', function(req, res, next) {
       }
       if(results.length > 0) {
         sess = req.session;
+        loggedIn = true;
         sess.email = req.body.email;
         // sess.id = getID(sess.email);
         console.log(req.sess);
