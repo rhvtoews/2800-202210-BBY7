@@ -21,8 +21,47 @@ body {
         "footer footer ";
 }
 
+
+.topnav {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    overflow: hidden;
+    background-color: #333;
+    position: relative;
+}
+
+.topnav #myLinks {
+    display: none;
+}
+
+.topnav a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
+.topnav a.icon {
+    background: black;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
 nav {
-    background-color: rgb(255, 0, 0);
+    background-color: #8ebab6;
     grid-area: nav;
     border-radius: 20px;
     margin-top: 20px;
@@ -30,8 +69,10 @@ nav {
     margin-left: 20px;
 }
 
+
+
 .Userlist {
-    background-color: rgb(252, 237, 23);
+    background-color: #8ebab6;
     margin-left: 20px;
     grid-area: Userlist;
     border-radius: 20px;
@@ -91,12 +132,33 @@ table thead tr {
 }
 
 footer {
-    background-color: rgb(0, 255, 255);
+    background-color: #B9D3CD;
     grid-area: footer;
     border-radius: 20px;
     margin-right: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    display: block;
+    max-height: 60%;
+    max-width: 60%;
+    border-radius: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .adminProfile {
@@ -104,4 +166,24 @@ footer {
     grid-area: adminProfile;
     border-radius: 20px;
     margin-right: 20px;
+}
+
+
+@media (max-width: 780px) {
+
+    .container {
+        height: 80%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 0.1fr 1fr 0.15fr;
+        grid-template-areas:
+            "nav"
+            "adminProfile"
+            "Userlist "
+            "footer";
+    }
+
+    .adminProfile {
+        margin-left: 20px;
+    }
+
 }

@@ -5,11 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/Dashboard/dashboard.css">
 </head>
 <body>
     <div class="container">
-        <nav>Navbar</nav>
+        <nav>
+            <div class="topnav">
+                <a href="/landing" class="active">Logo</a>
+                <div id="myLinks">
+                    <a href="/profile">Profile</a>                
+                    <a href="/dashboard">Admin</a>
+                    <a href="/about">About</a>
+                </div>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </nav>
         <div class="Userlist">
             <section class="users">
                 <div class="listOfUsers">
@@ -33,8 +45,13 @@
                 </div>
             </section>
         </div>
-        <div class="adminProfile">admin profile</div>
-        <footer>Footer</footer>
+        <div class="adminProfile">
+            <img src="/Image/Profile.jpg" alt="">
+            <h2>Name: Fregmond basie</h2>
+            <h2>City: Surrey</h2>
+            <h2>E-mail: fregmond@gmail.com</h2>
+        </div>
+        <footer>BCIT BBY-7 &copy;</footer>
     </div>
     <script src="/scripts/client.js"></script>
 </body>
