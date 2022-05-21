@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function plantCards(data) {
   let CardTemplate = document.getElementById("CardTemplate");
-  console.log(CardTemplate);
-  console.log(data);  
+
   var i = 0;
   let list = "";
 
@@ -30,7 +29,7 @@ function plantCards(data) {
     newcard.querySelector('.card-period').setAttribute("id", "cperiod" + (i+1));
     newcard.querySelector('.card-image').setAttribute("id", "cimage" + (i+1));
 
-    console.log(newcard);
+  
     document.getElementById(list + "plants-go-here").appendChild(newcard);
     i++;
   }    
