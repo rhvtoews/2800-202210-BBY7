@@ -59,18 +59,6 @@ if (is_heroku) {
   var sessionConnection = mysql.createPool(dbConfigLocal);
 }
 
-// var sessionData = new MySQLStore({
-//   expiration: 10800000,
-//   createDatabaseTable: true,
-//   schema:{
-//     tableName: 'sessiontbl',
-//     columnNames:{
-//       session_id: 'session_id',
-//       expires: 'expires',
-//       data: 'data'
-//     }
-//   }
-// });
 
 // Supply index page
 app.get('/', function(req, res) {
@@ -156,7 +144,7 @@ app.get('/surprise', function(req, res) {
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
-        loggedIn = false;
+        // loggedIn = false;
         res.redirect('/');
       } else {
         res.redirect('/');
@@ -183,8 +171,6 @@ app.post('/login', function(req, res, next) {
         sess = req.session;
         loggedIn = true;
         sess.email = req.body.email;
-        // sess.id = getID(sess.email);
-        console.log(req.sess);
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -195,15 +181,14 @@ app.post('/login', function(req, res, next) {
 
 // Plants Population //
 
-app.get("/plantscards", function(req, res) {
+// app.get("/plantscards", function(req, res) {
 
-  // check for a session first!
-  if(req.session.loggedIn) {
+//   if(req.session.loggedIn) {
 
-      let profile = fs.readFileSync("./plantscards.html", "utf8");
-      let profileDOM = new JSDOM(profile);
-  }
-});
+//       let profile = fs.readFileSync("./plantscards.html", "utf8");
+//       let profileDOM = new JSDOM(profile);
+//   }
+// });
 
 
 
@@ -299,22 +284,12 @@ app.post('/changeRegion', function(req, res, next) {
 
 app.delete('/delete/:ID', (request, response) => {
   const { ID } = request.params;
-  console.log('ID fed to DB: ' + ID);
   const results = deleteUser(ID);
   results
   .then(data => response.json({success : data}))
   .catch(err => console.log(err));
+
 });
-
-// // Delete Account, routes back to the dashboard upon completion.
-// app.post('/deleteAccount', function(req, res, next) {
-  
-//   const delInput = req.body.delInput;
-
-//   sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
-//   res.redirect('/dashboard');
-// });
-
 
 
 //--------------------------//
@@ -356,7 +331,6 @@ async function getPlantTableData() {
 }
 
 async function deleteUser(ID) {
-  console.log('ID received by DB: ' + ID);
   try {
       ID = parseInt(ID, 10); 
       const response = await new Promise((resolve, reject) => {
