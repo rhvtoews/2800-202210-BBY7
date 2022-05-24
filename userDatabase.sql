@@ -62,20 +62,12 @@ VALUES ("African daisy", "These flowers are best planted in the spring after the
 ("Incrediball Hydrangea", "The Incrediball hydrangea (Hydrangea arborescens 'Abetwo' Incrediball) is a broadleaf, deciduous flowering shrub.", "Moist, well-drained", "Summer", "Any Continent", "/IncrediballHydrangea.jpg"),
 ("Indian hawthorn", "Indian hawthorn (Rhaphiolepis indica) is a relatively small shrub that naturally grows in a neat, rounded shape. Despite its common name, it doesn't solely grow in India. It comes from China and also grows in other parts of Asia.", "Moist, well-drained", "Spring", "Asia", "/IndianHawthorn.jpg"),
 ("Jacaranda tree", "The jacaranda tree (Jacaranda mimosifolia) is a beautiful tropical tree that produces clusters of fragrant purple panicle-shaped blooms", "Sandy, well-drained", "Spring, Summer", "South America", "/JacarandaTree.jpg"),
-<<<<<<< HEAD
 ("Jackfruit", "It has a relatively fast growth rate, and new trees can start producing fruit within a few years", "Moist, well-drained", "Seasonal", "Asia", "/Jackfruit.jpg"),
-=======
-("Jackfruit", "It has a relatively fast growth rate, and new trees can start producing fruit within a few years", "Moist, well-drained", "Seasonal", "Asia", "/Jackfuit.jpg"),
->>>>>>> e1f19c8 (Ryan - Enabled image diplay on the plant directory)
 ("Julia Child roses", "The Julia Child rose is known for its luscious blooms and licorice-like scent. It is a smaller rose variety and is often grown in containers.", "Sandy, moist, well-drained", "Spring, Summer, fall", "North America", "/JuliaChildRoses.jpg"),
 ("Kobus magnolia", "The Kobus magnolia (Magnolia kobus) is a lovely deciduous small tree for landscapes. It has large dark-green leaves that are obovate in shape and 3 to 8 inches long.", "Well-drained", "Early spring", "Asia", "/KobusMagnolia.jpg"),
 ("Kale", "Kale plants can be quite ornamental, with textured and curly leaves that come in shades of green, purple, and other colors", "Moist, well-drained", "Spring", "Europe", "/Kale.jpg"),
 ("Kentucky coffee tree", "It has enormous leaves (up to 2 feet wide) making a dramatic impact in the landscape once it reaches its full mature height.", "Moist", "Late Spring  ", "North America", "/KentuckyCoffeeTree.jpg"),
 ("Lavender", "Lavender (Lavendula spp.) is a well-known and fragrant perennial plant with gray-green foliage, upright flower spikes, and a compact shrub form.", "Well-drained", "Summer", "Europe", "/Lavender.jpg"),
-<<<<<<< HEAD
 ("Magnolia 'Jane'", "The flowers Jane magnolia are fairly large, especially relative to the overall size of the plant. Under ideal conditions, the blooms can reach 8 inches across when fully open.", "Sandy", "Spring", "South America", "/MagnoliaJane.webp"),
-=======
-("Magnolia 'Jane'", "The flowers Jane magnolia are fairly large, especially relative to the overall size of the plant. Under ideal conditions, the blooms can reach 8 inches across when fully open.", "Sandy", "Spring", "South America", "/MagnoliaJane.jpg"),
->>>>>>> e1f19c8 (Ryan - Enabled image diplay on the plant directory)
 ("Naked ladies", "One of the plant's common names—naked ladies—comes from the fact that no foliage accompanies its blooms. This plant has a moderate growth rate.", "Well-drained", "Fall", "Europe, Africa, Asia", "/NakedLadies.jpg");
 
