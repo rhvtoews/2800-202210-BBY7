@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.querySelector('table tbody').addEventListener('click', function(event) {
   if (event.target.className === "deleteUserBtn") {
-      console.log('Delete ID: ' + event.target.dataset.ID);
-      deleteUser(event.target.dataset.ID);
+      console.log('Delete ID: ' + event.target.dataset.id);
+      deleteUser(event.target.dataset.id);
   }
   if (event.target.className === "editUserBtn") {
-    console.log('Edit ID: ' + event.target.dataset.ID);
-    handleEditUser(event.target.dataset.ID);
+    console.log('Edit ID: ' + event.target.dataset.id);
+    handleEditUser(event.target.dataset.id);
   }
 });
 
