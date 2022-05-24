@@ -13,6 +13,22 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
   }
 });
 
+document.querySelector('#update-name-input').addEventListener('click', function(event) {
+      
+});
+
+document.querySelector('#update-email-input').addEventListener('click', function(event) {
+      
+});
+
+document.querySelector('#update-password-input').addEventListener('click', function(event) {
+      
+});
+
+document.querySelector('#update-region-input').addEventListener('click', function(event) {
+      
+});
+
 function deleteUser(ID) {
   fetch('http://localhost:8000/delete/' + ID, {
       method: 'DELETE'
