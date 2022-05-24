@@ -27,6 +27,19 @@ section {
     width: 70%;
     margin-top: 20%;
     filter: drop-shadow(10px 10px 10px #000000);
+    animation: earth 5s infinite linear;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes earth {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
 }
 
 .earthTxt {
@@ -94,21 +107,6 @@ section {
 
 .fourth {
     background-color: rgb(194, 249, 105)
-}
-
-.earth:hover {
-    -webkit-animation: wiggle 5s ease-in-out .5s infinite alternate;
-}
-
-@-webkit-keyframes wiggle {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-
-    to {
-        -webkit-transform: rotate(-360deg);
-        -webkit-transform-origin: center center;
-    }
 }
 
 .tree:hover {
