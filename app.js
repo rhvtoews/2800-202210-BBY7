@@ -193,21 +193,6 @@ app.post('/login', function(req, res, next) {
     )
 });
 
-// Plants Population //
-
-app.get("/plantscards", function(req, res) {
-
-  // check for a session first!
-  if(req.session.loggedIn) {
-
-      let profile = fs.readFileSync("./plantscards.html", "utf8");
-      let profileDOM = new JSDOM(profile);
-  }
-});
-
-
-
-
 
 //--------------------------//
 //      CRUD Functions      //
@@ -305,16 +290,6 @@ app.delete('/delete/:ID', (request, response) => {
   .then(data => response.json({success : data}))
   .catch(err => console.log(err));
 });
-
-// // Delete Account, routes back to the dashboard upon completion.
-// app.post('/deleteAccount', function(req, res, next) {
-  
-//   const delInput = req.body.delInput;
-
-//   sessionConnection.query('DELETE FROM BBY7_user WHERE ID = ?', [delInput])
-//   res.redirect('/dashboard');
-// });
-
 
 
 //--------------------------//
