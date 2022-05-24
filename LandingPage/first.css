@@ -67,6 +67,7 @@ section {
     margin-top: 20%;
     margin-left: 10%;
     filter: drop-shadow(10px 10px 10px #000000);
+    -webkit-animation: jiggle 1s ease-in-out .1s infinite alternate;
 }
 
 .treeTxt {
@@ -107,10 +108,6 @@ section {
 
 .fourth {
     background-color: rgb(194, 249, 105)
-}
-
-.tree:hover {
-    -webkit-animation: jiggle 1s ease-in-out .1s infinite alternate;
 }
 
 @-webkit-keyframes jiggle {
