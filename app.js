@@ -183,8 +183,6 @@ app.post('/login', function(req, res, next) {
         sess = req.session;
         loggedIn = true;
         sess.email = req.body.email;
-        // sess.id = getID(sess.email);
-        console.log(req.sess);
         res.redirect('/landing');
       } else {
         res.redirect('/');
@@ -210,9 +208,9 @@ app.post('/signup', function(req, res, next) {
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, region, planCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
+    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
     [fullname, email, password, region, 0, false]);
-    res.redirect('/index.html');
+    res.sendFile(__dirname + '/html/index.html');
 
 });
 
@@ -244,6 +242,13 @@ app.get('/getPlants', (request, response) => {
   const results = getPlantTableData();
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
+
+// Gets user id of logged in user
+app.get('/getUser', (request, response) => {
+  const results = getUserData(sess.email);
+  results.then(data => response.json({ data : data })).catch(err => console.log(err));
+});
+
 
 
 //---- Update ----//
@@ -350,18 +355,18 @@ async function deleteUser(ID) {
   }
 }
 
-async function getID(email) {
+async function getUserData(email) {
   try {
     const response = await new Promise((resolve, reject) => {
         
-        const query = "SELECT ID FROM BBY7_user WHERE email = ?";
+        const query = "SELECT * FROM BBY7_user WHERE email = ?";
 
         sessionConnection.query(query, [email] , (err, results) => {
             if (err) reject(new Error(err.message));
             resolve(results);
         })
     });
-    return response[0].ID;
+    return response;
 } catch (err) {
     console.log(err);
     return false;
