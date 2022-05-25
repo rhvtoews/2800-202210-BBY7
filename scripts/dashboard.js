@@ -33,12 +33,7 @@ function deleteUser(ID) {
   fetch('http://localhost:8000/delete/' + ID, {
       method: 'DELETE'
   })
-  .then(response => response.json())
-  .then(data => {
-      if (data.success) {
-          location.reload();
-      }
-  });
+  location.reload();
 }
 
 function handleEditUser(ID) {
