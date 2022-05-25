@@ -109,18 +109,26 @@ body {
     background: #ccc;
 }
 
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .searchBar {
     border-radius: 20px;
+    width: 50%;
 }
 
 .custom-select {
     margin: auto;
-    width: 20%;
+    width: auto;
     border: 3px solid #3d545a;
     padding: 10px;
     position: relative;
     font-family: 'Merriweather', serif;
     border-radius: 30px;
+    display: inline-block;
 }
 
 .custom-select select {
@@ -131,6 +139,8 @@ body {
 .select-selected {
     background-color: #3d545a;
     border-radius: 20px;
+    width: auto;
+    display: inline-block;
 }
 
 /*style the arrow inside the select element:*/
@@ -193,7 +203,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    width: 10%;
+    width: auto;
     border-radius: 20px;
 }
 
