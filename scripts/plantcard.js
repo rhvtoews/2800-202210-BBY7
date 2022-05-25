@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(data => plantCards(data['data']));
 });
 
+document.querySelector('.card-body a').addEventListener('click', function(event) {
+  if (event.target.className === "plant-button") {
+      addPlant(event.target.dataset.plantName);
+  }
+});
+
+
 function plantCards(data) {
   let CardTemplate = document.getElementById("CardTemplate");
 
@@ -35,3 +42,4 @@ function plantCards(data) {
   }    
   
 )}
+

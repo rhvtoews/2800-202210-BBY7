@@ -1,8 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('http://localhost:8000/getTable')
+  fetch('/getTable')
   .then(response => response.json())
   .then(data => loadTable(data['data']));
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/getUser')
+  .then(response => response.json())
+  .then(data => placeUser(data['data']));
+  console.log(user);
+});
+
 
 document.querySelector('table tbody').addEventListener('click', function(event) {
   if (event.target.className === "deleteUserBtn") {
@@ -13,24 +21,26 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
   }
 });
 
-document.querySelector('#update-name-input').addEventListener('click', function(event) {
-      
-});
 
-document.querySelector('#update-email-input').addEventListener('click', function(event) {
-      
-});
 
-document.querySelector('#update-password-input').addEventListener('click', function(event) {
+// document.querySelector('#update-name-input').addEventListener('click', function(event) {
       
-});
+// });
 
-document.querySelector('#update-region-input').addEventListener('click', function(event) {
+// document.querySelector('#update-email-input').addEventListener('click', function(event) {
       
-});
+// });
+
+// document.querySelector('#update-password-input').addEventListener('click', function(event) {
+      
+// });
+
+// document.querySelector('#update-region-input').addEventListener('click', function(event) {
+      
+// });
 
 function deleteUser(ID) {
-  fetch('http://localhost:8000/delete/' + ID, {
+  fetch('/delete/' + ID, {
       method: 'DELETE'
   })
   location.reload();
@@ -70,4 +80,17 @@ function loadTable(data) {
   
 
   table.innerHTML = adminTable;
+}
+
+
+// Loads the current user data
+function placeUser(data) {
+  const fullname = document.getElementById('fullname');
+  const email = document.getElementById('email');
+  const region = document.getElementById('region');
+
+  fullname.innerHTML = data[0].fullname;
+  email.innerHTML = data[0].email;
+  region.innerHTML = data[0].region;
+
 }

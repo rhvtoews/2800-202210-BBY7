@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS BBY7_toolList (
 
 CREATE TABLE IF NOT EXISTS BBY7_myplantlist (
   pName varchar(50) NOT NULL,
-  ID int NOT NULL,
+  email int NOT NULL,
   cardTime TIMESTAMP NOT NULL,
-  PRIMARY KEY (ID),
-  FOREIGN KEY (ID) REFERENCES BBY7_user(ID)
+  PRIMARY KEY (email),
+  FOREIGN KEY (email) REFERENCES BBY7_user(email)
 );
 
 INSERT INTO BBY7_user 

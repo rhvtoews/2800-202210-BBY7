@@ -205,11 +205,12 @@ app.post('/signup', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
   var region = req.body.region;
+  var image = "/placeholder.png";
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
-    [fullname, email, password, region, 0, false]);
+    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?)',
+    [fullname, email, password, region, 0, false, image]);
     res.sendFile(__dirname + '/html/index.html');
 
 });
@@ -221,12 +222,22 @@ app.post('/adminCreate', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
   var region = req.body.city;
+  var image = "/placeholder.png";
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin) VALUES (?, ?, ?, ?, ?, ?)',
-    [fullname, email, password, region, 0, false]);
-    res.redirect('/Dashboard/dashboard');
+    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [fullname, email, password, region, 0, false, image]);
+    res.redirect('/dashboard');
 });
+
+// Adds plants to user's profile
+app.post('/addPlant', function(req, res, next) {
+  const email = sess.email;
+
+  var myList = ''
+  
+})
+
 
 
 //---- Read ----//
@@ -237,13 +248,13 @@ app.get('/getTable', (request, response) => {
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
-//gets BBY7_plant data
+// Gets BBY7_plant data
 app.get('/getPlants', (request, response) => {
   const results = getPlantTableData();
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
-// Gets user id of logged in user
+// Gets user data of logged in user
 app.get('/getUser', (request, response) => {
   const results = getUserData(sess.email);
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
@@ -285,11 +296,11 @@ app.post('/changeRegion', function(req, res, next) {
 });
 
 
+
 //---- Delete ----//
 
 app.delete('/delete/:ID', (request, response) => {
   const { ID } = request.params;
-  console.log('ID fed to DB: ' + ID);
   const results = deleteUser(ID);
   results
   .then(data => response.json({success : data}))

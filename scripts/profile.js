@@ -1,7 +1,5 @@
-var userData;
-
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('http://localhost:8000/getUser')
+  fetch('/getUser')
   .then(response => response.json())
   .then(data => placeUser(data['data']));
 });
@@ -22,3 +20,10 @@ function placeUser(data) {
   region.innerHTML = data[0].region;
 
 }
+
+
+// document.addEventListener('click', function() {
+//   fetch('http://localhost:8000/getUser')
+//   .then(response => response.json())
+//   .then(data => )
+// })
