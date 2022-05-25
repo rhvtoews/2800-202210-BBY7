@@ -11,6 +11,7 @@ const fs = require("fs");
 // const MySQLStore = require('express-mysql-session')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { response } = require('express');
 
 const twoHours = 1000 * 60 * 60 * 2;
 
@@ -260,6 +261,12 @@ app.get('/getUser', (request, response) => {
   results.then(data => response.json({ data : data })).catch(err => console.log(err));
 });
 
+// Gets plants added to timeline
+app.get('/getTimeline', (request, response) => {
+  const results = getUserPlants(sess.email);
+  results.then(data => response.json({ data : data })).catch(err => console.log(err));
+});
+
 
 
 //---- Update ----//
@@ -371,6 +378,24 @@ async function getUserData(email) {
     const response = await new Promise((resolve, reject) => {
         
         const query = "SELECT * FROM BBY7_user WHERE email = ?";
+
+        sessionConnection.query(query, [email] , (err, results) => {
+            if (err) reject(new Error(err.message));
+            resolve(results);
+        })
+    });
+    return response;
+} catch (err) {
+    console.log(err);
+    return false;
+}
+}
+
+async function getUserPlants(email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+        
+        const query = "SELECT * FROM BBY7_myplantlist WHERE email = ?";
 
         sessionConnection.query(query, [email] , (err, results) => {
             if (err) reject(new Error(err.message));
