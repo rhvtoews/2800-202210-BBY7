@@ -31,6 +31,14 @@ CREATE TABLE IF NOT EXISTS BBY7_toolList (
   FOREIGN KEY (pName) REFERENCES BBY7_plant(plantName)
 );
 
+CREATE TABLE IF NOT EXISTS BBY7_myplantlist (
+  pName varchar(50) NOT NULL,
+  ID int NOT NULL,
+  cardTime TIMESTAMP NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES BBY7_user(ID)
+);
+
 INSERT INTO BBY7_user 
 VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TRUE, "/nacho.webp"),
   ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 0, TRUE, "/saul.jpg"),
