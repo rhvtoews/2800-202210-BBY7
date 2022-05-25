@@ -1,90 +1,163 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+:root {
+  --darkGreen: #2c4451;
+  --lightGreen: #3d545a;
+  --white: white;
+  --dark: #333;
 
-  .topnav {
-    overflow: hidden;
-    background-color: #333;
-    position: relative;
+  /*These are the colors for */
+
+  --grey: #b5bbc5;
+  --black: #0e222c;
+  --grey2: #768691;
+  --green: #526774;
+  --green2: #2c4451;
+  --green3: #3d545a;
+  --grey3: #74849c;
+  --brown: #747c8a;
+  --brown2: #474534;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #2c4451;
+  color: white;
+
+}
+
+.logoImage {
+  width: 22px;
+  margin: 0%;
+  padding: 0%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #3d545a;
+  position: relative;
+
 }
 
 .topnav #myLinks {
-    display: none;
+  display: none;
 }
 
 .topnav a {
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    display: block;
+  color: #fbfeff;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a:not(.active) {
+  padding: 14px 16px;
 }
 
 .topnav a.icon {
-    background: black;
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
+  background: #0e222c;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+  background-color: #ddd;
+  color: #0e222c;
+
 }
 
 .active {
-    background-color: #04AA6D;
-    color: white;
+  background-color: #b5bbc5;
+  color: rgb(63, 101, 94);
 }
 
-  
-  /* Float four columns side by side */
-  .column {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
-  }
-  
-  /* Remove extra left and right margins, due to padding */
-  .row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
+.card {
+  background-color: var(--grey2);
+
+}
+
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.plant-button {
+  text-decoration: none;
+  border: none;
+  outline: 0;
+  display: inline-flexbox;
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(to bottom right, #c2cad7c4, #47595500);
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 10%;
+  border-radius: 20px;
+}
+
+.plant-button:hover {
+  background: linear-gradient(to bottom right, #47595500, #c2cad7c4);
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Responsive columns */
+@media screen and (max-width: 800px) {
+
+  body {
+    color: var(--dark);
   }
 
-  .button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
+  .column {
     width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
-  
-  /* Responsive columns */
-  @media screen and (max-width: 800px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
-  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-image: url(./tree.jpg);
+}
+
+.plant-button {
+  text-decoration: none;
+  border: none;
+  outline: 0;
+  display: inline-flexbox;
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(to bottom right, #2d2e2fc4, #d2cfcfdf); 
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 10%;
+  border-radius: 20px;
+}
