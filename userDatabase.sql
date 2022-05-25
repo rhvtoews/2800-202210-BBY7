@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS BBY7_user (
   region varchar(25),
   plantCounter int,
   admin BOOLEAN,
+  image varchar(50),
   PRIMARY KEY (ID)
   );
 
@@ -31,18 +32,12 @@ CREATE TABLE IF NOT EXISTS BBY7_toolList (
 );
 
 INSERT INTO BBY7_user 
-VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TRUE),
-  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 0, TRUE),
-  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "North America", 0, FALSE),
-  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "North America", 0, FALSE),
-  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987","North America", 0, FALSE),
-  ("6", "Alex Kamal", "alexk@mcrn.com", "pass1234", "North America", 0, FALSE),
-  ("7", "Amos Burton", "amosb@ba.com", "pass0987", "North America", 0, FALSE),
-  ("8", "Camina Drummer", "caminad@bl.com", "pass1234", "North America", 0, FALSE),
-  ("9", "Harry Bosch", "harryb@lapd.com", "pass0987", "North America", 0, FALSE),
-  ("10", "Jerry Edgar", "jerrye@lapd.com", "pass1234", "North America", 0, FALSE),
-  ("11", "Tester", "test@test.com", "1234", "North America", 0, TRUE),
-  ("12", "Charles Tapp", "charles@charles.com", "1234", "North America", 0, TRUE);
+VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TRUE, "/nacho.webp"),
+  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 0, TRUE, "/saul.jpg"),
+  ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "North America", 0, FALSE, "/dexter.jpg"),
+  ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "North America", 0, FALSE, "/rita.webp"),
+  ("5", "Naomi Nagata", "naomin@bl.com", "pass0987","North America", 0, FALSE, "/naomi.webp");
+  
 
 INSERT INTO BBY7_plant 
 VALUES ("African Daisy", "These flowers are best planted in the spring after the threat of frost has passed, and they have a fairly quick growth rate, blooming about two months after sprouting from seeds.", "moist, well-drained", "Spring, summer, fall", "Africa, South Asia", "/AfricanDaisy.jpg"),
