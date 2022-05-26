@@ -322,6 +322,13 @@ app.get('/makeAdmin/:ID', (request, response) => {
   .catch(err => console.log(err));
 });
 
+app.post('/addPlant', function(request, response, next){
+  var email = sess.email; 
+  var plant = request.body.plantName;
+  updateMyPlants(email, plant);
+  updateCounter(email);
+  response.sendFile(__dirname + '/html/plantscards.html');
+})
 
 
 //---- Delete ----//
@@ -538,6 +545,38 @@ async function getUserPlants(email) {
     console.log(err);
     return false;
 }
+}
+
+async function updateCounter(email){
+  try{
+    const response = await new Promise((resolve, reject) => {
+      const query = "UPDATE BBY7_user SET BBY7_user.plantCounter = (BBY7_user.plantCounter + 1) WHERE BBY7_user.email = ?";
+      sessionConnection.query(query, [email], (err, results) => {
+        if (err) reject(new Error(err.message));
+        resolve(results);
+      })
+      });
+    return response;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+}
+
+async function updateMyPlants(email, plant){
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const query2 = "INSERT INTO BBY7_myplantlist (pName, email) VALUES (?, ?)";
+      sessionConnection.query(query2, [email, plant], (err, results) => {
+        if (err) reject(new Error(err.message));
+        resolve(results);
+      })
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
 }
 
 // Start app, listen on port
