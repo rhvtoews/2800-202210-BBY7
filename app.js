@@ -564,10 +564,11 @@ async function updateCounter(email){
 }
 
 async function updateMyPlants(email, plant){
+  console.log(email);
   try {
     const response = await new Promise((resolve, reject) => {
-      const query2 = "INSERT INTO BBY7_myplantlist (pName, email) VALUES (?, ?)";
-      sessionConnection.query(query2, [email, plant], (err, results) => {
+      const query = "INSERT INTO BBY7_myplantlist (pName, email) VALUES (?, ?)";
+      sessionConnection.query(query, [email, plant], (err, results) => {
         if (err) reject(new Error(err.message));
         resolve(results);
       })
