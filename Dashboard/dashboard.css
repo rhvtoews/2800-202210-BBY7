@@ -28,6 +28,7 @@ body {
     overflow: hidden;
     background-color: #333;
     position: relative;
+    border-radius: 10px;
 }
 
 .topnav #myLinks {
@@ -35,7 +36,8 @@ body {
 }
 
 .topnav a {
-    color: white;
+    background-color: #ddd;
+    color: black;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
@@ -43,7 +45,7 @@ body {
 }
 
 .topnav a.icon {
-    background: black;
+    background: rgb(101, 99, 99);
     display: block;
     position: absolute;
     right: 0;
@@ -79,6 +81,7 @@ nav {
     margin-left: 20px;
     grid-area: Userlist;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .users {
@@ -94,6 +97,7 @@ nav {
     background: white;
     border-radius: 10px;
     box-shadow: 0 20px 20px rgb(62, 62, 62);
+    overflow-x: scroll;
 }
 
 .table {
