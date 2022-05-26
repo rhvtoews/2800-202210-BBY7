@@ -273,17 +273,21 @@ app.get('/getTimeline', (request, response) => {
 
 // Changes name
 app.post('/changeName', function(req, res, next) {
-  const fullname = req.body.fullname;
+  var fullname = req.body.fullname;
+  console.log(req.body.fullname);
+  console.log(fullname);
   const email = sess.email;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?',
-  [fullname, email], function(err, results, fields){})
+  console.log(sess.email);
+  sessionConnection.query(
+    'UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?',
+    [fullname, email]);
 });
 
 // Changes email
 app.post('/changeEmail', function(req, res, next) {
   const email = sess.email;
   sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.email = ?',
-  [email, email], function(err, results, fields){})
+  [email, email])
 });
 
 // Changes password
@@ -291,7 +295,7 @@ app.post('/changePassword', function(req, res, next) {
   const password = req.body.password;
   const email = sess.email;
   sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.email = ?',
-  [password, email], function(err, results, fields){})
+  [password, email])
 });
 
 // Changes region
@@ -299,7 +303,7 @@ app.post('/changeRegion', function(req, res, next) {
   const region = req.body.region;
   const email = sess.email;
   sessionConnection.query('UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.email = ?',
-  [region, email], function(err, results, fields){})
+  [region, email])
 });
 
 

@@ -52,28 +52,40 @@
                 <br>
 
                 <div hidden id="updateUser">
-                <form>
-                    <label>Name:</label>
-                    <input type="text" id="update-name-input">
-                    <button id="update-row-btn">Update</button>
-                    <br>
-                
-                    <label>Email:</label>
-                    <input type="email" id="update-email-input">
-                    <button>Update</button>
-                    <br>
-                
-                    <label>Password:</label>
-                    <input type="text" id="update-password-input">
-                    <button>Update</button>
+                    <form action="/changeName" method="POST">
+                        <label>Name:</label>
+                        <input type="text" id="update-name-input">
+                        <button id="update-row-btn">Update</button>
+                    </form>
                     <br>
 
-                    <label>Region:</label>
-                    <input type="text" id="update-region-input">
-                    <button>Update</button>
+                    <form action="/changeEmail" method="POST">
+                        <label>Email:</label>
+                        <input type="email" id="update-email-input">
+                        <button>Update</button>
+                    </form>
                     <br>
 
-                </form>
+                    <form action="/changePassword" method="POST">
+                        <label>Password:</label>
+                        <input type="text" id="update-password-input">
+                        <button>Update</button>
+                    </form>
+                    <br>
+
+                    <form action="/changeRegion" method="POST">
+                        <label>Region:</label>
+                        <input type="text" id="update-region-input">
+                        <button>Update</button>
+                    </form>
+                    <br>
+
+                    <form>
+                        <label>Upload Photo:</label>
+                        <input type="file" id="update-photo">
+                        <button>Upload</button>
+                    </form>
+                    <br>
                 </div>
             </section>
     

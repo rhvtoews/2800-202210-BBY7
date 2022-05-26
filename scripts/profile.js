@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(data => placeTimeline(data['data']));
 });
 
-
+document.getElementById('editBtn').addEventListener('click', function() {
+  const updateSection = document.querySelector('#updateUser');
+  updateSection.hidden = false;
+})
 
 // Loads the current user data
 function placeUser(data) {
@@ -28,7 +31,7 @@ function placeUser(data) {
 
 }
 
-
+// Loads data into timeline
 function placeTimeline(data) {
   let CardTemplate = document.getElementById("CardTemplate");
 
@@ -40,8 +43,6 @@ function placeTimeline(data) {
     let newcard = CardTemplate.content.cloneNode(true);
     const d = new Date(cardTime);
   
-
-    
     newcard.querySelector('.card-title').innerHTML = pName;
     newcard.querySelector('.card-timestamp').innerHTML = ("Planted: " + d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate());
 

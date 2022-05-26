@@ -47,7 +47,7 @@
         </div>
 
         <div class="editPp">
-            <p><button style="width: fit-content"><i class="fa fa-edit">Edit</i></button></p>
+            <p><button id="editBtn" style="width: fit-content"><i class="fa fa-edit">Edit</i></button></p>
         </div>
 
         <div class="hb5">
@@ -61,11 +61,43 @@
                 <p><button id="planted" style="background-color:#000000;">2</button></p>
         </div>
 
+    </div>
 
+    <div hidden id="updateUser">
+        <form action="/changeName" method="POST">
+            <label>Name:</label>
+            <input type="text" id="update-name-input" name="fullname">
+            <button id="update-row-btn">Update</button>
+        </form>
+        <br>
 
+        <form action="/changeEmail" method="POST">
+            <label>Email:</label>
+            <input type="email" id="update-email-input" name="email">
+            <button>Update</button>
+        </form>
+        <br>
 
+        <form action="/changePassword" method="POST">
+            <label>Password:</label>
+            <input type="text" id="update-password-input" name="password">
+            <button>Update</button>
+        </form>
+        <br>
 
+        <form action="/changeRegion" method="POST">
+            <label>Region:</label>
+            <input type="text" id="update-region-input" name="region">
+            <button>Update</button>
+        </form>
+        <br>
 
+        <form>
+            <label>Upload Photo:</label>
+            <input type="file" id="update-photo">
+            <button>Upload</button>
+        </form>
+        <br>
     </div>
 
     <h2><a id="timelineName"></a> - Timeline</h2>
