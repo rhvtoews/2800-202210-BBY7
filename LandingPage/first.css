@@ -21,11 +21,14 @@ section {
     background-color: rgb(62, 25, 163);
     display: grid;
     grid-template-columns: 0.8fr 1fr;
+    grid-template-areas:
+        "earth earthTxt";
 }
 
 .earth {
     width: 70%;
     margin-top: 20%;
+    grid: earth;
     filter: drop-shadow(10px 10px 10px #000000);
     animation: earth 5s infinite linear;
     transform-origin: center;
@@ -44,6 +47,7 @@ section {
 
 .earthTxt {
     display: flex;
+    grid: earthTxt;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -67,7 +71,7 @@ section {
     margin-top: 20%;
     margin-left: 10%;
     filter: drop-shadow(10px 10px 10px #000000);
-    -webkit-animation: jiggle 1s ease-in-out .1s infinite alternate;
+    -webkit-animation: jiggle 2s ease-in-out .2s infinite alternate;
 }
 
 .treeTxt {
@@ -92,6 +96,21 @@ section {
     width: 70%;
     margin-top: 20%;
     filter: drop-shadow(10px 10px 10px #000000);
+    animation: plant 3s ease infinite;
+}
+
+@keyframes plant {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1.2, 1.2);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
 }
 
 .plantTxt {
@@ -145,9 +164,18 @@ h3 {
     border: none;
     border-radius: 10px;
     background-color: rgb(254, 202, 137);
+}
+
+.backk {
     text-align: center;
 }
 
 .back:hover {
     cursor: pointer;
+}
+
+@media screen and (max-width:650px) {
+    .first {
+        grid-template-rows: 0.3fr 1fr;
+    }
 }
