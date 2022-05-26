@@ -13,7 +13,7 @@
 <body>
 
     <div class="topnav">
-        <a href="/landing" class="active"><img class="logoImage" src="./logoo.png" alt=""></a>
+        <a href="/landing" class="active">SeedIt</a>
         <div id="myLinks">
             <a href="/profile">Profile</a>                
             <a href="/dashboard">Admin</a>
@@ -21,7 +21,7 @@
             <a href="/logout">LogOut</a>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars fa-2x"></i>
+            <i style="font-size: medium" class="fa fa-bars fa"></i>
         </a>
     </div>
 
@@ -29,7 +29,8 @@
 
         <div class="hb1">
             <br><br><br><br><br>
-            <img id="photo" class="img" src="/Image/profile/placeholder.png" alt="" style="width:200px; margin: 100px; float: left;">
+            <img id="photo" class="img" src="/Image/profile/placeholder.png" alt=""
+                style="width:200px; margin: 100px; float: left;">
         </div>
 
         <div class="hb3">
@@ -57,38 +58,54 @@
             <a href="#"><i class="fa fa-linkedin fa-3x"></i></a>
         </div>
         <div class="hb7">
-            <h1>Plants Contribution Number</h1>
-                <p><button id="planted" style="background-color:#000000;">2</button></p>
+            <h2>Plants Contribution Number</h2>
+            <p><button id="planted" style="background-color:#000000;">2</button></p>
+        </div>
+
+        <div class="timelinecard">
+
+            <h2><a id="timelineName"></a>'s Timeline</h2>
+            <template id="CardTemplate">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Card Title</h1>
+                        <p class="card-timestamp">Period</p>
+                    </div>
+                </div>
+            </template>
+    
+            <div id="timeline-here" class="card"></div>
+    
         </div>
 
     </div>
 
-    <div hidden id="updateUser">
+    <div class="editForm" hidden id="updateUser">
         <form action="/changeName" method="POST">
             <label>Name:</label>
-            <input type="text" id="update-name-input" name="fullname">
-            <button id="update-row-btn">Update</button>
+            <input type="text" id="update-name-input" name="fullname" style="margin: 0 30px">
+            <button id="update-row-btn" style="margin: 0 82px">Update</button>
         </form>
         <br>
 
         <form action="/changeEmail" method="POST">
             <label>Email:</label>
-            <input type="email" id="update-email-input" name="email">
-            <button>Update</button>
+            <input type="email" id="update-email-input" name="email" style="margin: 0 30px">
+            <button style="margin: 0 82px">Update</button>
         </form>
         <br>
 
         <form action="/changePassword" method="POST">
             <label>Password:</label>
-            <input type="text" id="update-password-input" name="password">
-            <button>Update</button>
+            <input type="text" id="update-password-input" name="password" style="margin: 0 3px">
+            <button style="margin: 0 107px">Update</button>
         </form>
         <br>
 
         <form action="/changeRegion" method="POST">
             <label>Region:</label>
-            <input type="text" id="update-region-input" name="region">
-            <button>Update</button>
+            <input type="text" id="update-region-input" name="region" style="margin: 0 23px">
+            <button style="margin: 0 85px">Update</button>
         </form>
         <br>
 
@@ -100,21 +117,12 @@
         <br>
     </div>
 
-    <h2><a id="timelineName"></a> - Timeline</h2>
-    <template id="CardTemplate">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">Card Title</h1>
-                <p class="card-timestamp">Period</p>
-            </div>
-        </div>
-    </template>
-
-    <div id="timeline-here" class="card"></div>
+    
 
     <footer class="hb8">
         <p>BCIT BBY-7 &copy;</p>
     </footer>
     <script src="/scripts/profile.js"></script>
 </body>
+
 </html>
