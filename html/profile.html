@@ -32,35 +32,6 @@
             <img id="photo" class="img" src="/Image/profile/placeholder.png" alt="" style="width:200px; margin: 100px; float: left;">
         </div>
 
-        <!-- <div class="hb2">
-            <div class="info">
-                <h7>Additional Details</h7>
-                <div class="name">
-                    <p class="title"><i class="fa fa-envelope"></i>Email</p>
-                    <p style="color:rgb(8, 85, 8)">nachov@gmail.com</p>
-                </div>
-                <div class="name">
-                    <p class="title"><i class="fa fa-heart"></i>Preferred Pronoun / Gender</p>
-                    <p style="color:rgb(8, 85, 8)">nachov@gmail.com</p>
-                </div>
-                <div class="name">
-                    <p class="title"><i class="fa fa-user"></i>Nickname</p>
-                    <p style="color:rgb(8, 85, 8)">nachov@gmail.com</p>
-                </div>
-                <div class="name">
-                    <p class="title"><i class="fa fa-calendar"></i>Join Date</p>
-                    <p style="color:rgb(8, 85, 8)">2 months ago on 24/3/2022</p>
-                </div>
-                <div class="name">
-                    <p class="title"><i class="fa fa-photo"></i>Hobby</p>
-                    <p style="color:rgb(8, 85, 8)">Planting</p>
-                </div>
-                <div class="name">
-                    <p class="title"><i class="fa fa-globe"></i>Language</p>
-                    <p style="color:rgb(8, 85, 8)">English, Spanish</p>
-                </div>
-            </div>
-        </div> -->
         <div class="hb3">
             <h1 id="fullname">Maria Heard</h1>
             <p id="email" class="title">CEO & Founder, Example</p>
@@ -89,15 +60,29 @@
             <h1>Plants Contribution Number</h1>
                 <p><button id="planted" style="background-color:#000000;">2</button></p>
         </div>
-        <div class="hb8">
-            <p>BCIT BBY-7 &copy;</p>
-        </div>
+
 
 
 
 
 
     </div>
+
+    <h2><a id="timelineName"></a> - Timeline</h2>
+    <template id="CardTemplate">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">Card Title</h1>
+                <p class="card-timestamp">Period</p>
+            </div>
+        </div>
+    </template>
+
+    <div id="timeline-here" class="card"></div>
+
+    <footer class="hb8">
+        <p>BCIT BBY-7 &copy;</p>
+    </footer>
     <script src="/scripts/profile.js"></script>
 </body>
 </html>

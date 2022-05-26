@@ -2,14 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch('/getTable')
   .then(response => response.json())
   .then(data => loadTable(data['data']));
-});
 
-document.addEventListener('DOMContentLoaded', function() {
   fetch('/getUser')
   .then(response => response.json())
   .then(data => placeUser(data['data']));
-  console.log(user);
+
 });
+
 
 
 document.querySelector('table tbody').addEventListener('click', function(event) {

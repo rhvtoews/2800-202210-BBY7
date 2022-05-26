@@ -33,10 +33,8 @@ CREATE TABLE IF NOT EXISTS BBY7_toolList (
 
 CREATE TABLE IF NOT EXISTS BBY7_myplantlist (
   pName varchar(50) NOT NULL,
-  email int NOT NULL,
-  cardTime TIMESTAMP NOT NULL,
-  PRIMARY KEY (email),
-  FOREIGN KEY (email) REFERENCES BBY7_user(email)
+  email varchar(25) NOT NULL,
+  cardTime DATE NOT NULL
 );
 
 INSERT INTO BBY7_user 
@@ -74,3 +72,7 @@ VALUES ("African Daisy", "These flowers are best planted in the spring after the
 ("Magnolia 'Jane'", "The flowers Jane magnolia are fairly large, especially relative to the overall size of the plant. Under ideal conditions, the blooms can reach 8 inches across when fully open.", "Sandy", "Spring", "South America", "/MagnoliaJane.webp"),
 ("Naked Ladies", "One of the plant's common names—naked ladies—comes from the fact that no foliage accompanies its blooms. This plant has a moderate growth rate.", "Well-drained", "Fall", "Europe, Africa, Asia", "/NakedLadies.jpg");
 
+INSERT INTO BBY7_myplantlist
+VALUES ("Cassia", "saulg@bcs.com", "2022-02-09"),
+("Impatiens", "saulg@bcs.com", "2022-03-22"),
+("Jackfruit", "saulg@bcs.com", "2022-04-11");
