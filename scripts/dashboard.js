@@ -18,6 +18,9 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
   if (event.target.className === "editUserBtn") {
     handleEditUser(event.target.dataset.id);
   }
+  if (event.target.className === "editAdminBtn") {
+    toggleAdmin(event.target.dataset.id);
+  }
 });
 
 
@@ -51,6 +54,11 @@ function handleEditUser(ID) {
   document.querySelector('#updateNameInput').dataset.id = ID;
 }
 
+function toggleAdmin(ID) {
+  fetch('/makeAdmin/' + ID);
+  location.reload();
+}
+
 const addBtn = document.querySelector('#add-name-btn');
 
 // Loads our list of users
@@ -74,6 +82,7 @@ function loadTable(data) {
     adminTable += `<td>${(admin ? true : false)}</td>`;
     adminTable += `<td><button class='deleteUserBtn' data-id=${ID}>Delete</td>`;
     adminTable += `<td><button class='editUserBtn' data-id=${ID}>Edit</td>`;
+    adminTable += `<td><button class='editAdminBtn' data-id=${ID}>Admin</td>`;
     adminTable += "</tr>";
   });
   

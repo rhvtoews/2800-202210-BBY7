@@ -211,8 +211,10 @@ app.post('/signup', function(req, res, next) {
 
   sessionConnection.query(
     'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [fullname, email, password, region, 0, false, image]);
-    res.sendFile(__dirname + '/html/index.html');
+    [fullname, email, password, region, 0, false, image]
+  );
+  
+  res.sendFile(__dirname + '/html/index.html');
 
 });
 
@@ -268,41 +270,46 @@ app.get('/getTimeline', (request, response) => {
 });
 
 
-
 //---- Update ----//
 
 // Changes name
 app.post('/changeName', function(request, response, next) {
   var fullname = request.body.fullname;
   const email = sess.email;
-  const results = updateName(fullname, email);
-  results
-  .then(data => response.json({success : data}))
-  .catch(err => console.log(err));
+  updateName(fullname, email);
+  response.sendFile(__dirname + '/html/profile.html');
 });
 
 // Changes email
-app.post('/changeEmail', function(req, res, next) {
-  var newEmail = req.body.email;
+app.post('/changeEmail', function(request, response, next) {
+  var newEmail = request.body.email;
   const email = sess.email;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.email = ?',
-  [newEmail, email])
+  updateEmail(newEmail, email);
+  response.sendFile(__dirname + '/html/profile.html');
 });
 
 // Changes password
-app.post('/changePassword', function(req, res, next) {
-  const password = req.body.password;
+app.post('/changePassword', function(request, response, next) {
+  var password = request.body.password;
   const email = sess.email;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.email = ?',
-  [password, email])
+  updatePassword(password, email);
+  response.sendFile(__dirname + '/html/profile.html');
 });
 
 // Changes region
-app.post('/changeRegion', function(req, res, next) {
-  const region = req.body.region;
+app.post('/changeRegion', function(request, response, next) {
+  var region = request.body.region;
   const email = sess.email;
-  sessionConnection.query('UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.email = ?',
-  [region, email])
+  updateRegion(region, email);
+  response.sendFile(__dirname + '/html/profile.html');
+});
+
+app.get('/makeAdmin/:ID', (request, response) => {
+  const { ID } = request.params;
+  const results = toggleAdmin(ID);
+  results
+  .then(data => response.json({success : data}))
+  .catch(err => console.log(err));
 });
 
 
@@ -356,6 +363,25 @@ async function getPlantTableData() {
   }
 }
 
+async function toggleAdmin(ID) {
+  try {
+      ID = parseInt(ID, 10); 
+      const response = await new Promise((resolve, reject) => {
+          
+          const query = "UPDATE BBY7_user SET BBY7_user.admin = NOT(BBY7_user.admin) WHERE BBY7_user.ID = ?";
+
+          sessionConnection.query(query, [ID] , (err, results) => {
+              if (err) reject(new Error(err.message));
+              resolve(results);
+          })
+      });
+      return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
 async function deleteUser(ID) {
   try {
       ID = parseInt(ID, 10); 
@@ -383,24 +409,25 @@ async function updateName(fullname, email) {
 
       sessionConnection.query(query, [fullname, email], (err, results) => {
           if (err) reject(new Error(err.message));
-          resolve(results);
+          resolve(results.affectedRows);
       })
     });
-    return response;
+    return response === 1 ? true : false;
   } catch (err) {
       console.log(err);
       return false;
   }
 }
 
-async function updateName(fullname, email) {
+async function updateEmail(newEmail, email) {
   try {
     const response = await new Promise((resolve, reject) => {
     
-      const query = "UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?";
+      const query = "UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.email = ?";
 
-      sessionConnection.query(query, [fullname, email], (err, results) => {
+      sessionConnection.query(query, [newEmail, email], (err, results) => {
           if (err) reject(new Error(err.message));
+          resolve(results.affectedRows);
       })
     });
     return response;
@@ -409,6 +436,43 @@ async function updateName(fullname, email) {
       return false;
   }
 }
+
+async function updatePassword(password, email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.email = ?";
+
+      sessionConnection.query(query, [password, email], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results.affectedRows);
+      })
+    });
+    return response;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+async function updateRegion(fullname, email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.email = ?";
+
+      sessionConnection.query(query, [fullname, email], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results.affectedRows);
+      })
+    });
+    return response;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
 
 async function getUserData(email) {
   try {
