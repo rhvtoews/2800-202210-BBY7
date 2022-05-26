@@ -322,7 +322,7 @@ app.get('/makeAdmin/:ID', (request, response) => {
   .catch(err => console.log(err));
 });
 
-app.post('/addPlant', function(request, response, next){
+app.post('/addPlant/:plantName', function(request, response, next){
   var email = sess.email; 
   var plant = request.body.plantName;
   updateMyPlants(email, plant);

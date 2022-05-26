@@ -35,6 +35,7 @@ function plantCards(data) {
     newcard.querySelector('.card-soil').setAttribute("id", "csoil" + (i+1));
     newcard.querySelector('.card-period').setAttribute("id", "cperiod" + (i+1));
     newcard.querySelector('.card-image').setAttribute("id", "cimage" + (i+1));
+    newcard.querySelector('.plant-button').setAttribute("data-id", "${plantName}");
 
   
     document.getElementById(list + "plants-go-here").appendChild(newcard);
@@ -42,4 +43,11 @@ function plantCards(data) {
   }    
   
 )}
+
+function addPlant(plantName){
+  fetch('/addPlant/' + plantName,{
+    method: "POST"
+  })
+  location.reload();
+}
 
