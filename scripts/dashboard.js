@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.querySelector('table tbody').addEventListener('click', function(event) {
   if (event.target.className === "deleteUserBtn") {
-      deleteUser(event.target.dataset.id);
+    deleteUser(event.target.dataset.id);
   }
   if (event.target.className === "editUserBtn") {
     handleEditUser(event.target.dataset.id);

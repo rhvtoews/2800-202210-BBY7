@@ -210,7 +210,7 @@ app.post('/signup', function(req, res, next) {
   
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?)',
+    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
     [fullname, email, password, region, 0, false, image]);
     res.sendFile(__dirname + '/html/index.html');
 
@@ -272,22 +272,21 @@ app.get('/getTimeline', (request, response) => {
 //---- Update ----//
 
 // Changes name
-app.post('/changeName', function(req, res, next) {
-  var fullname = req.body.fullname;
-  console.log(req.body.fullname);
-  console.log(fullname);
+app.post('/changeName', function(request, response, next) {
+  var fullname = request.body.fullname;
   const email = sess.email;
-  console.log(sess.email);
-  sessionConnection.query(
-    'UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?',
-    [fullname, email]);
+  const results = updateName(fullname, email);
+  results
+  .then(data => response.json({success : data}))
+  .catch(err => console.log(err));
 });
 
 // Changes email
 app.post('/changeEmail', function(req, res, next) {
+  var newEmail = req.body.email;
   const email = sess.email;
   sessionConnection.query('UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.email = ?',
-  [email, email])
+  [newEmail, email])
 });
 
 // Changes password
@@ -358,7 +357,6 @@ async function getPlantTableData() {
 }
 
 async function deleteUser(ID) {
-  console.log('ID received by DB: ' + ID);
   try {
       ID = parseInt(ID, 10); 
       const response = await new Promise((resolve, reject) => {
@@ -371,6 +369,41 @@ async function deleteUser(ID) {
           })
       });
       return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+async function updateName(fullname, email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?";
+
+      sessionConnection.query(query, [fullname, email], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+      })
+    });
+    return response;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+async function updateName(fullname, email) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.email = ?";
+
+      sessionConnection.query(query, [fullname, email], (err, results) => {
+          if (err) reject(new Error(err.message));
+      })
+    });
+    return response;
   } catch (err) {
       console.log(err);
       return false;
