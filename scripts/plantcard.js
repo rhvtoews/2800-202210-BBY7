@@ -4,11 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(data => plantCards(data['data']));
 });
 
-// document.querySelector('.card-body a').addEventListener('click', function(event) {
-//   if (event.target.className === "plant-button") {
-//       addPlant(event.target.dataset.plantName);
-//   }
-// });
+
 
 
 function plantCards(data) {
@@ -35,7 +31,7 @@ function plantCards(data) {
     newcard.querySelector('.card-soil').setAttribute("id", "csoil" + (i+1));
     newcard.querySelector('.card-period').setAttribute("id", "cperiod" + (i+1));
     newcard.querySelector('.card-image').setAttribute("id", "cimage" + (i+1));
-    newcard.querySelector('.plant-button').setAttribute("data-id", "${plantName}");
+    newcard.querySelector('.plant-button').setAttribute("data-id", `${plantName}`);
 
   
     document.getElementById(list + "plants-go-here").appendChild(newcard);
@@ -43,6 +39,12 @@ function plantCards(data) {
   }    
   
 )}
+
+document.addEventListener('click', function(event) {
+  if (event.target.className === "plant-button") {
+      addPlant(event.target.dataset.plantName);
+  }
+});
 
 function addPlant(plantName){
   fetch('/addPlant/' + plantName,{
