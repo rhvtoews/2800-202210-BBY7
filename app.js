@@ -280,6 +280,15 @@ app.post('/changeName', function(request, response, next) {
   response.sendFile(__dirname + '/html/profile.html');
 });
 
+app.post('/adminChgName', function(request, response, next) {
+  var fullname = request.body.fullname;
+  console.log(fullname);
+  var ID = request.body.ID;
+  console.log(ID);
+  adminUpdateName(fullname, ID);
+  response.sendFile(__dirname + '/html/dashboard.html');
+});
+
 // Changes email
 app.post('/changeEmail', function(request, response, next) {
   var newEmail = request.body.email;
@@ -304,6 +313,7 @@ app.post('/changeRegion', function(request, response, next) {
   response.sendFile(__dirname + '/html/profile.html');
 });
 
+// Toggles admin status
 app.get('/makeAdmin/:ID', (request, response) => {
   const { ID } = request.params;
   const results = toggleAdmin(ID);
@@ -418,6 +428,26 @@ async function updateName(fullname, email) {
       return false;
   }
 }
+
+async function adminUpdateName(fullname, ID) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.fullname = ? WHERE BBY7_user.ID = ?";
+
+      sessionConnection.query(query, [fullname, ID], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+      })
+    });
+    return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+
 
 async function updateEmail(newEmail, email) {
   try {

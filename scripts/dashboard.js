@@ -19,7 +19,7 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
     handleEditUser(event.target.dataset.id);
   }
   if (event.target.className === "editAdminBtn") {
-    toggleAdmin(event.target.dataset.id);
+    toggleAdmin(event.target.dataset.id, event);
   }
 });
 
@@ -48,18 +48,50 @@ function deleteUser(ID) {
   location.reload();
 }
 
+const updateNameBtn = document.querySelector('#update-name-btn');
+const updateEmailBtn = document.querySelector('#update-email-btn');
+const updatePasswordBtn = document.querySelector('#update-password-btn');
+const updateRegionBtn = document.querySelector('#update-region-btn');
+const updatePhotoBtn = document.querySelector('#update-photo-btn');
+
 function handleEditUser(ID) {
   const updateSection = document.querySelector('#updateUser');
   updateSection.hidden = false;
-  document.querySelector('#updateNameInput').dataset.id = ID;
+  document.querySelector('#update-name-input').dataset.id = ID;
+  document.querySelector('#update-email-input').dataset.id = ID;
+  document.querySelector('#update-password-input').dataset.id = ID;
+  document.querySelector('#update-region-input').dataset.id = ID;
+  document.querySelector('#update-photo-input').dataset.id = ID;
 }
+
+updateNameBtn.onclick = function() {
+  const updateNameInput = document.querySelector('#update-name-input');
+  console.log(updateNameInput);
+  fetch('/adminChgName', {
+      method: 'POST',
+      headers: {
+          'Content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+          ID: updateNameInput.dataset.id,
+          fullname: updateNameInput.value
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          location.reload();
+      }
+  })
+}
+
 
 function toggleAdmin(ID) {
   fetch('/makeAdmin/' + ID);
   location.reload();
 }
 
-const addBtn = document.querySelector('#add-name-btn');
+
 
 // Loads our list of users
 function loadTable(data) {
