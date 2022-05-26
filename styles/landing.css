@@ -60,6 +60,7 @@ body {
 }
 
 .seco {
+    width: auto;
     border-radius: 30px;
     margin-top: 60px;
     opacity: 0.7;
@@ -90,7 +91,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 50px;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bolder;
     color: #2c4451;
 }
@@ -241,7 +242,7 @@ body {
     border: none;
     outline: 0;
     display: inline-block;
-    padding: 10px;
+    padding: 20px;
     color: rgb(0, 0, 0);
     background: linear-gradient(to bottom right, #c2cad7c4, #47595500);
     text-align: center;
@@ -249,7 +250,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     width: auto;
-    border-radius: 20px;
+    border-radius: 30px;
     margin-top: 80px;
 }
 
@@ -438,6 +439,13 @@ body {
 }
 
 @media screen and (max-width:600px) {
+
+    .texty {
+        padding: 0%;
+        margin: 0%;
+        font-size: 20px;
+    }
+
     .full-chat-block {
         width: 100%;
         border-radius: 0px;
