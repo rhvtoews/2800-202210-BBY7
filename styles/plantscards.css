@@ -29,7 +29,7 @@ body {
 }
 
 .logoImage {
-  width: 22px;
+  width: 40px;
   margin: 0%;
   padding: 0%;
 }
@@ -76,8 +76,12 @@ body {
   color: rgb(63, 101, 94);
 }
 
+
 .card {
-  background-color: var(--grey2);
+  background-image: url(./tree.jpg);
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.478);
+  padding: 20px;
 
 }
 
@@ -105,7 +109,7 @@ body {
   text-decoration: none;
   border: none;
   outline: 0;
-  display: inline-flexbox;
+  display:inline-flexbox;
   padding: 10px;
   color: rgb(0, 0, 0);
   background: linear-gradient(to bottom right, #c2cad7c4, #47595500);
@@ -113,7 +117,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  width: 10%;
+  width: 15%;
   border-radius: 20px;
 }
 
@@ -128,7 +132,7 @@ body {
 @media screen and (max-width: 800px) {
 
   body {
-    color: var(--dark);
+    color: white;
   }
 
   .column {
@@ -136,7 +140,7 @@ body {
     display: block;
     margin-bottom: 20px;
   }
-}
+
 
 /* Style the counter cards */
 .card {
@@ -144,6 +148,10 @@ body {
   padding: 16px;
   text-align: center;
   background-image: url(./tree.jpg);
+}
+
+.card-image {
+  width: 40%;
 }
 
 .plant-button {
@@ -155,9 +163,10 @@ body {
   color: rgb(0, 0, 0);
   background: linear-gradient(to bottom right, #2d2e2fc4, #d2cfcfdf); 
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  width: 10%;
+  width: 35%;
   border-radius: 20px;
+}
 }
