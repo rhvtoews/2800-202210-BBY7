@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS BBY7_myplantlist (
 
 INSERT INTO BBY7_user 
 VALUES ("1", "Nacho Varga", "nachov@bcs.com", "pass0987", "North America", 0, TRUE, "/nacho.webp"),
-  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 0, TRUE, "/saul.jpg"),
+  ("2", "Saul Goodman", "saulg@bcs.com", "pass1234", "North America", 3, TRUE, "/saul.jpg"),
   ("3", "Dexter Morgan", "dexterm@mpd.com", "pass0987", "North America", 0, FALSE, "/dexter.jpg"),
   ("4", "Rita Bennett", "ritab@gmail.com", "pass1234", "North America", 0, FALSE, "/rita.webp"),
   ("5", "Naomi Nagata", "naomin@bl.com", "pass0987","North America", 0, FALSE, "/naomi.webp");
