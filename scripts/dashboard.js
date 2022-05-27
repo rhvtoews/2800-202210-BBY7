@@ -23,6 +23,10 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
   }
 });
 
+document.querySelector('#admin-create-btn').addEventListener('click', function(event) {
+  const updateSection = document.querySelector('#adminCreate');
+  updateSection.hidden = false;
+});
 
 
 function deleteUser(ID) {
@@ -32,11 +36,11 @@ function deleteUser(ID) {
   location.reload();
 }
 
+
 const updateNameBtn = document.querySelector('#update-name-btn');
 const updateEmailBtn = document.querySelector('#update-email-btn');
 const updatePasswordBtn = document.querySelector('#update-password-btn');
 const updateRegionBtn = document.querySelector('#update-region-btn');
-const updatePhotoBtn = document.querySelector('#update-photo-btn');
 
 function handleEditUser(ID) {
   const updateSection = document.querySelector('#updateUser');
@@ -45,12 +49,12 @@ function handleEditUser(ID) {
   document.querySelector('#update-email-input').dataset.id = ID;
   document.querySelector('#update-password-input').dataset.id = ID;
   document.querySelector('#update-region-input').dataset.id = ID;
-  document.querySelector('#update-photo-input').dataset.id = ID;
 }
+
+
 
 updateNameBtn.onclick = function() {
   const updateNameInput = document.querySelector('#update-name-input');
-  console.log(updateNameInput);
   fetch('/adminChgName', {
       method: 'POST',
       headers: {
@@ -71,7 +75,6 @@ updateNameBtn.onclick = function() {
 
 updateEmailBtn.onclick = function() {
   const updateEmailInput = document.querySelector('#update-email-input');
-  console.log(updateNameInput);
   fetch('/adminChgEmail', {
       method: 'POST',
       headers: {
@@ -85,14 +88,13 @@ updateEmailBtn.onclick = function() {
   .then(response => response.json())
   .then(data => {
       if (data.success) {
-          location.reload();
+          
       }
   })
 }
 
 updatePasswordBtn.onclick = function() {
   const updatePasswordInput = document.querySelector('#update-password-input');
-  console.log(updatePasswordInput);
   fetch('/adminChgPassword', {
       method: 'POST',
       headers: {
@@ -113,7 +115,6 @@ updatePasswordBtn.onclick = function() {
 
 updateRegionBtn.onclick = function() {
   const updateRegionInput = document.querySelector('#update-region-input');
-  console.log(updateRegionInput);
   fetch('/adminChgRegion', {
       method: 'POST',
       headers: {
@@ -170,7 +171,7 @@ function loadTable(data) {
 }
 
 
-// Loads the current user data
+// Loads the logged in user data
 function placeUser(data) {
   const fullname = document.getElementById('fullname');
   const email = document.getElementById('email');

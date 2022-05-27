@@ -231,11 +231,11 @@ app.post('/adminCreate', function(req, res, next) {
   var fullname = req.body.fullname;
   var email = req.body.email;
   var password = req.body.password;
-  var region = req.body.city;
+  var region = req.body.region;
   var image = "/placeholder.png";
 
   sessionConnection.query(
-    'INSERT into BBY7_user (fullname, email, password, city, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    'INSERT into BBY7_user (fullname, email, password, region, plantCounter, admin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
     [fullname, email, password, region, 0, false, image]);
     res.redirect('/dashboard');
 });

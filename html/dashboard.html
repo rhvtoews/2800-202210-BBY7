@@ -50,6 +50,11 @@
             
                 <br>
 
+                <div>
+                    <button id="admin-create-btn">Create Account</button>
+                </div>
+                
+                <br>
                 <div hidden id="updateUser">
                     <form>
                         <label>Name:</label>
@@ -58,34 +63,41 @@
                     </form>
                     <br>
 
-                    <form action="/changeEmail" method="POST">
+                    <form>
                         <label>Email:</label>
                         <input type="email" id="update-email-input">
-                        <button>Update</button>
+                        <button id="update-email-btn">Update</button>
                     </form>
                     <br>
 
-                    <form action="/changePassword" method="POST">
+                    <form>
                         <label>Password:</label>
                         <input type="text" id="update-password-input">
-                        <button>Update</button>
+                        <button id="update-password-btn">Update</button>
                     </form>
                     <br>
 
-                    <form action="/changeRegion" method="POST">
+                    <form>
                         <label>Region:</label>
                         <input type="text" id="update-region-input">
-                        <button>Update</button>
+                        <button id="update-region-btn">Update</button>
                     </form>
                     <br>
-
-                    <form action="/adminUpload" method="POST" enctype="multipart/form-data">
-                        <label>Upload Photo:</label>
-                        <input type="file" id="update-photo">
-                        <button>Upload</button>
-                    </form>
                     <br>
                 </div>
+
+                <div hidden id="adminCreate">
+                    <form action="/adminCreate" method="POST" class="login">				
+                        <h1>Register</h1>
+                        <div class="line"></div>
+                        <input type="text" name="fullname" placeholder="Enter Your Name" id="username" required><br><br>
+                        <input type="text" name="region" placeholder="Enter Your region" id="newRegion" required><br><br>
+                        <input type="email" name="email" placeholder="Enter e-mail" id="newEmail" required><br><br>
+                        <input type="password" name="password" placeholder="Enter Password" id="password" required><br><br>
+                        <input type="submit" class="submit" value="Submit">
+                    </form>	
+                </div>
+
             </section>
     
         </div>
