@@ -23,7 +23,7 @@ function plantCards(data) {
     newcard.querySelector('.card-region').innerHTML = region;
     newcard.querySelector('.card-soil').innerHTML = soilType;
     newcard.querySelector('.card-period').innerHTML = bloomingPeriod;
-    newcard.querySelector('.card-image').src = "./PlantPhotos" + image;
+    newcard.querySelector('.card-image').src = "./Image/PlantPhotos" + image;
 
     
     newcard.querySelector('.card-title').setAttribute("id", "ctitle" + (i+1));
