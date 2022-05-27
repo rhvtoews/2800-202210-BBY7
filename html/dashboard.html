@@ -58,30 +58,27 @@
                 
                 <br>
                 <div hidden id="updateUser">
+                    <h1>Update Account</h1>
                     <form>
-                        <label>Name:</label>
-                        <input type="text" id="update-name-input">
+                        <input type="text" id="update-name-input" placeholder="Update Name">
                         <button id="update-name-btn">Update</button>
                     </form>
                     <br>
 
                     <form>
-                        <label>Email:</label>
-                        <input type="email" id="update-email-input">
+                        <input type="email" id="update-email-input" placeholder="Update Email">
                         <button id="update-email-btn">Update</button>
                     </form>
                     <br>
 
                     <form>
-                        <label>Password:</label>
-                        <input type="text" id="update-password-input">
+                        <input type="password" id="update-password-input" placeholder="Update Password">
                         <button id="update-password-btn">Update</button>
                     </form>
                     <br>
 
                     <form>
-                        <label>Region:</label>
-                        <input type="text" id="update-region-input">
+                        <input type="text" id="update-region-input" placeholder="Update Region">
                         <button id="update-region-btn">Update</button>
                     </form>
                     <br>
@@ -90,12 +87,12 @@
 
                 <div hidden id="adminCreate">
                     <form action="/adminCreate" method="POST" class="login">				
-                        <h1>Register</h1>
+                        <h1>Create Account</h1>
                         <div class="line"></div>
                         <input type="text" name="fullname" placeholder="Enter Your Name" id="username" required><br><br>
-                        <input type="text" name="region" placeholder="Enter Your region" id="newRegion" required><br><br>
-                        <input type="email" name="email" placeholder="Enter e-mail" id="newEmail" required><br><br>
+                        <input type="email" name="email" placeholder="Enter Email" id="newEmail" required><br><br>
                         <input type="password" name="password" placeholder="Enter Password" id="password" required><br><br>
+                        <input type="text" name="region" placeholder="Enter Your Region" id="newRegion" required><br><br>
                         <input type="submit" class="submit" value="Submit">
                     </form>	
                 </div>
