@@ -12,6 +12,7 @@ const fs = require("fs");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { response } = require('express');
+const multer = require('multer');
 
 const twoHours = 1000 * 60 * 60 * 2;
 
@@ -33,6 +34,18 @@ app.use(session ({
 var sess;
 var loggedIn = false;
 var isAdmin = false;
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './Image/profile')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage }).single('userPhoto');
+
 
 // DB Location constants
 const is_heroku = process.env.IS_HEROKU || false;
@@ -126,14 +139,14 @@ app.get('/about', function(req, res) {
   
 });
 
-// Supply account admin page
-app.get('/admin', function(req, res) {  
-  if (!loggedIn) {
-    res.sendFile(__dirname + '/html/index.html');
-  } else {
-    res.sendFile(__dirname + '/html/admin.html');
-  } 
-});
+// // Supply account admin page
+// app.get('/admin', function(req, res) {  
+//   if (!loggedIn) {
+//     res.sendFile(__dirname + '/html/index.html');
+//   } else {
+//     res.sendFile(__dirname + '/html/admin.html');
+//   } 
+// });
 
 // Plants page
 app.get('/plantscards', function(req, res) {  
@@ -172,7 +185,6 @@ app.post('/login', function(req, res, next) {
   
   const email = req.body.email;
   const password = req.body.password;
-  
   sessionConnection.query(
     'SELECT * FROM BBY7_user WHERE email = ? AND password = ?', 
     [email, password],
@@ -189,7 +201,12 @@ app.post('/login', function(req, res, next) {
         res.redirect('/');
       }
     }
-    )
+  )
+  // console.log(email);
+  // checkAdmin(email).then((value) => {
+  //   console.log(value);
+  // })
+  // console.log(isAdmin);
 });
 
 
@@ -233,15 +250,6 @@ app.post('/adminCreate', function(req, res, next) {
     res.redirect('/dashboard');
 });
 
-// Adds plants to user's profile
-app.post('/addPlant', function(req, res, next) {
-  const email = sess.email;
-
-  var myList = ''
-  
-})
-
-
 
 //---- Read ----//
 
@@ -282,9 +290,7 @@ app.post('/changeName', function(request, response, next) {
 
 app.post('/adminChgName', function(request, response, next) {
   var fullname = request.body.fullname;
-  console.log(fullname);
   var ID = request.body.ID;
-  console.log(ID);
   adminUpdateName(fullname, ID);
   response.sendFile(__dirname + '/html/dashboard.html');
 });
@@ -297,6 +303,13 @@ app.post('/changeEmail', function(request, response, next) {
   response.sendFile(__dirname + '/html/profile.html');
 });
 
+app.post('/adminChgEmail', function(request, response, next) {
+  var email = request.body.email;
+  var ID = request.body.ID;
+  adminUpdateEmail(email, ID);
+  response.sendFile(__dirname + '/html/dashboard.html');
+});
+
 // Changes password
 app.post('/changePassword', function(request, response, next) {
   var password = request.body.password;
@@ -305,12 +318,27 @@ app.post('/changePassword', function(request, response, next) {
   response.sendFile(__dirname + '/html/profile.html');
 });
 
+app.post('/adminChgEmail', function(request, response, next) {
+  var password = request.body.password;
+  var ID = request.body.ID;
+  adminUpdatePassword(password, ID);
+  response.sendFile(__dirname + '/html/dashboard.html');
+});
+
+
 // Changes region
 app.post('/changeRegion', function(request, response, next) {
   var region = request.body.region;
   const email = sess.email;
   updateRegion(region, email);
   response.sendFile(__dirname + '/html/profile.html');
+});
+
+app.post('/adminChgRegion', function(request, response, next) {
+  var region = request.body.region;
+  var ID = request.body.ID;
+  adminUpdateRegion(region, ID);
+  response.sendFile(__dirname + '/html/dashboard.html');
 });
 
 // Toggles admin status
@@ -322,14 +350,31 @@ app.get('/makeAdmin/:ID', (request, response) => {
   .catch(err => console.log(err));
 });
 
-app.post('/addPlant/:plantName', function(request, response, next){
-  var email = sess.email; 
-  var plant = request.body.plantName;
-  updateMyPlants(email, plant);
+// Adds a plant to the user's timeline and increments their plant counter
+app.post('/addPlant/:plant', function(request, response, next){
+  var plant = request.params;
+  console.log(plant);
+  var email = sess.email;
+  updateMyPlants(plant, email);
   updateCounter(email);
   response.sendFile(__dirname + '/html/plantscards.html');
 })
 
+// Uploads files
+app.post('/upload', async (req, res) => {
+  upload(req, res, function (err) {
+      if (err) {
+          console.log(err)
+      } else {
+          var FileName = req.file.filename;
+          res.status(200).send(FileName);
+      }
+  })
+});
+
+// app.post('/upload'. upload.single('image'), function(request, response) {
+//   request.send("Uploaded")
+// })
 
 //---- Delete ----//
 
@@ -398,6 +443,25 @@ async function toggleAdmin(ID) {
       return false;
   }
 }
+
+// async function checkAdmin(email) {
+//   try {
+//       const response = await new Promise((resolve, reject) => {
+          
+//           const query = "SELECT ID FROM BBY7_user WHERE (email = ? AND admin = true)";
+//           console.log(email);
+//           sessionConnection.query(query, [email] , (err, results) => {
+//               if (err) reject(new Error(err.message));
+//               console.log(results.length);
+//               resolve(results);
+//           })
+//       });
+//       return response === 1 ? true : false;
+//   } catch (err) {
+//       console.log(err);
+//       return false;
+//   }
+// }
 
 async function deleteUser(ID) {
   try {
@@ -474,6 +538,24 @@ async function updateEmail(newEmail, email) {
   }
 }
 
+async function adminUpdateEmail(email, ID) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.email = ? WHERE BBY7_user.ID = ?";
+
+      sessionConnection.query(query, [email, ID], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+      })
+    });
+    return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
 async function updatePassword(password, email) {
   try {
     const response = await new Promise((resolve, reject) => {
@@ -492,18 +574,54 @@ async function updatePassword(password, email) {
   }
 }
 
-async function updateRegion(fullname, email) {
+async function adminUpdatePassword(password, ID) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.password = ? WHERE BBY7_user.ID = ?";
+
+      sessionConnection.query(query, [password, ID], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+      })
+    });
+    return response === 1 ? true : false;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+async function updateRegion(region, email) {
   try {
     const response = await new Promise((resolve, reject) => {
     
       const query = "UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.email = ?";
 
-      sessionConnection.query(query, [fullname, email], (err, results) => {
+      sessionConnection.query(query, [region, email], (err, results) => {
           if (err) reject(new Error(err.message));
           resolve(results.affectedRows);
       })
     });
     return response;
+  } catch (err) {
+      console.log(err);
+      return false;
+  }
+}
+
+async function adminUpdateRegion(region, ID) {
+  try {
+    const response = await new Promise((resolve, reject) => {
+    
+      const query = "UPDATE BBY7_user SET BBY7_user.region = ? WHERE BBY7_user.ID = ?";
+
+      sessionConnection.query(query, [region, ID], (err, results) => {
+          if (err) reject(new Error(err.message));
+          resolve(results);
+      })
+    });
+    return response === 1 ? true : false;
   } catch (err) {
       console.log(err);
       return false;
@@ -563,12 +681,14 @@ async function updateCounter(email){
   }
 }
 
-async function updateMyPlants(email, plant){
-  console.log(email);
+async function updateMyPlants(pName, email){
+  var newPlant = pName.plant.toString();
+  var d = new Date();
+  console.log(d);
   try {
     const response = await new Promise((resolve, reject) => {
-      const query = "INSERT INTO BBY7_myplantlist (pName, email) VALUES (?, ?)";
-      sessionConnection.query(query, [email, plant], (err, results) => {
+      const query = "INSERT INTO BBY7_myplantlist (pName, email, cardTime) VALUES (?, ?, ?)";
+      sessionConnection.query(query, [newPlant, email, d], (err, results) => {
         if (err) reject(new Error(err.message));
         resolve(results);
       })

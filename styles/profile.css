@@ -14,6 +14,7 @@
     --green: #526774;
     --green2: #2c4451;
     --green3: #3d545a;
+    --green4: #1fa53c;
     --grey3: #74849c;
     --brown: #747c8a;
     --brown2: #474534;
@@ -29,6 +30,9 @@ body {
     height: 100%;
 }
 
+h1, h2, p {
+    color: White;
+}
 
 .logoImage {
     width: 40px;
@@ -137,7 +141,7 @@ img {
 }
 
 .title {
-    color: grey;
+    color: white;
     font-size: x-large;
 }
 

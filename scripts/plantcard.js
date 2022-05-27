@@ -42,11 +42,13 @@ function plantCards(data) {
 
 document.addEventListener('click', function(event) {
   if (event.target.className === "plant-button") {
-      addPlant(event.target.dataset.plantName);
+    plant = event.target.dataset.id;
+    addPlant(plant);
   }
 });
 
 function addPlant(plantName){
+  
   fetch('/addPlant/' + plantName,{
     method: "POST"
   })

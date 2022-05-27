@@ -25,22 +25,6 @@ document.querySelector('table tbody').addEventListener('click', function(event) 
 
 
 
-// document.querySelector('#update-name-input').addEventListener('click', function(event) {
-      
-// });
-
-// document.querySelector('#update-email-input').addEventListener('click', function(event) {
-      
-// });
-
-// document.querySelector('#update-password-input').addEventListener('click', function(event) {
-      
-// });
-
-// document.querySelector('#update-region-input').addEventListener('click', function(event) {
-      
-// });
-
 function deleteUser(ID) {
   fetch('/delete/' + ID, {
       method: 'DELETE'
@@ -68,6 +52,69 @@ updateNameBtn.onclick = function() {
   const updateNameInput = document.querySelector('#update-name-input');
   console.log(updateNameInput);
   fetch('/adminChgName', {
+      method: 'POST',
+      headers: {
+          'Content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+          ID: updateNameInput.dataset.id,
+          fullname: updateNameInput.value
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          location.reload();
+      }
+  })
+}
+
+updateEmailBtn.onclick = function() {
+  const updateNameInput = document.querySelector('#update-email-input');
+  console.log(updateNameInput);
+  fetch('/adminChgEmail', {
+      method: 'POST',
+      headers: {
+          'Content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+          ID: updateNameInput.dataset.id,
+          fullname: updateNameInput.value
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          location.reload();
+      }
+  })
+}
+
+updatePasswordBtn.onclick = function() {
+  const updateNameInput = document.querySelector('#update-password-input');
+  console.log(updateNameInput);
+  fetch('/adminChgPassword', {
+      method: 'POST',
+      headers: {
+          'Content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+          ID: updateNameInput.dataset.id,
+          fullname: updateNameInput.value
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          location.reload();
+      }
+  })
+}
+
+updateRegionBtn.onclick = function() {
+  const updateNameInput = document.querySelector('#update-region-input');
+  console.log(updateNameInput);
+  fetch('/adminChgRegion', {
       method: 'POST',
       headers: {
           'Content-type' : 'application/json'
