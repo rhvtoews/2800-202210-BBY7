@@ -13,32 +13,35 @@
 <body>
 
     <div class="topnav">
-        <a href="/landing" class="active">Logo</a>
+        <a href="/landing" class="active">SeedIt</a>
         <div id="myLinks">
-            <a href="/profile">Profile</a>
+            <a href="/profile">Profile</a>                
             <a href="/dashboard">Admin</a>
             <a href="/about">About</a>
             <a href="/logout">LogOut</a>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
+            <i style="font-size: medium" class="fa fa-bars fa"></i>
         </a>
     </div>
 
     <h2>Plant Suggestions</h2>
+
+    
     <template id="CardTemplate">
         <div class="card">
-            <img class="card-image" src="..." alt="..." width="25%" height="25%">
+            <img class="card-image" src="..." alt="..." width="25%" height="25%" style="border-radius: 10px;">
             <div class="card-body">
-                <h3 class="card-title">Card Title</h3>
-                <h4 class="card-region">Region</h4>
-                <h4 class="card-soil">Soil</h4>
-                <h4 class="card-period">Period</h4>
+                <h1 class="card-title">Card Title</h1>
+                <p class="card-region">Region</p>
+                <p class="card-soil">Soil</p>
+                <p class="card-period">Period</p>
                 <p class="card-description"></p>
-                <a class="plant-button" href="/profile">Let's Plant This!</a>
+                <button class="plant-button"><b>Let's Plant This!</b></button>
             </div>
         </div>
     </template>
+
 
     <div id="plants-go-here" class="card"></div>
 

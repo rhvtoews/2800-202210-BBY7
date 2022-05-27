@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,7 +16,7 @@
 
         <!-- Top Navigation Menu -->
         <div class="topnav">
-            <a href="/landing" class="active">Logo</a>
+            <a href="/landing" class="active">SeedIt</a>
             <div id="myLinks">
                 <a href="/profile">Profile</a>                
                 <a href="/dashboard">Admin</a>
@@ -23,7 +24,7 @@
                 <a href="/logout">LogOut</a>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
+                <i class="fa fa-bars fa"></i>
             </a>
         </div>
         
@@ -31,55 +32,26 @@
         <div class="about-section">
             <h1>About SeedIt</h1>
             <p>Pollution, Pollution, Tree in the Solution!</p>
-            <p>SeedIt is a web-based planting app to help people without planting knowledge by
-                suggesting the detailed planting processes along with the required tools”.</p>
+            <p>"SeedIt is a web-based planting app to help people without planting knowledge by
+                suggesting the detailed planting processes along with the required tools."</p>
         </div>
+        <div class="background">
+            <div class="animate">
+                <div class="sec">
+                    <img class="seco" src="/styles/secondary.jpg" alt="">
+                    <div class="texty">Here at SeedIT, we strive to help you find a plant suitable for you to help you get started on your planting journey. Click the button below to see all of the plants we have! Happy Planting!</div>
+                </div>
+            </div>
         <div class="middle">
-            <div class="search-container">
-                <form class="searchBar">
-                    <input type="text" placeholder="Search.." name="search" size="80" style="padding: 10px">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
-            <br><br><br>
-
-            <h2>Choose your location!</h2>
-
-            <div class="custom-select">
-                <select>
-                    <option value="0">Select location:</option>
-                    <option value="1">Asia</option>
-                    <option value="2">Africa</option>
-                    <option value="3">North America</option>
-                    <option value="4">South America</option>
-                    <option value="5">Antarctica</option>
-                    <option value="6">Europe</option>
-                    <option value="7">Australia</option>
-
-                </select>
-            </div>
-
-
-            <br><br><br>
-
-            <h2>Select your soil condition!</h2>
-
-            <div class="custom-select">
-                <select>
-                    <option value="0">Select type:</option>
-                    <option value="1">Moist</option>
-                    <option value="2">Well-drained</option>
-                    <option value="3">Sandy</option>
-                </select>
-            </div>
-            <br><br><br>
             <form action="/plantscards">
-                <button class="button">Submit</button>
+                <button class="button">START PLANTING!</button>
             </form>
         </div>
+
         <form action="/surprise" class="surprise">
             <button id="phantom" class="button"></button>
         </form>
+
 
         <!-- End smartphone / tablet look -->
         <div class="chat-bar-collapsible">
@@ -126,6 +98,7 @@
 
         </div>
     </div>
+    </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/scripts/chatbot.js"></script>
@@ -133,5 +106,4 @@
 <script src="/scripts/landing.js"></script>
 
 </body>
-
 </html>

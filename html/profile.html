@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,32 +12,117 @@
 
 <body>
 
-    <div class="card">
-
-        <div class="topnav">
-            <a href="/landing" class="active">Logo</a>
-            <div id="myLinks">
-                <a href="/profile">Profile</a>                
-                <a href="/dashboard">Admin</a>
-                <a href="/about">About</a>
-                <a href="/logout">LogOut</a>
-            </div>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-            </a>
+    <div class="topnav">
+        <a href="/landing" class="active">SeedIt</a>
+        <div id="myLinks">
+            <a href="/profile">Profile</a>                
+            <a href="/dashboard">Admin</a>
+            <a href="/about">About</a>
+            <a href="/logout">LogOut</a>
         </div>
-        <img src="/Image/profile2.jpg" alt="John" style="width:100%">
-        <h1>Maria Heard</h1>
-        <p class="title">CEO & Founder, Example</p>
-        <p>Harvard University</p>
-        <a href="#"><i class="fa fa-dribbble"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <p><b>No. of Plants Planted</b></p>
-        <p><button style="background-color:#04AA6D;">2</button></p>
-
-        <p><button><a href="/admin">Edit Profile</a></button></p>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i style="font-size: medium" class="fa fa-bars fa"></i>
+        </a>
     </div>
+
+    <div class="content">
+
+        <div class="hb1">
+            <br><br><br><br><br>
+            <img id="photo" class="img" src="/Image/profile/placeholder.png" alt=""
+                style="width:200px; margin: 100px; float: left;">
+        </div>
+
+        <div class="hb3">
+            <h1 id="fullname">Maria Heard</h1>
+            <p id="email" class="title">CEO & Founder, Example</p>
+            <p id="region"></p>
+        </div>
+
+
+        <div class="hb4">
+            <div class="social1">
+                <a href="#"><i class="fa fa-dribbble fa-3x"></i></a>
+
+            </div>
+        </div>
+
+        <div class="editPp">
+            <p><button id="editBtn" style="width: fit-content"><i class="fa fa-edit">Edit</i></button></p>
+        </div>
+
+        <div class="hb5">
+            <a href="#"><i class="fa fa-twitter fa-3x"></i></a>
+        </div>
+        <div class="hb6">
+            <a href="#"><i class="fa fa-linkedin fa-3x"></i></a>
+        </div>
+        <div class="hb7">
+            <h2>Plants Contribution Number</h2>
+            <p><button id="planted" style="background-color:#000000;">2</button></p>
+        </div>
+
+        <div class="timelinecard">
+
+            <h2><a id="timelineName"></a>'s Timeline</h2>
+            <template id="CardTemplate">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Card Title</h1>
+                        <p class="card-timestamp">Period</p>
+                    </div>
+                </div>
+            </template>
+    
+            <div id="timeline-here" class="card"></div>
+    
+        </div>
+
+    </div>
+
+    <div class="editForm" hidden id="updateUser">
+        <form action="/changeName" method="POST">
+            <label>Name:</label>
+            <input type="text" id="update-name-input" name="fullname" style="margin: 0 30px">
+            <button id="update-row-btn" style="margin: 0 82px">Update</button>
+        </form>
+        <br>
+
+        <form action="/changeEmail" method="POST">
+            <label>Email:</label>
+            <input type="email" id="update-email-input" name="email" style="margin: 0 30px">
+            <button style="margin: 0 82px">Update</button>
+        </form>
+        <br>
+
+        <form action="/changePassword" method="POST">
+            <label>Password:</label>
+            <input type="text" id="update-password-input" name="password" style="margin: 0 3px">
+            <button style="margin: 0 107px">Update</button>
+        </form>
+        <br>
+
+        <form action="/changeRegion" method="POST">
+            <label>Region:</label>
+            <input type="text" id="update-region-input" name="region" style="margin: 0 23px">
+            <button style="margin: 0 85px">Update</button>
+        </form>
+        <br>
+
+        <form action="/upload" method="POST">
+            <label>Upload Photo:</label>
+            <input type="file" id="update-photo" name="filename">
+            <button type="submit" id="upload-button">Upload</button>
+        </form>
+        <br>
+    </div>
+
+    
+
+    <footer class="hb8">
+        <p>BCIT BBY-7 &copy;</p>
+    </footer>
+    <script src="/scripts/profile.js"></script>
 </body>
+
 </html>

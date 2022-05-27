@@ -1,116 +1,150 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
 
 :root {
-  --darkGreen: #103a2b;
-  --lightGreen: #04AA6D;
+  --darkGreen: #2c4451;
+  --lightGreen: #3d545a;
   --white: white;
   --dark: #333;
+
+  /*These are the colors for */
+
+  --grey: #b5bbc5;
+  --black: #0e222c;
+  --grey2: #768691;
+  --green: #526774;
+  --green2: #2c4451;
+  --green3: #3d545a;
+  --grey3: #74849c;
+  --brown: #747c8a;
+  --brown2: #474534;
 }
 
 
 
 body {
-    font-family: 'Merriweather', serif;
-    margin: 0;
-  }
-  
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  background-color: var(--darkGreen);
+}
 
-  .topnav {
-    overflow: hidden;
-    background-color: var(--dark);
-    position: relative;
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #3d545a;
+  position: relative;
+
 }
 
 .topnav #myLinks {
-    display: none;
+  display: none;
 }
 
 .topnav a {
-    color: var(--white);
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    display: block;
+  color: #000000;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a:not(.active) {
+  padding: 14px 16px;
 }
 
 .topnav a.icon {
-    background: var(--dark);
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
+  background: #0e222c;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .topnav a:hover {
-    background-color: #ddd;
-    color: var(--dark);
+  background-color: #ddd;
+  color: #0e222c;
+
 }
 
 .active {
-    background-color: var(--lightGreen);
-    color: var(--white);
+  background-color: #b5bbc5;
+  color: rgb(63, 101, 94);
+  font-weight: bolder;
 }
-  
+
+.logoImage {
+  width: 40px;
+  margin: 0%;
+  padding: 0%;
+}
+
+.content {
+ background-image: url(./tree.jpg);
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  color: white;
+  box-shadow: 0 8px 8px 0 rgba(45, 45, 45, 0.767);
+  margin: 8px;
+}
+
+.about-section {
+  font-size: large;
+  padding: 50px;
+  text-align: center;
+  background-color: var(--darkGreen);
+  color: var(--white);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after,
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: var(--grey3);
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
   .column {
-    float: left;
-    width: 33.3%;
-    margin-bottom: 16px;
-    padding: 0 8px;
-  }
-  
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 8px;
-  }
-  
-  .about-section {
-    font-size: large;
-    padding: 50px;
-    text-align: center;
-    background-color: var(--darkGreen);
-    color: var(--white);
-  }
-  
-  .container {
-    padding: 0 16px;
-  }
-  
-  .container::after, .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  
-  .title {
-    color: grey;
-  }
-  
-  .button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
     width: 100%;
+    display: block;
   }
-  
-  .button:hover {
-    background-color: #555;
-  }
-  
-  @media screen and (max-width: 650px) {
-    .column {
-      width: 100%;
-      display: block;
-    }
-  }
+}
