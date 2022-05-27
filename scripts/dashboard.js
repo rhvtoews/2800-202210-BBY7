@@ -70,7 +70,7 @@ updateNameBtn.onclick = function() {
 }
 
 updateEmailBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-email-input');
+  const updateEmailInput = document.querySelector('#update-email-input');
   console.log(updateNameInput);
   fetch('/adminChgEmail', {
       method: 'POST',
@@ -78,8 +78,8 @@ updateEmailBtn.onclick = function() {
           'Content-type' : 'application/json'
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updateEmailInput.dataset.id,
+          email: updateEmailInput.value
       })
   })
   .then(response => response.json())
@@ -91,16 +91,16 @@ updateEmailBtn.onclick = function() {
 }
 
 updatePasswordBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-password-input');
-  console.log(updateNameInput);
+  const updatePasswordInput = document.querySelector('#update-password-input');
+  console.log(updatePasswordInput);
   fetch('/adminChgPassword', {
       method: 'POST',
       headers: {
           'Content-type' : 'application/json'
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updatePasswordInput.dataset.id,
+          password: updatePasswordInput.value
       })
   })
   .then(response => response.json())
@@ -112,16 +112,16 @@ updatePasswordBtn.onclick = function() {
 }
 
 updateRegionBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-region-input');
-  console.log(updateNameInput);
+  const updateRegionInput = document.querySelector('#update-region-input');
+  console.log(updateRegionInput);
   fetch('/adminChgRegion', {
       method: 'POST',
       headers: {
           'Content-type' : 'application/json'
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updateRegionInput.dataset.id,
+          region: updateRegionInput.value
       })
   })
   .then(response => response.json())

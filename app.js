@@ -35,16 +35,18 @@ var sess;
 var loggedIn = false;
 var isAdmin = false;
 
+
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './Image/profile')
+      cb(null, "./Image/profile")
   },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
+  filename: function(req, file, cb) {
+      cb(null, file.originalname);
   }
 });
+const upload = multer({ storage: storage });
 
-const upload = multer({ storage: storage }).single('userPhoto');
 
 
 // DB Location constants
@@ -346,23 +348,27 @@ app.post('/addPlant/:plant', function(request, response, next){
   updateMyPlants(plant, email);
   updateCounter(email);
   response.sendFile(__dirname + '/html/plantscards.html');
-})
-
-// Uploads files
-app.post('/upload', async (req, res) => {
-  upload(req, res, function (err) {
-      if (err) {
-          console.log(err)
-      } else {
-          var FileName = req.file.filename;
-          res.status(200).send(FileName);
-      }
-  })
 });
 
-// app.post('/upload'. upload.single('image'), function(request, response) {
-//   request.send("Uploaded")
-// })
+// Uploads files
+app.post('/upload', upload.single("userPhoto"), function (request, response) {
+
+  var Filename = request.file.filename;
+  var email = sess.email;
+  updateProfilePhoto(Filename, email);
+  response.sendFile(__dirname + '/html/profile.html');
+});
+
+// Uploads files
+app.post('/adminUpload', upload.single("userPhoto"), function (request, response) {
+
+  var Filename = request.file.filename;
+  var email = sess.email;
+  updateProfilePhoto(Filename, email);
+  response.sendFile(__dirname + '/html/profile.html');
+});
+
+
 
 //---- Delete ----//
 
@@ -679,6 +685,23 @@ async function updateMyPlants(pName, email){
       sessionConnection.query(query, [newPlant, email, d], (err, results) => {
         if (err) reject(new Error(err.message));
         resolve(results);
+      })
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+}
+
+async function updateProfilePhoto(Filename, email) {
+  var location = ("/" + Filename.toString());
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const query = "UPDATE BBY7_user SET BBY7_user.image = ? WHERE BBY7_user.email = ?";
+      sessionConnection.query(query, [location, email], (err, results) => {
+        if (err) reject(new Error(err.message));
+        resolve(results.affectedRows);
       })
     });
     return response;
