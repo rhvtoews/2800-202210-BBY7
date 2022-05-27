@@ -5,7 +5,7 @@
     font-family: 'Koulen', cursive;
 }
 
-section {
+div {
     height: 100vh;
     color: white;
     scroll-snap-align: start;
