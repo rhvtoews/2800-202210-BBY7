@@ -8,7 +8,6 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const { JSDOM } = require('jsdom');
 const fs = require("fs");
-// const MySQLStore = require('express-mysql-session')(session);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { response } = require('express');
@@ -129,14 +128,6 @@ app.get('/about', function(req, res) {
   
 });
 
-// // Supply account admin page
-// app.get('/admin', function(req, res) {  
-//   if (!loggedIn) {
-//     res.sendFile(__dirname + '/html/index.html');
-//   } else {
-//     res.sendFile(__dirname + '/html/admin.html');
-//   } 
-// });
 
 // Plants page
 app.get('/plantscards', function(req, res) {  
@@ -160,15 +151,13 @@ app.get('/surprise', function(req, res) {
 app.get('/logout', function(req,res){
   req.session.destroy(function(err){
       if(!err){
-        // loggedIn = false;
+        loggedIn = false;
         res.redirect('/');
       } else {
         res.redirect('/');
       }
   })
 });
-
-
 
 // Login, route to landing page on success
 app.post('/login', function(req, res, next) {
@@ -192,11 +181,6 @@ app.post('/login', function(req, res, next) {
       }
     }
   )
-  // console.log(email);
-  // checkAdmin(email).then((value) => {
-  //   console.log(value);
-  // })
-  // console.log(isAdmin);
 });
 
 
@@ -437,25 +421,6 @@ async function toggleAdmin(ID) {
       return false;
   }
 }
-
-// async function checkAdmin(email) {
-//   try {
-//       const response = await new Promise((resolve, reject) => {
-          
-//           const query = "SELECT ID FROM BBY7_user WHERE (email = ? AND admin = true)";
-//           console.log(email);
-//           sessionConnection.query(query, [email] , (err, results) => {
-//               if (err) reject(new Error(err.message));
-//               console.log(results.length);
-//               resolve(results);
-//           })
-//       });
-//       return response === 1 ? true : false;
-//   } catch (err) {
-//       console.log(err);
-//       return false;
-//   }
-// }
 
 async function deleteUser(ID) {
   try {
