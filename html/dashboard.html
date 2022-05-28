@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/Dashboard/dashboard.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
     <script src="/scripts/header.js"></script>
 
 </head>
@@ -35,6 +35,7 @@
                     <div id="usertable">
                         <table id="table">
                             <thead>
+                                <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -42,6 +43,7 @@
                                 <th>Region</th>
                                 <th>Planted</th>
                                 <th>Admin</th>
+                                </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
@@ -50,49 +52,59 @@
             
                 <br>
 
+                <div>
+                    <button id="admin-create-btn">Create Account</button>
+                </div>
+                
+                <br>
                 <div hidden id="updateUser">
+                    <h1>Update Account</h1>
                     <form>
-                        <label>Name:</label>
-                        <input type="text" id="update-name-input">
+                        <input type="text" id="update-name-input" placeholder="Update Name">
                         <button id="update-name-btn">Update</button>
                     </form>
                     <br>
 
-                    <form action="/changeEmail" method="POST">
-                        <label>Email:</label>
-                        <input type="email" id="update-email-input">
-                        <button>Update</button>
-                    </form>
-                    <br>
-
-                    <form action="/changePassword" method="POST">
-                        <label>Password:</label>
-                        <input type="text" id="update-password-input">
-                        <button>Update</button>
-                    </form>
-                    <br>
-
-                    <form action="/changeRegion" method="POST">
-                        <label>Region:</label>
-                        <input type="text" id="update-region-input">
-                        <button>Update</button>
+                    <form>
+                        <input type="email" id="update-email-input" placeholder="Update Email">
+                        <button id="update-email-btn">Update</button>
                     </form>
                     <br>
 
                     <form>
-                        <label>Upload Photo:</label>
-                        <input type="file" id="update-photo">
-                        <button>Upload</button>
+                        <input type="password" id="update-password-input" placeholder="Update Password">
+                        <button id="update-password-btn">Update</button>
                     </form>
                     <br>
+
+                    <form>
+                        <input type="text" id="update-region-input" placeholder="Update Region">
+                        <button id="update-region-btn">Update</button>
+                    </form>
+                    <br>
+                    <br>
                 </div>
+
+                <div hidden id="adminCreate">
+                    <form action="/adminCreate" method="POST" class="login">				
+                        <h1>Create Account</h1>
+                        <div class="line"></div>
+                        <input type="text" name="fullname" placeholder="Enter Your Name" id="username" required><br><br>
+                        <input type="email" name="email" placeholder="Enter Email" id="newEmail" required><br><br>
+                        <input type="password" name="password" placeholder="Enter Password" id="password" required><br><br>
+                        <input type="text" name="region" placeholder="Enter Your Region" id="newRegion" required><br><br>
+                        <input type="submit" class="submit" value="Submit">
+                    </form>	
+                </div>
+
             </section>
     
         </div>
         <div class="adminProfile">
-            <h3>Name: <a id="fullname">Fregmond basie</a></h3>
+            <h2>Your Account</h2>
+            <h3>Name: <a id="fullname"></a></h3>
             <h3>Region: <a id="region"></a></h3>
-            <h3>E-mail: <a id="email">fregmond@gmail.com</a></h3>
+            <h3>E-mail: <a id="email"></a></h3>
         </div>
         <footer>BCIT BBY-7 &copy;</footer>
     </div>

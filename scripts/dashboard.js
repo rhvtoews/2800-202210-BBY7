@@ -1,68 +1,74 @@
-document.addEventListener('DOMContentLoaded', function() {
-  fetch('/getTable')
-  .then(response => response.json())
-  .then(data => loadTable(data['data']));
+document.addEventListener("DOMContentLoaded", function() {
+  fetch("/getTable")
+  .then((response) => response.json())
+  .then((data) => loadTable(data["data"]));
 
-  fetch('/getUser')
-  .then(response => response.json())
-  .then(data => placeUser(data['data']));
+  fetch("/getUser")
+  .then((response) => response.json())
+  .then((data) => placeUser(data["data"]));
 
 });
 
 
 
-document.querySelector('table tbody').addEventListener('click', function(event) {
-  if (event.target.className === "deleteUserBtn") {
-    deleteUser(event.target.dataset.id);
-  }
-  if (event.target.className === "editUserBtn") {
-    handleEditUser(event.target.dataset.id);
-  }
-  if (event.target.className === "editAdminBtn") {
-    toggleAdmin(event.target.dataset.id, event);
-  }
+document.querySelector("table tbody").addEventListener("click", 
+  function(event) {
+    if (event.target.className === "deleteUserBtn") {
+      deleteUser(event.target.dataset.id);
+    }
+    if (event.target.className === "editUserBtn") {
+      handleEditUser(event.target.dataset.id);
+    }
+    if (event.target.className === "editAdminBtn") {
+      toggleAdmin(event.target.dataset.id, event);
+    }
 });
 
+document.querySelector("#admin-create-btn").addEventListener("click", 
+  function(event) {
+    const updateSection = document.querySelector('#adminCreate');
+    updateSection.hidden = false;
+});
 
 
 function deleteUser(ID) {
-  fetch('/delete/' + ID, {
-      method: 'DELETE'
+  fetch("/delete/" + ID, {
+      method: "DELETE"
   })
   location.reload();
 }
 
-const updateNameBtn = document.querySelector('#update-name-btn');
-const updateEmailBtn = document.querySelector('#update-email-btn');
-const updatePasswordBtn = document.querySelector('#update-password-btn');
-const updateRegionBtn = document.querySelector('#update-region-btn');
-const updatePhotoBtn = document.querySelector('#update-photo-btn');
+
+const updateNameBtn = document.querySelector("#update-name-btn");
+const updateEmailBtn = document.querySelector("#update-email-btn");
+const updatePasswordBtn = document.querySelector("#update-password-btn");
+const updateRegionBtn = document.querySelector("#update-region-btn");
 
 function handleEditUser(ID) {
-  const updateSection = document.querySelector('#updateUser');
+  const updateSection = document.querySelector("#updateUser");
   updateSection.hidden = false;
-  document.querySelector('#update-name-input').dataset.id = ID;
-  document.querySelector('#update-email-input').dataset.id = ID;
-  document.querySelector('#update-password-input').dataset.id = ID;
-  document.querySelector('#update-region-input').dataset.id = ID;
-  document.querySelector('#update-photo-input').dataset.id = ID;
+  document.querySelector("#update-name-input").dataset.id = ID;
+  document.querySelector("#update-email-input").dataset.id = ID;
+  document.querySelector("#update-password-input").dataset.id = ID;
+  document.querySelector("#update-region-input").dataset.id = ID;
 }
 
+
+
 updateNameBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-name-input');
-  console.log(updateNameInput);
-  fetch('/adminChgName', {
-      method: 'POST',
+  const updateNameInput = document.querySelector("#update-name-input");
+  fetch("/adminChgName", {
+      method: "POST",
       headers: {
-          'Content-type' : 'application/json'
+          "Content-type" : "application/json"
       },
       body: JSON.stringify({
           ID: updateNameInput.dataset.id,
           fullname: updateNameInput.value
       })
   })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
       if (data.success) {
           location.reload();
       }
@@ -70,41 +76,39 @@ updateNameBtn.onclick = function() {
 }
 
 updateEmailBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-email-input');
-  console.log(updateNameInput);
-  fetch('/adminChgEmail', {
-      method: 'POST',
+  const updateEmailInput = document.querySelector("#update-email-input");
+  fetch("/adminChgEmail", {
+      method: "POST",
       headers: {
-          'Content-type' : 'application/json'
+        "Content-type" : "application/json"
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updateEmailInput.dataset.id,
+          email: updateEmailInput.value
       })
   })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
       if (data.success) {
-          location.reload();
+          
       }
   })
 }
 
 updatePasswordBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-password-input');
-  console.log(updateNameInput);
-  fetch('/adminChgPassword', {
-      method: 'POST',
+  const updatePasswordInput = document.querySelector("#update-password-input");
+  fetch("/adminChgPassword", {
+      method: "POST",
       headers: {
-          'Content-type' : 'application/json'
+        "Content-type" : "application/json"
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updatePasswordInput.dataset.id,
+          password: updatePasswordInput.value
       })
   })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
       if (data.success) {
           location.reload();
       }
@@ -112,20 +116,19 @@ updatePasswordBtn.onclick = function() {
 }
 
 updateRegionBtn.onclick = function() {
-  const updateNameInput = document.querySelector('#update-region-input');
-  console.log(updateNameInput);
-  fetch('/adminChgRegion', {
-      method: 'POST',
+  const updateRegionInput = document.querySelector("#update-region-input");
+  fetch("/adminChgRegion", {
+      method: "POST",
       headers: {
-          'Content-type' : 'application/json'
+          "Content-type" : "application/json"
       },
       body: JSON.stringify({
-          ID: updateNameInput.dataset.id,
-          fullname: updateNameInput.value
+          ID: updateRegionInput.dataset.id,
+          region: updateRegionInput.value
       })
   })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
       if (data.success) {
           location.reload();
       }
@@ -134,7 +137,7 @@ updateRegionBtn.onclick = function() {
 
 
 function toggleAdmin(ID) {
-  fetch('/makeAdmin/' + ID);
+  fetch("/makeAdmin/" + ID);
   location.reload();
 }
 
@@ -142,15 +145,17 @@ function toggleAdmin(ID) {
 
 // Loads our list of users
 function loadTable(data) {
-  const table = document.querySelector('table tbody');
+  const table = document.querySelector("table tbody");
   
   if (data.length === 0) {
-    table.innerHTML = "<tr><td class='noData' colspan ='8'>No user data is present</td></tr>";
+    table.innerHTML = "<tr><td class='noData' colspan ='8'>No user data " 
+      + "is present</td></tr>";
     return;
   }
   let adminTable = "";
 
-  data.forEach(function ({ID, fullname, email, password, region, plantCounter, admin}) {
+  data.forEach(function ({ID, fullname, email, password, region, plantCounter, 
+    admin}) {
     adminTable += "<tr>";
     adminTable += `<td>${ID}</td>`;
     adminTable += `<td>${fullname}</td>`;
@@ -170,11 +175,11 @@ function loadTable(data) {
 }
 
 
-// Loads the current user data
+// Loads the logged in user data
 function placeUser(data) {
-  const fullname = document.getElementById('fullname');
-  const email = document.getElementById('email');
-  const region = document.getElementById('region');
+  const fullname = document.getElementById("fullname");
+  const email = document.getElementById("email");
+  const region = document.getElementById("region");
 
   fullname.innerHTML = data[0].fullname;
   email.innerHTML = data[0].email;
